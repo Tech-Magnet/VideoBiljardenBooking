@@ -20,7 +20,16 @@ $sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '
 $rs = mysqli_query($con, $sql);
 if($rs)
 {
-	echo "Booking Records Inserted";
+	echo "Din Bokning har sparats";
+	echo "";
+	echo "Boknings Bekräftelse:";
+	echo "Namn: $txtName";
+	echo "Telefon: $txtPhone";
+	echo "Datum: $txtDate";
+	echo "Tid: $txtTime";
+	echo "Bord: $txtTable";
+	$sql = "SELECT id `Booked` WHERE fldDate = $txtDate AND fldTime = $txtTime";
+	echo "Avboknings ID: $sql"
 }
 }
 else
