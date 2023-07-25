@@ -8,23 +8,23 @@ $con = mysqli_connect('localhost', 'admin', 'nNASGE!yM!dH9hj5','id21042321_booki
 // get the post records
 
 $txtName = $_POST['txtName'];
-$txtEmail = $_POST['txtEmail'];
 $txtPhone = $_POST['txtPhone'];
-$txtMessage = $_POST['txtMessage'];
+$txtDate = $_POST['txtDate'];
+$txtTime = $_POST['txtTime'];
+$txtDur = $_POST['txtDur'];
 
 // database insert SQL code
-$sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtEmail', '$txtPhone', '$txtMessage')";
+$sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtDur')";
 
 // insert in database 
 $rs = mysqli_query($con, $sql);
 if($rs)
 {
-	echo "Contact Records Inserted";
+	echo "Booking Records Inserted";
 }
 }
 else
 {
-	echo "Are you a genuine visitor?";
-	
+	echo "An ERrOR occured";
 }
 ?>
