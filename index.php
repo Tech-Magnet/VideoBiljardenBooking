@@ -1,37 +1,83 @@
+<?php
+// database connection code
+if(isset($_POST['txtName']))
+{
+$con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
+
+// get the post records
+
+$txtName = $_POST['txtName'];
+$txtPhone = $_POST['txtPhone'];
+$txtDate = $_POST['txtDate'];
+$txtTime = $_POST['txtTime'];
+$txtTable = $_POST['txtTable'];
+
+// database insert SQL code
+$sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtTable')";
+
+// insert in database 
+$rs = mysqli_query($con, $sql);
+if($rs)
+{
+	echo "Booking Records Inserted";
+}
+}
+$con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
+$result = mysqli_query($con,"SELECT * FROM `Booked`");
+$data = $result->fetch_all(MYSQLI_ASSOC);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Boka ett Bord</title>
 <link href="style.css" rel="stylesheet">
+<script type="text/javascript" src="main.js"></script>
+<script async type="text/javascript" src="bootstrap.bundle.min.js"></script>
 <link rel="icon" href="img/icon.png">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMPN0CGN95"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TMPN0CGN95');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-TMPN0CGN95');
 </script>
-<body class="bg-light">
+<body class="bg-light" onload="GetArrays();">
+<div style="display: none;">
+  <table border="1" id="dbTable">
+    <tr>
+      <th>Datum</th>
+      <th>Tid</th>
+      <th>Bord</th>
+    </tr>
+    <?php foreach($data as $row): ?>
+    <tr>
+      <td><?= htmlspecialchars($row['fldDate']) ?></td>
+      <td><?= htmlspecialchars($row['fldTime']) ?></td>
+      <td><?= htmlspecialchars($row['fldTable']) ?></td>
+    </tr>
+    <?php endforeach ?>
+  </table>
+</div>
 <div class="container">
 <div class="py-5 text-center">
-        <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="https://www.orebrobiljarden.se/ws/media-library/926cce7e857f48f4addf19cebf438b96/orebrobiljarden-logo-final.jpg" height="140px"></a>
+        <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
         <h2>Boka Bord - Snooker</h2>
-        
       </div>
 <fieldset>
   
-  <form name="frmContact" class="needs-validation " method="post" action="contact.php">
+  <form id="myForm" name="frmBook" class="needs-validation " method="post" action="index.php" onsubmit="handleFormSubmit(event)">
     <p>
-      <label for="Name">Your Name </label>
-      <input type="text" class="form-control" name="txtName" id="txtName" placeholder="Name" value="" required>
+      <label for="Name">Namn</label>
+      <input type="text" class="form-control" name="txtName" id="txtName" placeholder="Namn" value="" required>
     </p>
     <p>
-      <label for="phone">Your Phone</label>
-      <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="Phone" value="" required>
+      <label for="phone">Telefon Nummer</label>
+      <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="Telefon Nummer" value="" required>
     </p>
     <p>
       <label for="date">Datum</label>
@@ -39,7 +85,7 @@
     </p>
     <p>
       <label for="time">Tid</label>
-      <input type="time"  class="form-control"  name="txtTime" id="txtTime" placeholder="" value="" required>
+      <input type="time"  class="form-control"  name="txtTime" id="txtTime" step="3600000" placeholder="" value="" required>
     </p>
     <p>
       <label for="Table">Bord</label><br>
@@ -53,7 +99,6 @@
   </form>
 </fieldset>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 <div class="row">
   <div class="column"></div>
   <div class="column">
