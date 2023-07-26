@@ -6,6 +6,14 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <link rel="icon" href="img/icon.png">
     <title>Admin Panel</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMPN0CGN95"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TMPN0CGN95');
+</script>
 </head>
 <body>
 <table border="1">

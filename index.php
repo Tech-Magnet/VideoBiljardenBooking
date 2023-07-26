@@ -6,10 +6,19 @@
 <link href="style.css" rel="stylesheet">
 <link rel="icon" href="img/icon.png">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TMPN0CGN95"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TMPN0CGN95');
+</script>
 <body class="bg-light">
 <div class="container">
 <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://www.orebrobiljarden.se/ws/media-library/926cce7e857f48f4addf19cebf438b96/orebrobiljarden-logo-final.jpg" alt="" height="140px" onclick="window.location.href = 'https://www.orebrobiljarden.se/'">
+        <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="https://www.orebrobiljarden.se/ws/media-library/926cce7e857f48f4addf19cebf438b96/orebrobiljarden-logo-final.jpg" height="140px"></a>
         <h2>Boka Bord - Snooker</h2>
         
       </div>
@@ -51,20 +60,20 @@
 <div>
   <h2 style="padding-left: 10px;">Nya Bordet</h2>
   <div class="grid-container">
-    <div class="grid-item" id="TT_NEW_13_mon">13.00</div>
-    <div class="grid-item" id="TT_NEW_13_tue">13.00</div>
-    <div class="grid-item" id="TT_NEW_13_wed">13.00</div>
-    <div class="grid-item" id="TT_NEW_13_thu">13.00</div>
+    <div class="grid-item" id="TT_NEW_13_mon" style="background-color: #000;">13.00</div>
+    <div class="grid-item" id="TT_NEW_13_tue" style="background-color: #000;">13.00</div>
+    <div class="grid-item" id="TT_NEW_13_wed" style="background-color: #000;">13.00</div>
+    <div class="grid-item" id="TT_NEW_13_thu" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_NEW_13_fri">13.00</div>
     <div class="grid-item" id="TT_NEW_13_sat">13.00</div>
-    <div class="grid-item" id="TT_NEW_13_sun">13.00</div>
-    <div class="grid-item" id="TT_NEW_14_mon">14.00</div>
-    <div class="grid-item" id="TT_NEW_14_tue">14.00</div>
-    <div class="grid-item" id="TT_NEW_14_wed">14.00</div>
-    <div class="grid-item" id="TT_NEW_14_thu">14.00</div>
+    <div class="grid-item" id="TT_NEW_13_sun" style="background-color: #000;">13.00</div>
+    <div class="grid-item" id="TT_NEW_14_mon" style="background-color: #000;">14.00</div>
+    <div class="grid-item" id="TT_NEW_14_tue" style="background-color: #000;">14.00</div>
+    <div class="grid-item" id="TT_NEW_14_wed" style="background-color: #000;">14.00</div>
+    <div class="grid-item" id="TT_NEW_14_thu" style="background-color: #000;">14.00</div>
     <div class="grid-item" id="TT_NEW_14_fri">14.00</div>
     <div class="grid-item" id="TT_NEW_14_sat">14.00</div>
-    <div class="grid-item" id="TT_NEW_14_sun">14.00</div>
+    <div class="grid-item" id="TT_NEW_14_sun" style="background-color: #000;">14.00</div>
     <div class="grid-item" id="TT_NEW_15_mon">15.00</div>
     <div class="grid-item" id="TT_NEW_15_tue">15.00</div>
     <div class="grid-item" id="TT_NEW_15_wed">15.00</div>
@@ -145,20 +154,20 @@
 <div>
   <h2 style="padding-left: 10px;">Gamla Bordet</h2>
   <div class="grid-container">
-    <div class="grid-item" id="TT_OLD_13_mon">13.00</div>
-    <div class="grid-item" id="TT_OLD_13_tue">13.00</div>
-    <div class="grid-item" id="TT_OLD_13_wed">13.00</div>
-    <div class="grid-item" id="TT_OLD_13_thu">13.00</div>
+    <div class="grid-item" id="TT_OLD_13_mon" style="background-color: #000;">13.00</div>
+    <div class="grid-item" id="TT_OLD_13_tue" style="background-color: #000;">13.00</div>
+    <div class="grid-item" id="TT_OLD_13_wed" style="background-color: #000;">13.00</div>
+    <div class="grid-item" id="TT_OLD_13_thu" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_OLD_13_fri">13.00</div>
     <div class="grid-item" id="TT_OLD_13_sat">13.00</div>
-    <div class="grid-item" id="TT_OLD_13_sun">13.00</div>
-    <div class="grid-item" id="TT_OLD_14_mon">14.00</div>
-    <div class="grid-item" id="TT_OLD_14_tue">14.00</div>
-    <div class="grid-item" id="TT_OLD_14_wed">14.00</div>
-    <div class="grid-item" id="TT_OLD_14_thu">14.00</div>
+    <div class="grid-item" id="TT_OLD_13_sun" style="background-color: #000;">13.00</div>
+    <div class="grid-item" id="TT_OLD_14_mon" style="background-color: #000;">14.00</div>
+    <div class="grid-item" id="TT_OLD_14_tue" style="background-color: #000;">14.00</div>
+    <div class="grid-item" id="TT_OLD_14_wed" style="background-color: #000;">14.00</div>
+    <div class="grid-item" id="TT_OLD_14_thu" style="background-color: #000;">14.00</div>
     <div class="grid-item" id="TT_OLD_14_fri">14.00</div>
     <div class="grid-item" id="TT_OLD_14_sat">14.00</div>
-    <div class="grid-item" id="TT_OLD_14_sun">14.00</div>
+    <div class="grid-item" id="TT_OLD_14_sun" style="background-color: #000;">14.00</div>
     <div class="grid-item" id="TT_OLD_15_mon">15.00</div>
     <div class="grid-item" id="TT_OLD_15_tue">15.00</div>
     <div class="grid-item" id="TT_OLD_15_wed">15.00</div>
