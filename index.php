@@ -58,7 +58,6 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <tr>
       <td><?= htmlspecialchars($row['fldDate']) ?></td>
       <td><?= htmlspecialchars($row['fldTime']) ?></td>
-      <td><?= htmlspecialchars($row['fldTable']) ?></td>
     </tr>
     <?php endforeach ?>
   </table>
@@ -89,8 +88,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     </p>
     <p>
       <label for="Table">Bord</label><br>
-        <input type="radio" name="txtTable" id="txtTable" value="Nya" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Nya Bordet</label><br>
-        <input type="radio" name="txtTable" id="txtTable" value="Gamla" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Gamla Bordet</label><br>
+        <input type="radio" name="txtTable" id="txtTable" value="new" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Nya Bordet</label><br>
+        <input type="radio" name="txtTable" id="txtTable" value="old" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Gamla Bordet</label><br>
     </p>
     <p>&nbsp;</p>
     <p>
@@ -105,6 +104,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <div>
   <h2 style="padding-left: 10px;">Nya Bordet</h2>
   <div class="grid-container">
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">M&aringndag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Tisdag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Onsdag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Torsdag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
     <div class="grid-item" id="TT_NEW_13_mon" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_NEW_13_tue" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_NEW_13_wed" style="background-color: #000;">13.00</div>
@@ -199,6 +205,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <div>
   <h2 style="padding-left: 10px;">Gamla Bordet</h2>
   <div class="grid-container">
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">M&aringndag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Tisdag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Onsdag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Torsdag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
+    <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
     <div class="grid-item" id="TT_OLD_13_mon" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_OLD_13_tue" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_OLD_13_wed" style="background-color: #000;">13.00</div>

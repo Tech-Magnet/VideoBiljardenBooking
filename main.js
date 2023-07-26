@@ -102,6 +102,6 @@ function checkIfBookingExists(date, time, table) {
       // Your additional logic goes here...
       // For example, you can call a function here to submit the form or handle the data as required.
       const form = document.getElementById('myForm');
-      //form.submit();
+      form.submit();
     }
   }
