@@ -11,25 +11,16 @@ $txtName = $_POST['txtName'];
 $txtPhone = $_POST['txtPhone'];
 $txtDate = $_POST['txtDate'];
 $txtTime = $_POST['txtTime'];
-$txtTable = $_POST['txtTable'];
+$txtDur = $_POST['txtDur'];
 
 // database insert SQL code
-$sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtTable')";
+$sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtDur')";
 
 // insert in database 
 $rs = mysqli_query($con, $sql);
 if($rs)
 {
-	echo "Din Bokning har sparats";
-	echo "";
-	echo "Boknings Bekräftelse:";
-	echo "Namn: $txtName";
-	echo "Telefon: $txtPhone";
-	echo "Datum: $txtDate";
-	echo "Tid: $txtTime";
-	echo "Bord: $txtTable";
-	$sql = "SELECT id `Booked` WHERE fldDate = $txtDate AND fldTime = $txtTime";
-	echo "Avboknings ID: $sql"
+	echo "Booking Records Inserted";
 }
 }
 else
