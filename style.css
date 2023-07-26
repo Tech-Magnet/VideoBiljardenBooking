@@ -8791,3 +8791,18 @@ textarea.form-control-lg{
     }
 }
 /*# sourceMappingURL=bootstrap.min.css.map */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    background-color: #ffffff;
+    padding: 10px;
+    width: 200px;
+  }
+  .grid-item {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
