@@ -11,10 +11,10 @@ $txtName = $_POST['txtName'];
 $txtPhone = $_POST['txtPhone'];
 $txtDate = $_POST['txtDate'];
 $txtTime = $_POST['txtTime'];
-$txtDur = $_POST['txtDur'];
+$txtTable = $_POST['txtTable'];
 
 // database insert SQL code
-$sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtDur')";
+$sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtTable')";
 
 // insert in database 
 $rs = mysqli_query($con, $sql);
