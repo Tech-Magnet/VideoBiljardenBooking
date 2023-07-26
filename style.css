@@ -8798,11 +8798,32 @@ textarea.form-control-lg{
     background-color: #ffffff;
     padding: 10px;
     width: 200px;
-  }
-  .grid-item {
+}
+.grid-item {
     background-color: #ffffff;
     border: 1px solid #000000;
     padding: 20px;
     font-size: 30px;
     text-align: center;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+}
+
+
+
+
+/*columns*/
+* {
+    box-sizing: border-box;
+  }
+.column {
+    float: center;
+    width: 16%;
+    padding: 10px;
+  }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
   }
