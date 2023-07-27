@@ -31,19 +31,13 @@ function GetArrays(index){
     const columnIndices = [0, 1, 2];
     const [arrayColumn0, arrayColumn1, arrayColumn2] = importColumnsToArrays(tableId, columnIndices);
 
-    console.log('Array for Column 0:', arrayColumn0);
-    console.log('Array for Column 1:', arrayColumn1);
-    console.log('Array for Column 2:', arrayColumn2);
-
 
       for(let i = 0; i < arrayColumn2.length; i++){
         if (arrayColumn2[i] == "new"){
           arrayColumn2[i] = 1;
-          console.log("ARRAY CONVERION: " + arrayColumn2[i]);
         }
         else if(arrayColumn2[i] == "old"){
           arrayColumn2[i] = 2
-          console.log("ARRAY CONVERION: " + arrayColumn2[i]);
         }
         else{
           console.log("ERROR converting table array to bool system");
@@ -66,15 +60,11 @@ function checkIfBookingExists(date, time, table) {
     const arrayColumn1 = GetArrays(1);
     const arrayColumn2 = GetArrays(2);
     for (let i = 0; i < arrayColumn0.length; i++) {
-        console.log("ARRAY DATE: " + arrayColumn0[i]);
-        console.log("ARRAY TIME: " + arrayColumn1[i]);
-        console.log("ARRAY TABLE: " + arrayColumn2[i]);
       if (
         arrayColumn0[i] === date &&
         arrayColumn1[i] === time &&
         arrayColumn2[i] == table
       ) {
-        console.log("true");
         return true;
       }else if (
         arrayColumn0[i] == date &&
@@ -82,7 +72,6 @@ function checkIfBookingExists(date, time, table) {
         arrayColumn2[i] === table
         )
       {
-        console.log("false");
         return false;
       }else{
         console.log("ERROR could not diffrientiate values");
@@ -110,9 +99,6 @@ function checkIfBookingExists(date, time, table) {
       console.log("ERROR table could not be decided");
       console.log(table_bool);
     }
-    console.log("Date: " + bookingDate);
-    console.log("Time: " + bookingTime);
-    console.log("Table: " + selectedTable);
 
     if (!selectedTable) {
       alert('Please select a table.');
@@ -156,7 +142,7 @@ function checkIfBookingExists(date, time, table) {
 
 
 
-      
+
       //Gets the day for open hours
       var day = new Date(date);
       var weekday = day.getDay();
