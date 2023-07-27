@@ -125,6 +125,72 @@ function checkIfBookingExists(date, time, table) {
     if (checkIfBookingExists(bookingDate, bookingTime, table_bool)) {
       alert('This booking already exists. Please choose a different date, time, or table.');
     } else {
+
+      //Stores open hours in whole hours (NT = Normal Time (Sun-Thu), HT = Holiday Time (Fri - Sat))
+      const whitelist_NT = [
+        "15:00:00",
+        "16:00:00", 
+        "17:00:00",
+        "18:00:00",
+        "19:00:00",
+        "20:00:00",
+        "21:00:00",
+        "22:00:00",
+        "23:00:00"
+        ];
+      const whitelist_HT = [
+        "13:00:00",
+        "14:00:00",
+        "15:00:00",
+        "16:00:00",
+        "17:00:00",
+        "18:00:00",
+        "19:00:00",
+        "20:00:00",
+        "21:00:00",
+        "22:00:00",
+        "23:00:00",
+        "00:00:00"
+      ];
+
+
+
+
+      
+      //Gets the day for open hours
+      var day = new Date(date);
+      var weekday = day.getDay();
+      console.log(weekday);
+      //0 = Sun
+      //1 = Mon
+      //2 = Tue
+      //3 = Wed
+      //4 = Thur
+      //5 = Fri
+      //6 = Sat
+      if (weekday == 0 || weekday == 1 || weekday == 2 || weekday == 3 || weekday == 4){
+        if (whitelist_NT.includes(time) == true){
+          return false;
+        }else {
+          alert("Tiden du har valt &aumlr inte tillg&aumlnglig, var god och v&aumllj en annan tid, l&aumlgg m&aumlrke till att du kan bara v&aumlja hela timar");
+          return true;
+        }
+      }else if(weekday == 5 || weekday == 6){
+        if(whitelist_HT.includes(time) == true){
+          return false;
+        }else{
+          alert("Tiden du har valt &aumlr inte tillg&aumlnglig, var god och v&aumllj en annan tid, l&aumlgg m&aumlrke till att du kan bara v&aumlja hela timar");
+          return true;
+        }
+      }
+
+
+
+
+
+
+
+
       // If the booking is unique, you can proceed with your logic to save it to the database or perform any other actions.
       console.log('Booking is unique. Proceed with form submission or other actions.');
       // Your additional logic goes here...
