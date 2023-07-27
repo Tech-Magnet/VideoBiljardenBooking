@@ -55,21 +55,32 @@ function GetArrays(index){
       }
 }
   
-function checkIfBookingExists(date, time, table) {
+function checkIfBookingExists(date, time, table_bool) {
     const arrayColumn0 = GetArrays(0);
     const arrayColumn1 = GetArrays(1);
     const arrayColumn2 = GetArrays(2);
+
+    console.log("ARRAY COLUMN 0: " + arrayColumn0);
+    console.log("ARRAY COLUMN 1: " + arrayColumn1);
+    console.log("ARRAY COLUMN 2: " + arrayColumn2);
+
+    console.log("Table_Bool: " + table_bool);
+
     for (let i = 0; i < arrayColumn0.length; i++) {
+      console.log("try: " + i + ",arr0 Res: " + arrayColumn0 == date);
+      console.log("try: " + i + ",arr1 Res: " + arrayColumn1 == date);
+      console.log("try: " + i + ",arr2 Res: " + arrayColumn2 == date);
       if (
         arrayColumn0[i] === date &&
         arrayColumn1[i] === time &&
-        arrayColumn2[i] == table
+        arrayColumn2[i] === table_bool
+        
       ) {
         return true;
       }else if (
         arrayColumn0[i] == date &&
         arrayColumn1[i] == time &&
-        arrayColumn2[i] === table
+        arrayColumn2[i] === table_bool
         )
       {
         return false;
@@ -91,13 +102,13 @@ function checkIfBookingExists(date, time, table) {
     var table_bool = 0;
     if (selectedTable == "new"){
       table_bool = 1;
-      console.log(table_bool);
+      console.log("Table:" + table_bool);
     }else if(selectedTableValue == "old"){
       table_bool = 2;
-      console.log(table_bool);
+      console.log("Table: " + table_bool);
     }else{
       console.log("ERROR table could not be decided");
-      console.log(table_bool);
+      console.log("Table: " + table_bool);
     }
 
     if (!selectedTable) {
@@ -111,77 +122,10 @@ function checkIfBookingExists(date, time, table) {
     if (checkIfBookingExists(bookingDate, bookingTime, table_bool)) {
       alert('This booking already exists. Please choose a different date, time, or table.');
     } else {
-
-      //Stores open hours in whole hours (NT = Normal Time (Sun-Thu), HT = Holiday Time (Fri - Sat))
-      const whitelist_NT = [
-        "15:00:00",
-        "16:00:00", 
-        "17:00:00",
-        "18:00:00",
-        "19:00:00",
-        "20:00:00",
-        "21:00:00",
-        "22:00:00",
-        "23:00:00"
-        ];
-      const whitelist_HT = [
-        "13:00:00",
-        "14:00:00",
-        "15:00:00",
-        "16:00:00",
-        "17:00:00",
-        "18:00:00",
-        "19:00:00",
-        "20:00:00",
-        "21:00:00",
-        "22:00:00",
-        "23:00:00",
-        "00:00:00"
-      ];
-
-
-
-
-
-      //Gets the day for open hours
-      var day = new Date(date);
-      var weekday = day.getDay();
-      console.log(weekday);
-      //0 = Sun
-      //1 = Mon
-      //2 = Tue
-      //3 = Wed
-      //4 = Thur
-      //5 = Fri
-      //6 = Sat
-      if (weekday == 0 || weekday == 1 || weekday == 2 || weekday == 3 || weekday == 4){
-        if (whitelist_NT.includes(time) == true){
-          return false;
-        }else {
-          alert("Tiden du har valt &aumlr inte tillg&aumlnglig, var god och v&aumllj en annan tid, l&aumlgg m&aumlrke till att du kan bara v&aumlja hela timar");
-          return true;
-        }
-      }else if(weekday == 5 || weekday == 6){
-        if(whitelist_HT.includes(time) == true){
-          return false;
-        }else{
-          alert("Tiden du har valt &aumlr inte tillg&aumlnglig, var god och v&aumllj en annan tid, l&aumlgg m&aumlrke till att du kan bara v&aumlja hela timar");
-          return true;
-        }
-      }
-
-
-
-
-
-
-
-
       // If the booking is unique, you can proceed with your logic to save it to the database or perform any other actions.
       console.log('Booking is unique. Proceed with form submission or other actions.');
       // Your additional logic goes here...
       // For example, you can call a function here to submit the form or handle the data as required.
       const form = document.getElementById('myForm');
-      form.submit();
+      //form.submit();
     }
-  }

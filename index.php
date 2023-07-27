@@ -76,8 +76,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       <input type="text" class="form-control" name="txtName" id="txtName" placeholder="Namn" value="" required>
     </p>
     <p>
-      <label for="phone">Telefon Nummer</label>
-      <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="Telefon Nummer" value="" required>
+      <label for="phone">Telnr</label>
+      <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="07012354567" value="" required>
     </p>
     <p>
       <label for="date">Datum</label>

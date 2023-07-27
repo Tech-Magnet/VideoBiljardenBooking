@@ -23,7 +23,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <th>Telefon</th>
     <th>Datum</th>
     <th>Tid</th>
-    <th>L&aumlgd</th>
+    <th>L&aumlgnd</th>
     <th>Bord</th>
   </tr>
   <?php foreach($data as $row): ?>
