@@ -129,3 +129,4 @@ function checkIfBookingExists(date, time, table_bool) {
       const form = document.getElementById('myForm');
       //form.submit();
     }
+  }
