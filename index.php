@@ -58,6 +58,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <tr>
       <td><?= htmlspecialchars($row['fldDate']) ?></td>
       <td><?= htmlspecialchars($row['fldTime']) ?></td>
+      <td><?= htmlspecialchars($row['fldTable']) ?></td>
     </tr>
     <?php endforeach ?>
   </table>

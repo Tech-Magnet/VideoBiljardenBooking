@@ -36,6 +36,22 @@ function GetArrays(index){
     console.log('Array for Column 2:', arrayColumn2);
 
 
+      for(let i = 0; i < arrayColumn2.length; i++){
+        if (arrayColumn2[i] == "new"){
+          arrayColumn2[i] = 1;
+          console.log("ARRAY CONVERION: " + arrayColumn2[i]);
+        }
+        else if(arrayColumn2[i] == "old"){
+          arrayColumn2[i] = 2
+          console.log("ARRAY CONVERION: " + arrayColumn2[i]);
+        }
+        else{
+          console.log("ERROR converting table array to bool system");
+          console.log("ARRAY CONVERION: " + arrayColumn2[i]);
+        }
+      }
+
+
       if(index == 0){
         return arrayColumn0;
       }else if(index == 1){
@@ -68,10 +84,11 @@ function checkIfBookingExists(date, time, table) {
       {
         console.log("false");
         return false;
+      }else{
+        console.log("ERROR could not diffrientiate values");
+        return true;
       }
     }
-    console.log("false");
-    return false;
   }
 
   // Function to handle form submission
@@ -82,6 +99,17 @@ function checkIfBookingExists(date, time, table) {
     const bookingDate = document.getElementById('txtDate').value;
     const bookingTime = document.getElementById('txtTime').value + ":00";
     const selectedTable = document.querySelector('input[name="txtTable"]:checked').value;
+    var table_bool = 0;
+    if (selectedTable == "new"){
+      table_bool = 1;
+      console.log(table_bool);
+    }else if(selectedTableValue == "old"){
+      table_bool = 2;
+      console.log(table_bool);
+    }else{
+      console.log("ERROR table could not be decided");
+      console.log(table_bool);
+    }
     console.log("Date: " + bookingDate);
     console.log("Time: " + bookingTime);
     console.log("Table: " + selectedTable);
@@ -94,7 +122,7 @@ function checkIfBookingExists(date, time, table) {
     const selectedTableValue = selectedTable.value;
 
     // Check if the booking already exists in the arrays
-    if (checkIfBookingExists(bookingDate, bookingTime/*, selectedTableValue*/)) {
+    if (checkIfBookingExists(bookingDate, bookingTime, table_bool)) {
       alert('This booking already exists. Please choose a different date, time, or table.');
     } else {
       // If the booking is unique, you can proceed with your logic to save it to the database or perform any other actions.
