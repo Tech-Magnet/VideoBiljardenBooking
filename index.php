@@ -85,7 +85,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     </p>
     <p>
       <label for="time">Tid</label>
-      <input type="time"  class="form-control"  name="txtTime" id="txtTime" step="3600000" placeholder="" value="" required>
+      <input type="time"  class="form-control"  name="txtTime" id="txtTime" step="3600" placeholder="00:00:00" value="" required>
     </p>
     <p>
       <label for="Table">Bord</label><br>
@@ -189,13 +189,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <div class="grid-item" id="TT_NEW_23_fri">23.00</div>
     <div class="grid-item" id="TT_NEW_23_sat">23.00</div>
     <div class="grid-item" id="TT_NEW_23_sun">23.00</div>
-    <div class="grid-item" id="TT_NEW_24_mon">24.00</div>
-    <div class="grid-item" id="TT_NEW_24_tue">24.00</div>
-    <div class="grid-item" id="TT_NEW_24_wed">24.00</div>
-    <div class="grid-item" id="TT_NEW_24_thu">24.00</div>
+    <div class="grid-item" id="TT_NEW_24_mon" style="background-color: #000;">24.00</div>
+    <div class="grid-item" id="TT_NEW_24_tue" style="background-color: #000;">24.00</div>
+    <div class="grid-item" id="TT_NEW_24_wed" style="background-color: #000;">24.00</div>
+    <div class="grid-item" id="TT_NEW_24_thu" style="background-color: #000;">24.00</div>
     <div class="grid-item" id="TT_NEW_24_fri">24.00</div>
     <div class="grid-item" id="TT_NEW_24_sat">24.00</div>
-    <div class="grid-item" id="TT_NEW_24_sun">24.00</div>
+    <div class="grid-item" id="TT_NEW_24_sun" style="background-color: #000;">24.00</div>
   </div>
 </div>
 </div>
@@ -290,13 +290,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <div class="grid-item" id="TT_OLD_23_fri">23.00</div>
     <div class="grid-item" id="TT_OLD_23_sat">23.00</div>
     <div class="grid-item" id="TT_OLD_23_sun">23.00</div>
-    <div class="grid-item" id="TT_OLD_24_mon">24.00</div>
-    <div class="grid-item" id="TT_OLD_24_tue">24.00</div>
-    <div class="grid-item" id="TT_OLD_24_wed">24.00</div>
-    <div class="grid-item" id="TT_OLD_24_thu">24.00</div>
+    <div class="grid-item" id="TT_OLD_24_mon" style="background-color: #000;">24.00</div>
+    <div class="grid-item" id="TT_OLD_24_tue" style="background-color: #000;">24.00</div>
+    <div class="grid-item" id="TT_OLD_24_wed" style="background-color: #000;">24.00</div>
+    <div class="grid-item" id="TT_OLD_24_thu" style="background-color: #000;">24.00</div>
     <div class="grid-item" id="TT_OLD_24_fri">24.00</div>
     <div class="grid-item" id="TT_OLD_24_sat">24.00</div>
-    <div class="grid-item" id="TT_OLD_24_sun">24.00</div>
+    <div class="grid-item" id="TT_OLD_24_sun" style="background-color: #000;">24.00</div>
   </div>
 </div>
 </div>
