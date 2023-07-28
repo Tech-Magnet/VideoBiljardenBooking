@@ -35,7 +35,6 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <title>Boka ett Bord</title>
 <link href="style.css" rel="stylesheet">
 <script type="text/javascript" src="main.js"></script>
-<script async type="text/javascript" src="bootstrap.bundle.min.js"></script>
 <link rel="icon" href="img/icon.png">
 </head>
 <!-- Google tag (gtag.js) -->
