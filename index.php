@@ -47,22 +47,6 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         gtag('config', 'G-TMPN0CGN95');
 </script>
 <body class="bg-light" onload="GetArrays();">
-<div style="display: none;">
-  <table border="1" id="dbTable">
-    <tr>
-      <th>Datum</th>
-      <th>Tid</th>
-      <th>Bord</th>
-    </tr>
-    <?php foreach($data as $row): ?>
-    <tr>
-      <td><?= htmlspecialchars($row['fldDate']) ?></td>
-      <td><?= htmlspecialchars($row['fldTime']) ?></td>
-      <td><?= htmlspecialchars($row['fldTable']) ?></td>
-    </tr>
-    <?php endforeach ?>
-  </table>
-</div>
 <div class="container">
 <div class="py-5 text-center">
         <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
@@ -98,6 +82,23 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     </p>
   </form>
 </fieldset>
+</div>
+<div>
+  <h3>Aktiva Bokingar</h3>
+  <table border="1" id="dbTable">
+    <tr>
+      <th>Datum</th>
+      <th>Tid</th>
+      <th>Bord</th>
+    </tr>
+    <?php foreach($data as $row): ?>
+    <tr>
+      <td><?= htmlspecialchars($row['fldDate']) ?></td>
+      <td><?= htmlspecialchars($row['fldTime']) ?></td>
+      <td><?= htmlspecialchars($row['fldTable']) ?></td>
+    </tr>
+    <?php endforeach ?>
+  </table>
 </div>
 <div class="row">
   <div class="column"></div>
