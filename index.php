@@ -2,25 +2,28 @@
 // database connection code
 if(isset($_POST['txtName']))
 {
-$con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
+  $txtLength = $_POST['txtLength'];
+  for ($i = 0; $i < $txtLength; $i++) {
+    $con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
 
-// get the post records
-
-$txtName = $_POST['txtName'];
-$txtPhone = $_POST['txtPhone'];
-$txtDate = $_POST['txtDate'];
-$txtTime = $_POST['txtTime'];
-$txtTable = $_POST['txtTable'];
-
-// database insert SQL code
-$sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtTable')";
-
-// insert in database 
-$rs = mysqli_query($con, $sql);
-if($rs)
-{
-	echo "Booking Records Inserted";
-}
+    // get the post records
+      
+    $txtName = $_POST['txtName'];
+    $txtPhone = $_POST['txtPhone'];
+    $txtDate = $_POST['txtDate'];
+    $txtTime = $_POST['txtTime'];
+    $txtTable = $_POST['txtTable'];
+      
+    // database insert SQL code
+    $sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtTable')";
+      
+    // insert in database 
+    $rs = mysqli_query($con, $sql);
+    if($rs)
+    {
+    	echo "Booking Records Inserted";
+    }
+} 
 }
 $con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
 $result = mysqli_query($con,"SELECT * FROM `Booked`");
@@ -46,45 +49,49 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         gtag('config', 'G-TMPN0CGN95');
 </script>
 <body class="bg-light" onload="GetArrays();">
-<div class="container">
-<div class="py-5 text-center">
-        <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
-        <h2>Boka Bord - Snooker</h2>
-      </div>
-<fieldset>
-  
-  <form id="myForm" name="frmBook" class="needs-validation " method="post" action="index.php" onsubmit="handleFormSubmit(event)">
-    <p>
-      <label for="Name">Namn</label>
-      <input type="text" class="form-control" name="txtName" id="txtName" placeholder="Namn" value="" required>
-    </p>
-    <p>
-      <label for="phone">Telnr</label>
-      <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="07012354567" value="" required>
-    </p>
-    <p>
-      <label for="date">Datum</label>
-      <input type="date"  class="form-control"  name="txtDate" id="txtDate" placeholder="" value="" required>
-    </p>
-    <p>
-      <label for="time">Tid</label>
-      <input type="time"  class="form-control"  name="txtTime" id="txtTime" step="3600" placeholder="00:00:00" value="" required>
-    </p>
-    <p>
-      <label for="Table">Bord</label><br>
-        <input type="radio" name="txtTable" id="txtTable" value="new" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Nya Bordet</label><br>
-        <input type="radio" name="txtTable" id="txtTable" value="old" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Gamla Bordet</label><br>
-    </p>
-    <p>&nbsp;</p>
-    <p>
-      <input type="submit" name="Submit" id="Submit" value="Boka Bord"  class="btn btn-primary btn-lg btn-block">
-    </p>
-  </form>
-</fieldset>
-</div>
-<div>
-  <h3>Aktiva Bokingar</h3>
-  <table border="1" id="dbTable">
+  <div class="container">
+    <div class="py-5 text-center">
+      <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
+      <h2>Boka Bord - Snooker</h2>
+    </div>
+  <fieldset>
+    <form id="myForm" name="frmBook" class="needs-validation " method="post" action="index.php">
+      <p>
+        <label for="Name">Namn</label>
+        <input type="text" class="form-control" name="txtName" id="txtName" placeholder="Namn" value="" required>
+      </p>
+      <p>
+        <label for="phone">Telnr</label>
+        <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="07012354567" value="" required>
+      </p>
+      <p>
+        <label for="date">Datum</label>
+        <input type="date"  class="form-control"  name="txtDate" id="txtDate" placeholder="" value="" required>
+      </p>
+      <p>
+        <label for="time">Tid</label>
+        <input type="number"  class="form-control"  name="txtTime" id="txtTime" step="3600" placeholder="00:00:00" value="" required>
+      </p>
+      <p>
+        <label for="date">L&aumlngd</label>
+        <input type="number"  class="form-control"  name="txtLength" id="txtLength" placeholder="" value="" required>
+      </p>
+      <p>
+        <label for="Table">Bord</label><br>
+          <input type="radio" name="txtTable" id="txtTable" value="new" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Nya Bordet</label><br>
+          <input type="radio" name="txtTable" id="txtTable" value="old" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Gamla Bordet</label><br>
+      </p>
+      <p>&nbsp;</p>
+      <p>
+        <input type="button" name="button" id="smt-button" value="Boka Bord"  class="btn btn-primary btn-lg btn-block" onclick="CheckSubmit()">
+      </p>
+    </form>
+  </fieldset>
+
+  </div>
+  <div>
+    <h3>Aktiva Bokingar</h3>
+    <table border="1" id="dbTable">
     <tr>
       <th>Datum</th>
       <th>Tid</th>
@@ -97,14 +104,14 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       <td><?= htmlspecialchars($row['fldTable']) ?></td>
     </tr>
     <?php endforeach ?>
-  </table>
-</div>
-<div class="row">
-  <div class="column"></div>
-  <div class="column">
-<div>
-  <h2 style="padding-left: 10px;">Nya Bordet</h2>
-  <div class="grid-container">
+    </table>
+  </div>
+  <div class="row">
+    <div class="column"></div>
+    <div class="column">
+  <div>
+    <h2 style="padding-left: 10px;">Nya Bordet</h2>
+    <div class="grid-container">
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">M&aringndag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Tisdag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Onsdag</div>
@@ -196,16 +203,16 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <div class="grid-item" id="TT_NEW_24_fri">24.00</div>
     <div class="grid-item" id="TT_NEW_24_sat">24.00</div>
     <div class="grid-item" id="TT_NEW_24_sun" style="background-color: #000;">24.00</div>
+    </div>
   </div>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="column"></div>
-<div class="column">
-<div>
-  <h2 style="padding-left: 10px;">Gamla Bordet</h2>
-  <div class="grid-container">
+  </div>
+  </div>
+  <div class="row">
+  <div class="column"></div>
+  <div class="column">
+  <div>
+    <h2 style="padding-left: 10px;">Gamla Bordet</h2>
+    <div class="grid-container">
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">M&aringndag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Tisdag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Onsdag</div>
@@ -297,10 +304,10 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <div class="grid-item" id="TT_OLD_24_fri">24.00</div>
     <div class="grid-item" id="TT_OLD_24_sat">24.00</div>
     <div class="grid-item" id="TT_OLD_24_sun" style="background-color: #000;">24.00</div>
+    </div>
   </div>
-</div>
-</div>
-</div>
-</div>
+  </div>
+  </div>
+  </div>
 </body>
 </html>
