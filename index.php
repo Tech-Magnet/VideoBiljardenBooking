@@ -74,7 +74,17 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       </p>
       <p>
         <label for="time">Tid</label>
-        <input type="number"  class="form-control"  name="txtTime" id="txtTime" step="1" placeholder="Start Timme" value="" required>
+        <select id="txtTime" name="txtTime" style="padding: 10px;">
+          <option value="15">15.00</option>
+          <option value="16">16.00</option>
+          <option value="17">17.00</option>
+          <option value="18">18.00</option>
+          <option value="19">19.00</option>
+          <option value="20">20.00</option>
+          <option value="21">21.00</option>
+          <option value="22">22.00</option>
+          <option value="23">23.00</option>
+        </select>
       </p>
       <p>
         <label for="date">L&aumlngd (Timmar)</label>
