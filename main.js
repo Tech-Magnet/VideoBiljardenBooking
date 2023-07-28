@@ -20,11 +20,45 @@ function importColumnsToArrays(tableId, columnIndices) {
   }
   return columnArrays;
 }
-function GetArrays(){
+function GetArrays(index){
   // Usage example: Importing columns 0, 1, and 2 into separate arrays
   const tableId = 'dbTable';
   const columnIndices = [0, 1, 2];
   const [arrayColumn0, arrayColumn1, arrayColumn2] = importColumnsToArrays(tableId, columnIndices);
+
+  /*console.log("ARRAY DATE: " + arrayColumn0);
+  console.log("ARRAY TIME: " + arrayColumn1);
+  console.log("ARRAY TABL: " + arrayColumn2);*/
+
+  if(index == 0){
+    return arrayColumn0;
+  }else if (index == 1){
+    return arrayColumn1
+  }else if (index == 2){
+    return arrayColumn2;
+  }
+}
+
+
+function CheckForExistDB(date, time, table){
+  const arrayColumn0 = GetArrays(0);
+  const arrayColumn1 = GetArrays(1);
+  const arrayColumn2 = GetArrays(2);
+
+  let found = false
+
+  for(i = 0; i < arrayColumn0.length; i++){
+    if (arrayColumn0[i] == date && arrayColumn1[i] == time && arrayColumn2[i] == table){
+      console.log("SAME DATA AS ON FILE");
+      found = true;
+      return true;
+    }
+  }
+  if (!found){
+    console.log("NOT THE SAME AS ON FILE");
+    console.log("ENTRY: " + date + ", " + time + ", " + table);
+    return false;
+  }
 }
 
 
@@ -41,4 +75,22 @@ function CheckSubmit() {
   var date = document.getElementById('txtDate').value;
   var time = document.getElementById('txtTime').value;
   var table = document.getElementById('txtTable').value;
+
+
+  console.log("NAME: " + name);
+  console.log("PHONE: " + phone);
+  console.log("DATE: " + date);
+  console.log("TIME: " + time);
+  console.log("TABLE: " + table);
+  console.log("");
+  console.log("");
+  console.log("");
+
+  if(CheckForExistDB(date, time, table)){
+    alert("Ledsen men Tiden du har valt &aumlr inte tillg&aumlgning, var god och v&aumlj en annan tid");
+  }else if(!CheckForExistDB(date, time, table)){
+    console.log("Submit");
+    const form = document.getElementById('myForm');
+    form.submit();
+  }
 }

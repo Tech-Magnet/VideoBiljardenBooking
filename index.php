@@ -2,26 +2,30 @@
 // database connection code
 if(isset($_POST['txtName']))
 {
+  $txtName = $_POST['txtName'];
+  $txtPhone = $_POST['txtPhone'];
+  $txtDate = $_POST['txtDate'];
+  $txtTime = $_POST['txtTime'];
+  $txtTable = $_POST['txtTable'];
   $txtLength = $_POST['txtLength'];
+
+
   for ($i = 0; $i < $txtLength; $i++) {
     $con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
 
     // get the post records
-      
-    $txtName = $_POST['txtName'];
-    $txtPhone = $_POST['txtPhone'];
-    $txtDate = $_POST['txtDate'];
-    $txtTime = $_POST['txtTime'];
-    $txtTable = $_POST['txtTable'];
-      
+
+    
+
     // database insert SQL code
     $sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$txtTime', '$txtTable')";
-      
+
     // insert in database 
     $rs = mysqli_query($con, $sql);
     if($rs)
     {
     	echo "Booking Records Inserted";
+      $txtTime = $txtTime + 1;
     }
 } 
 }
@@ -70,16 +74,18 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       </p>
       <p>
         <label for="time">Tid</label>
-        <input type="number"  class="form-control"  name="txtTime" id="txtTime" step="3600" placeholder="00:00:00" value="" required>
+        <input type="number"  class="form-control"  name="txtTime" id="txtTime" step="1" placeholder="Start Timme" value="" required>
       </p>
       <p>
-        <label for="date">L&aumlngd</label>
-        <input type="number"  class="form-control"  name="txtLength" id="txtLength" placeholder="" value="" required>
+        <label for="date">L&aumlngd (Timmar)</label>
+        <input type="number"  class="form-control"  name="txtLength" id="txtLength" placeholder="1" value="1" required>
       </p>
       <p>
-        <label for="Table">Bord</label><br>
-          <input type="radio" name="txtTable" id="txtTable" value="new" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Nya Bordet</label><br>
-          <input type="radio" name="txtTable" id="txtTable" value="old" style="height: 20px;" required><label for="Table" style="padding-left: 25px;">Gamla Bordet</label><br>
+      <label for="txtTable">Bord</label>
+      <select id="txtTable" name="txtTable" style="padding: 10px;">
+        <option value="new">Nya</option>
+        <option value="old">Gamla</option>
+      </select>
       </p>
       <p>&nbsp;</p>
       <p>
@@ -89,7 +95,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
   </fieldset>
 
   </div>
-  <div>
+  <div style="padding-left: 50px">
     <h3>Aktiva Bokingar</h3>
     <table border="1" id="dbTable">
     <tr>
