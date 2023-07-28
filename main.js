@@ -75,6 +75,11 @@ function CheckSubmit() {
   var date = document.getElementById('txtDate').value;
   var time = document.getElementById('txtTime').value;
   var table = document.getElementById('txtTable').value;
+  var length = document.getElementById('txtLength').value;
+
+  if(length <= 0){
+    document.getElementById('txtLength').value = 1;
+  }
 
 
   console.log("NAME: " + name);

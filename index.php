@@ -88,7 +88,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       </p>
       <p>
         <label for="date">L&aumlngd (Timmar)</label>
-        <input type="number"  class="form-control"  name="txtLength" id="txtLength" placeholder="1" value="1" required>
+        <input type="number"  class="form-control"  name="txtLength" id="txtLength" placeholder="" value="1" required>
       </p>
       <p>
       <label for="txtTable">Bord</label>
