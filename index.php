@@ -36,7 +36,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
 
 <!DOCTYPE html>
-<html lang="en" style="padding: 130px;" id="html-tag">
+<html lang="en" id="html-tag">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Boka ett Bord</title>
