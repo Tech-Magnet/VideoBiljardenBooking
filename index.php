@@ -36,7 +36,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="padding: 130px;" id="html-tag">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Boka ett Bord</title>
@@ -52,7 +52,176 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         gtag('js', new Date());
         gtag('config', 'G-TMPN0CGN95');
 </script>
-<body class="bg-light" onload="GetArrays();">
+<body class="bg-light" onload="Start();">
+  <script>
+    
+
+    function getDay() {
+      let day = current_date.getDay();
+      let dd = String(current_date.getDate()).padStart(2, '0');
+      return dd;
+    }
+    function Start(){
+      
+      const arrayColumn0 = GetArrays(0);
+      const arrayColumn1 = GetArrays(1);
+      const arrayColumn2 = GetArrays(2);
+
+      for (i = 0; i < arrayColumn2.length; i++){
+        if(arrayColumn2[i] == "Bord_1"){
+          if(arrayColumn0[i] == 0){//SUNDAY
+            var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sun";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 1){//MONDAY
+            var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_mon";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 2){//TUESDAY
+            var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_tue";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 3){//WEDNESDAY
+            var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_wed";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 4){//THURSDAY
+            var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_thu";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 5){//FRIDAY
+            var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_fri";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 6){//SATURDAY
+            var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sat";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }
+        }else if(arrayColumn2[i] == "Bord_2"){
+          if(arrayColumn0[i] == 0){//SUNDAY
+            var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_sun";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 1){//MONDAY
+            var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_mon";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 2){//TUESDAY
+            var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_tue";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 3){//WEDNESDAY
+            var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_wed";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 4){//THURSDAY
+            var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_thu";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 5){//FRIDAY
+            var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_fri";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }else if(arrayColumn0[i] == 6){//SATURDAY
+            var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_sat";
+            document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+          }
+        }
+      }
+
+
+
+
+      const current_date = new Date();
+      //current_date = new Date("2023-07-28");
+      let day = current_date.getDay();
+      let dd = String(current_date.getDate()).padStart(2, '0');
+	    let mm = String(current_date.getMonth() + 1).padStart(2, '0');
+      console.log("DAY: " + dd);
+      console.log("MONTH: " + mm);
+      console.log("CURRENT WEEKDAY: " + day);
+
+
+      if(day == 0){//Sunday
+        document.getElementById('TTN_NEW_sun').innerText = dd + "-" + mm;
+        document.getElementById('TTN_OLD_sun').innerText = dd + "-" + mm;
+      }else if(day == 1){//Monday
+        document.getElementById('TTN_NEW_mon').innerText = dd + "-" + mm;
+        document.getElementById('TTN_OLD_mon').innerText = dd + "-" + mm;
+      }else if(day == 2){//Tuesday
+        document.getElementById('TTN_NEW_tue').innerText = dd + "-" + mm;
+        document.getElementById('TTN_OLD_tue').innerText = dd + "-" + mm;
+      }else if(day == 3){//Wednesday
+        document.getElementById('TTN_NEW_wed').innerText = dd + "-" + mm;
+        document.getElementById('TTN_OLD_wed').innerText = dd + "-" + mm;
+      }else if(day == 4){//Thursday
+        document.getElementById('TTN_NEW_thu').innerText = dd + "-" + mm;
+        document.getElementById('TTN_OLD_thu').innerText = dd + "-" + mm;
+      }else if(day == 5){//Friday
+        document.getElementById('TTN_NEW_fri').innerText = dd + "-" + mm;
+        document.getElementById('TTN_OLD_fri').innerText = dd + "-" + mm;
+      }else if(day == 6){//Saturday
+        var CUR_MON = String(current_date.getDate() - 5).padStart(2, '0');
+        var CUR_TUE = String(current_date.getDate() - 4).padStart(2, '0');
+        var CUR_WED = String(current_date.getDate() - 3).padStart(2, '0');
+        var CUR_THU = String(current_date.getDate() - 2).padStart(2, '0');
+        var CUR_FRI = String(current_date.getDate() - 1).padStart(2, '0');
+        var CUR_SAT = String(current_date.getDate()).padStart(2, '0');
+        var CUR_SUN = String(current_date.getDate() + 1).padStart(2, '0');
+
+        var NEX_MON = String(current_date.getDate() + 2).padStart(2, '0');
+        var NEX_TUE = String(current_date.getDate() + 3).padStart(2, '0');
+        var NEX_WED = String(current_date.getDate() + 4).padStart(2, '0');
+        var NEX_THU = String(current_date.getDate() + 5).padStart(2, '0');
+        var NEX_FRI = String(current_date.getDate() + 6).padStart(2, '0');
+        var NEX_SAT = String(current_date.getDate() + 7).padStart(2, '0');
+        var NEX_SUN = String(current_date.getDate() + 8).padStart(2, '0');
+
+        //Monday
+        document.getElementById('TTN_NEW_mon').innerText = CUR_MON + "-" + mm;
+        document.getElementById('TTN_OLD_mon').innerText = CUR_MON + "-" + mm;
+        //Tuesday
+        document.getElementById('TTN_NEW_tue').innerText = CUR_TUE + "-" + mm;
+        document.getElementById('TTN_OLD_tue').innerText = CUR_TUE + "-" + mm;
+        //Wednesday
+        document.getElementById('TTN_NEW_wed').innerText = CUR_WED + "-" + mm;
+        document.getElementById('TTN_OLD_wed').innerText = CUR_WED + "-" + mm;
+        //Thursday
+        document.getElementById('TTN_NEW_thu').innerText = CUR_THU + "-" + mm;
+        document.getElementById('TTN_OLD_thu').innerText = CUR_THU + "-" + mm;
+        //Friday
+        document.getElementById('TTN_NEW_fri').innerText = CUR_FRI + "-" + mm;
+        document.getElementById('TTN_OLD_fri').innerText = CUR_FRI + "-" + mm;
+        //Saturday
+        document.getElementById('TTN_NEW_sat').innerText = CUR_SAT + "-" + mm;
+        document.getElementById('TTN_OLD_sat').innerText = CUR_SAT + "-" + mm;
+        //Sunday
+        document.getElementById('TTN_NEW_sun').innerText = CUR_SUN + "-" + mm;
+        document.getElementById('TTN_OLD_sun').innerText = CUR_SUN + "-" + mm;
+        //DROPDOWN 1
+        //Monday
+        document.getElementById('DATE-CURR-MON').innerText = "Måndag  " + CUR_MON + "-" + mm;
+        //Tuesday
+        document.getElementById('DATE-CURR-TUE').innerText = "Tisdag  " + CUR_TUE + "-" + mm;
+        //Wednesday
+        document.getElementById('DATE-CURR-WED').innerText = "Onsdag  " + CUR_WED + "-" + mm;
+        //Thursday
+        document.getElementById('DATE-CURR-THU').innerText = "Torsdag  " + CUR_THU + "-" + mm;
+        //Friday
+        document.getElementById('DATE-CURR-FRI').innerText = "Fredag  " + CUR_FRI + "-" + mm;
+        //Saturday
+        document.getElementById('DATE-CURR-SAT').innerText = "Lördag  " + CUR_SAT + "-" + mm;
+        //Sunday
+        document.getElementById('DATE-CURR-SUN').innerText = "Söndag  " + CUR_SUN + "-" + mm;
+
+        /*//DROPDOWN 2
+        //Monday
+        document.getElementById('DATE-NEXT-MON').innerText = "Måndag  " + NEX_MON + "-" + mm;
+        //Tuesday
+        document.getElementById('DATE-NEXT-TUE').innerText = "Tisdag  " + NEX_TUE + "-" + mm;
+        //Wednesday
+        document.getElementById('DATE-NEXT-WED').innerText = "Onsdag  " + NEX_WED + "-" + mm;
+        //Thursday
+        document.getElementById('DATE-NEXT-THU').innerText = "Torsdag  " + NEX_THU + "-" + mm;
+        //Friday
+        document.getElementById('DATE-NEXT-FRI').innerText = "Fredag  " + NEX_FRI + "-" + mm;
+        //Saturday
+        document.getElementById('DATE-NEXT-SAT').innerText = "Lördag  " + NEX_SAT + "-" + mm;
+        //Sunday
+        document.getElementById('DATE-NEXT-SUN').innerText = "Söndag  " + NEX_SUN + "-" + mm;*/
+      }
+
+
+    }
+  </script>
   <div class="container">
     <div class="py-5 text-center">
       <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
@@ -66,11 +235,28 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       </p>
       <p>
         <label for="phone">Telnr</label>
-        <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="07012354567" value="" required>
+        <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="0701234567" value="" required>
       </p>
       <p>
         <label for="date">Datum</label>
-        <input type="date"  class="form-control"  name="txtDate" id="txtDate" placeholder="" value="" required>
+        <select id="txtDate" name="txtDate" style="padding: 10px;">
+          <!--Week One (Current)-->
+          <option id="DATE-CURR-MON" value="1">M&aringndag</option>
+          <option id="DATE-CURR-TUE" value="2">Tisdag</option>
+          <option id="DATE-CURR-WED" value="3">Ondsdag</option>
+          <option id="DATE-CURR-THU" value="4">Torsdag</option>
+          <option id="DATE-CURR-FRI" value="5">Fredag</option>
+          <option id="DATE-CURR-SAT" value="6">L&oumlrdag</option>
+          <option id="DATE-CURR-SUN" value="0">S&oumlndag</option>
+          <!--NEXT WEEK-->
+          <option id="DATE-NEXT-MON" value="8">M&aringndag</option>
+          <option id="DATE-NEXT-TUE" value="9">Tisdag</option>
+          <option id="DATE-NEXT-WED" value="10">Onsdag</option>
+          <option id="DATE-NEXT-THU" value="11">Torsdag</option>
+          <option id="DATE-NEXT-FRI" value="12">Fredag</option>
+          <option id="DATE-NEXT-SAT" value="13">L&oumlrdag</option>
+          <option id="DATE-NEXT-SUN" value="7">S&oumlndag</option>
+        </select>
       </p>
       <p>
         <label for="time">Tid</label>
@@ -91,11 +277,11 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         <input type="number"  class="form-control"  name="txtLength" id="txtLength" placeholder="" value="1" required>
       </p>
       <p>
-      <label for="txtTable">Bord</label>
-      <select id="txtTable" name="txtTable" style="padding: 10px;">
-        <option value="new">Nya</option>
-        <option value="old">Gamla</option>
-      </select>
+        <label for="txtTable">Bord</label>
+        <select id="txtTable" name="txtTable" style="padding: 10px;">
+          <option value="Bord_1">Bord 1</option>
+          <option value="Bord_2">Bord 2</option>
+        </select>
       </p>
       <p>&nbsp;</p>
       <p>
@@ -126,7 +312,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <div class="column"></div>
     <div class="column">
   <div>
-    <h2 style="padding-left: 10px;">Nya Bordet</h2>
+    <h2 style="padding-left: 10px;">Bord 1</h2>
     <div class="grid-container">
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">M&aringndag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Tisdag</div>
@@ -135,6 +321,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
+    <div class="grid-item" id="TTN_NEW_mon" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_NEW_tue" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_NEW_wed" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_NEW_thu" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_NEW_fri" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_NEW_sat" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_NEW_sun" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TT_NEW_13_mon" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_NEW_13_tue" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_NEW_13_wed" style="background-color: #000;">13.00</div>
@@ -227,7 +420,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
   <div class="column"></div>
   <div class="column">
   <div>
-    <h2 style="padding-left: 10px;">Gamla Bordet</h2>
+    <h2 style="padding-left: 10px;">Bord 2</h2>
     <div class="grid-container">
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">M&aringndag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Tisdag</div>
@@ -236,6 +429,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
+    <div class="grid-item" id="TTN_OLD_mon" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_OLD_tue" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_OLD_wed" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_OLD_thu" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_OLD_fri" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_OLD_sat" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_OLD_sun" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TT_OLD_13_mon" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_OLD_13_tue" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_OLD_13_wed" style="background-color: #000;">13.00</div>

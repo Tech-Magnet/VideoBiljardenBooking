@@ -26,9 +26,9 @@ function GetArrays(index){
   const columnIndices = [0, 1, 2];
   const [arrayColumn0, arrayColumn1, arrayColumn2] = importColumnsToArrays(tableId, columnIndices);
 
-  /*console.log("ARRAY DATE: " + arrayColumn0);
-  console.log("ARRAY TIME: " + arrayColumn1);
-  console.log("ARRAY TABL: " + arrayColumn2);*/
+  //console.log("ARRAY DATE: " + arrayColumn0);
+  //console.log("ARRAY TIME: " + arrayColumn1);
+  //console.log("ARRAY TABL: " + arrayColumn2);
 
   if(index == 0){
     return arrayColumn0;
@@ -55,17 +55,11 @@ function CheckForExistDB(date, time, table){
     }
   }
   if (!found){
-    console.log("NOT THE SAME AS ON FILE");
-    console.log("ENTRY: " + date + ", " + time + ", " + table);
+    //console.log("NOT THE SAME AS ON FILE");
+    //console.log("ENTRY: " + date + ", " + time + ", " + table);
     return false;
   }
 }
-
-
-
-
-
-
 
 // Function to handle form submission
 function CheckSubmit() {
@@ -81,20 +75,19 @@ function CheckSubmit() {
     document.getElementById('txtLength').value = 1;
   }
 
-
-  console.log("NAME: " + name);
-  console.log("PHONE: " + phone);
-  console.log("DATE: " + date);
-  console.log("TIME: " + time);
-  console.log("TABLE: " + table);
-  console.log("");
-  console.log("");
-  console.log("");
+  //console.log("NAME: " + name);
+  //console.log("PHONE: " + phone);
+  //console.log("DATE: " + date);
+  //console.log("TIME: " + time);
+  //console.log("TABLE: " + table);
+  //console.log("");
+  //console.log("");
+  //console.log("");
 
   if(CheckForExistDB(date, time, table)){
-    alert("Ledsen men Tiden du har valt &aumlr inte tillg&aumlgning, var god och v&aumlj en annan tid");
+    alert("Ledsen men Tiden du har valt är inte tillgänging, var god och välj en annan tid");
   }else if(!CheckForExistDB(date, time, table)){
-    console.log("Submit");
+    //console.log("Submit");
     const form = document.getElementById('myForm');
     form.submit();
   }
