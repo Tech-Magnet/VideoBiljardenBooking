@@ -1,31 +1,14 @@
 <?php
 // database connection code
-if(isset($_POST['txtName']))
+if(isset($_POST['txtPhone']))
 {
-  $txtName = $_POST['txtName'];
-  $txtPhone = $_POST['txtPhone'];
-  $txtDate = $_POST['txtDate'];
-  $txtTime = $_POST['txtTime'];
-  $txtTable = $_POST['txtTable'];
-  $txtLength = $_POST['txtLength'];
-  $bkDate = $_POST['bkDate'];
-
-
-  for ($i = 0; $i < $txtLength; $i++) {
     $con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
-    
-    // database insert SQL code
-    $sql = "INSERT INTO `Booked` VALUES ('0', '$txtName', '$txtPhone', '$txtDate', '$bkDate' ,'$txtTime', '$txtTable')";
 
-    // insert in database 
-    $rs = mysqli_query($con, $sql);
-    if($rs)
-    {
-    	//echo "Booking Records Inserted";
-      $txtTime = $txtTime + 1;
-    }
-    //Delete Old Data
-    $sql = "DELETE FROM `Booked` WHERE `Booked`.bkDate = ";
+    // get the post records
+    $txtPhone = $_POST['txtPhone'];
+
+    // database insert SQL code
+    $sql = "DELETE FROM `Booked` WHERE `Booked`.`fldPhone` = $txtPhone";
 
     // insert in database 
     $rs = mysqli_query($con, $sql);
@@ -33,8 +16,8 @@ if(isset($_POST['txtName']))
     {
     	echo "Booking Records Removed";
     }
-} 
 }
+
 $con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
 $result = mysqli_query($con,"SELECT * FROM `Booked`");
 $data = $result->fetch_all(MYSQLI_ASSOC);
@@ -45,9 +28,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <html lang="en" id="html-tag">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Boka ett Bord</title>
+<title>Avboka ett Bord</title>
 <link href="style.css" rel="stylesheet">
-<script type="text/javascript" src="main3.js"></script>
+<script type="text/javascript" src="main2.js"></script>
 <link rel="icon" href="img/icon.png">
 </head>
 <!-- Google tag (gtag.js) -->
@@ -62,85 +45,20 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
   <div class="container">
     <div class="py-5 text-center">
       <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
-      <h2>Boka Bord - Snooker</h2>
+      <h2>Avboka Bord - Snooker</h2>
     </div>
   <fieldset>
-    <form id="myForm" name="frmBook" class="needs-validation " method="post" action="index.php">
-      <p>
-        <label for="Name">Namn</label>
-        <input type="text" class="form-control" name="txtName" id="txtName" placeholder="Namn" value="" required>
-      </p>
+    <form id="myForm" name="frmBook" class="needs-validation " method="post" action="unbook.php">
       <p>
         <label for="phone">Telnr</label>
         <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="0701234567" value="" required>
       </p>
-      <p>
-        <label for="date">Datum</label>
-        <select id="txtDate" name="txtDate" style="padding: 10px;" onchange="CheckForTimeChange();">
-          <!--Week One (Current)-->
-          <option id="DATE-CURR-MON" value="1">M&aringndag</option>
-          <option id="DATE-CURR-TUE" value="2">Tisdag</option>
-          <option id="DATE-CURR-WED" value="3">Ondsdag</option>
-          <option id="DATE-CURR-THU" value="4">Torsdag</option>
-          <option id="DATE-CURR-FRI" value="5">Fredag</option>
-          <option id="DATE-CURR-SAT" value="6">L&oumlrdag</option>
-          <option id="DATE-CURR-SUN" value="0">S&oumlndag</option>
-          <!--NEXT WEEK-->
-          <!--<option id="DATE-NEXT-MON" value="8">M&aringndag</option>
-          <option id="DATE-NEXT-TUE" value="9">Tisdag</option>
-          <option id="DATE-NEXT-WED" value="10">Onsdag</option>
-          <option id="DATE-NEXT-THU" value="11">Torsdag</option>
-          <option id="DATE-NEXT-FRI" value="12">Fredag</option>
-          <option id="DATE-NEXT-SAT" value="13">L&oumlrdag</option>
-          <option id="DATE-NEXT-SUN" value="7">S&oumlndag</option>-->
-        </select>
-      </p>
-      <p>
-        <label for="time">Tid</label>
-        <select id="txtTime" name="txtTime" style="padding: 10px;">
-          <option id="txtTime_13" value="13" disabled>13.00</option>
-          <option id="txtTime_14" value="14" disabled>14.00</option>
-          <option id="txtTime_15" value="15">15.00</option>
-          <option id="txtTime_16" value="16">16.00</option>
-          <option id="txtTime_17" value="17">17.00</option>
-          <option id="txtTime_18" value="18">18.00</option>
-          <option id="txtTime_19" value="19">19.00</option>
-          <option id="txtTime_20" value="20">20.00</option>
-          <option id="txtTime_21" value="21">21.00</option>
-          <option id="txtTime_22" value="22">22.00</option>
-          <option id="txtTime_23" value="23">23.00</option>
-          <option id="txtTime_24" value="24" disabled>24.00</option>
-        </select>
-      </p>
-      <p>
-        <label for="Length">L&aumlngd (Timmar)</label>
-        <select id="txtLength" name="txtLength" style="padding: 10px;">
-          <option value="1">1 Timme</option>
-          <option value="2">2 Timmar</option>
-          <option value="3">3 Timmar</option>
-          <option value="4">4 Timmar</option>
-          <option value="5">5 Timmar</option>
-          <option value="6">6 Timmar</option>
-          <option value="7">7 Timmar</option>
-        </select>
-      </p>
-      <p>
-        <label for="txtTable">Bord</label>
-        <select id="txtTable" name="txtTable" style="padding: 10px;">
-          <option value="Bord_1">Bord 1</option>
-          <option value="Bord_2">Bord 2</option>
-        </select>
-      </p>
-      <p style="display: none;">
-        <input style="display: none;" id="bkDate" name="bkDate" value="2023-08-19">
-      </p>
       <p>&nbsp;</p>
       <p>
-        <input type="button" name="button" id="smt-button" value="Boka Bord"  class="btn btn-primary btn-lg btn-block" onclick="CheckSubmit()">
+        <input type="submit" name="button" id="smt-button" value="Avboka Bord"  class="btn btn-primary btn-lg btn-block">
       </p>
     </form>
   </fieldset>
-  <input type="button" name="button" id="smt-button" value="Avboka Bord"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='unbook.php'">
 
   </div>
   <div style="display: none;">
