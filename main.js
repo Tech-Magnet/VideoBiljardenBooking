@@ -40,15 +40,26 @@ function GetArrays(index){
   }
 }
 
-function CheckForTimeChange(){
-  if(document.getElementById('txtDate') == 5 || document.getElementById('txtDate') == 6){
-    document.getElementById('txtTime_13').disabled = false;
-    document.getElementById('txtTime_14').disabled = false;
-    document.getElementById('txtTime_24').disabled = false;
-  }else{
-    document.getElementById('txtTime_13').disabled = true;
-    document.getElementById('txtTime_14').disabled = true;
-    document.getElementById('txtTime_24').disabled = true;
+function CheckForTimeChange() {
+  const txtDate = document.getElementById("txtDate");
+  const txtTime = document.getElementById("txtTime");
+
+  const selectedDay = parseInt(txtDate.value, 10);
+
+  // Enable/disable options in the second dropdown based on the selected day
+  for (let i = 0; i < txtTime.options.length; i++) {
+    const option = txtTime.options[i];
+    const hour = parseInt(option.value, 10);
+    if (
+      (selectedDay === 5 || selectedDay === 6) // Friday or Saturday
+      && hour >= 13 && hour <= 24
+    ) {
+      option.disabled = false;
+    } else if (hour >= 15 && hour <= 23) {
+      option.disabled = false;
+    } else {
+      option.disabled = true;
+    }
   }
 }
 
