@@ -25,14 +25,14 @@ if(isset($_POST['txtName']))
       $txtTime = $txtTime + 1;
     }
     //Delete Old Data
-    $sql = "DELETE FROM `Booked` WHERE `Booked`.bkDate = ";
+    /*$sql = "DELETE FROM `Booked` WHERE `Booked`.bkDate = ";
 
     // insert in database 
     $rs = mysqli_query($con, $sql);
     if($rs)
     {
     	echo "Booking Records Removed";
-    }
+    }*/
 } 
 }
 $con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id21042321_booking');
@@ -72,7 +72,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       </p>
       <p>
         <label for="phone">Telnr</label>
-        <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="0701234567" value="" required>
+        <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="" value="" required>
       </p>
       <p>
         <label for="date">Datum</label>
@@ -113,7 +113,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         </select>
       </p>
       <p>
-        <label for="Length">L&aumlngd (Timmar)</label>
+        <label for="Length">L&aumlngd</label>
         <select id="txtLength" name="txtLength" style="padding: 10px;">
           <option value="1">1 Timme</option>
           <option value="2">2 Timmar</option>
@@ -163,7 +163,12 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     </table>
   </div>
   <div class="row">
-    <div class="column"></div>
+    <div class="column" style="padding-left: 20px">
+      <h2>&Oumlppettider</h2>
+      <h4>M&aringn - Tors: 15 - 24</h4>
+      <h4>Fre - L&oumlr: 13 - 01</h4>
+      <h4>S&oumln: 15 - 24</h4>
+    </div>
     <div class="column">
   <div>
     <h2 style="padding-left: 10px;">Bord 1</h2>

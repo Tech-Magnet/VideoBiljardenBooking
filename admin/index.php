@@ -3,6 +3,7 @@ $con = mysqli_connect('localhost', 'id21042321_admin', 'nNASGE!yM!dH9hj5','id210
 $result = mysqli_query($con,"SELECT * FROM `Booked`");
 $data = $result->fetch_all(MYSQLI_ASSOC);
 ?>
+
 <head>
     <link rel="icon" href="img/icon.png">
     <title>Admin Panel</title>
@@ -45,4 +46,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
   </tr>
   <?php endforeach ?>
 </table>
+<br>
+<br>
+<input type="button" name="button" id="smt-button" value="RENSA DATA💀"  class="btn btn-primary btn-lg btn-block" style="background-color: red;" onclick="">
 <body>

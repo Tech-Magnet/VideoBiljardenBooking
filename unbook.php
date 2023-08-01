@@ -8,13 +8,13 @@ if(isset($_POST['txtPhone']))
     $txtPhone = $_POST['txtPhone'];
 
     // database insert SQL code
-    $sql = "DELETE FROM `Booked` WHERE `Booked`.`fldPhone` = $txtPhone";
+    $sql = "DELETE * FROM `Booked` WHERE `Booked`.`fldPhone` = $txtPhone";
 
     // insert in database 
     $rs = mysqli_query($con, $sql);
     if($rs)
     {
-    	echo "Booking Records Removed";
+    	//echo "Booking Records Removed";
     }
 }
 
@@ -59,6 +59,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       </p>
     </form>
   </fieldset>
+  <input type="button" name="button" id="smt-button" value="Tillbacka"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href = 'index.php'">
 
   </div>
   <div style="display: none;">

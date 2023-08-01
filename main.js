@@ -88,6 +88,11 @@ function CheckSubmit() {
     return;
   }
 
+  if(phone == "" || name == ""){
+    alert("Se till att du fyller i hela formuläret");
+    return;
+  }
+
 
   if(day == 0){//Sunday
     var BOOK_SUN = current_date_db.getDate();
