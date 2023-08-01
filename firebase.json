@@ -1,11 +1,16 @@
 {
   "hosting": {
+<<<<<<< Updated upstream
     "public": "prod",
+=======
+    "public": "public",
+>>>>>>> Stashed changes
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ]
+<<<<<<< Updated upstream
   },
   "emulators": {
     "hosting": {
@@ -15,5 +20,7 @@
       "enabled": true
     },
     "singleProjectMode": true
+=======
+>>>>>>> Stashed changes
   }
 }
