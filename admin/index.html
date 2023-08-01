@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ADMIN PANEL</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMPN0CGN95"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-TMPN0CGN95');
+    </script>
+</head>
+<body>
+<label for="Username">Andv&aumlnarnamn</label>
+<input id="username" type="input">
+<label for="Password">L&oumlenord</label>
+<input id="password" type="password">
+<input type="button" value="Logga In" onclick="LogIn();">
+<script>
+
+    function LogIn(){
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if(username == "admin" && password == "V1DE0"){
+            window.location.href = 'index2846.php';
+        }else{
+            alert("Fel Lösenord")
+        }
+    }
+    
+</script>
+</body>
+</html>
