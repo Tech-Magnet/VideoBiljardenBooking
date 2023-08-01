@@ -47,7 +47,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Boka ett Bord</title>
 <link href="style.css" rel="stylesheet">
-<script defer type="text/javascript" src="main6.js"></script>
+<script type="text/javascript" src="main6.js"></script>
 <link rel="icon" href="img/icon.png">
 </head>
 <!-- Google tag (gtag.js) -->
