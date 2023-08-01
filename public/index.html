@@ -4,6 +4,15 @@
   <!-- ... Other meta tags, CSS, etc. ... -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FPJBGKX7R0"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FPJBGKX7R0');
+  </script>
   <script>
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -18,14 +27,33 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   </script>
+  <script defer type="text/javascript" src="main.js"></script>
 </head>
 <body>
     <!-- ... Your website's content ... -->
 
 
     <!-- Assuming you have a form like this -->
-  <form id="myForm">
-    <input type="text" id="dataInput" />
+  <form id="bookingForm">
+    <p>
+    <label for="name">Namn</label>
+    <input type="text" id="txtName"/>
+    </p>
+    <p>
+    <label for="phone">Telnr.</label>
+    <input type="text" id="txtPhone"/>
+    </p>
+    <p>
+    <label for="day">Dag</label>
+    <select id="txtDay">
+      <option value="TEST_1">TEST1</option>
+      <option value="TEST_2">TEST2</option>
+      <option value="TEST_3">TEST3</option>
+      <option value="TEST_4">TEST4</option>
+      <option value="TEST_5">TEST5</option>
+    </select>
+    </p>
+    <p>&nbsp;</p>
     <button type="submit">Submit</button>
   </form>
   
@@ -37,11 +65,12 @@
 
 <!--READ FROM DB-->
 <!-- Assuming you have an empty table with an ID "messagesTable" -->
-<table id="messagesTable">
+<table id="bookingTable">
   <thead>
     <tr>
-      <th>Message</th>
-      <th>Timestamp</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Day</th>
     </tr>
   </thead>
   <tbody>
