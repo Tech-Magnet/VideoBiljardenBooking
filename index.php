@@ -76,7 +76,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       </p>
       <p>
         <label for="date">Datum</label>
-        <select id="txtDate" name="txtDate" style="padding: 10px;" onchange="CheckForTimeChange();">
+        <select id="txtDate" name="txtDate" style="padding: 10px;">
           <!--Week One (Current)-->
           <option id="DATE-CURR-MON" value="1">M&aringndag</option>
           <option id="DATE-CURR-TUE" value="2">Tisdag</option>
@@ -98,8 +98,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
       <p>
         <label for="time">Tid</label>
         <select id="txtTime" name="txtTime" style="padding: 10px;">
-          <option id="txtTime_13" value="13" disabled>13.00</option>
-          <option id="txtTime_14" value="14" disabled>14.00</option>
+          <option id="txtTime_13" value="13">13.00</option>
+          <option id="txtTime_14" value="14">14.00</option>
           <option id="txtTime_15" value="15">15.00</option>
           <option id="txtTime_16" value="16">16.00</option>
           <option id="txtTime_17" value="17">17.00</option>
@@ -109,7 +109,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
           <option id="txtTime_21" value="21">21.00</option>
           <option id="txtTime_22" value="22">22.00</option>
           <option id="txtTime_23" value="23">23.00</option>
-          <option id="txtTime_24" value="24" disabled>24.00</option>
+          <option id="txtTime_24" value="24">24.00</option>
         </select>
       </p>
       <p>

@@ -40,29 +40,6 @@ function GetArrays(index){
   }
 }
 
-function CheckForTimeChange() {
-  const txtDate = document.getElementById("txtDate");
-  const txtTime = document.getElementById("txtTime");
-
-  const selectedDay = parseInt(txtDate.value, 10);
-
-  // Enable/disable options in the second dropdown based on the selected day
-  for (let i = 0; i < txtTime.options.length; i++) {
-    const option = txtTime.options[i];
-    const hour = parseInt(option.value, 10);
-    if (
-      (selectedDay === 5 || selectedDay === 6) // Friday or Saturday
-      && hour >= 13 && hour <= 24
-    ) {
-      option.disabled = false;
-    } else if (hour >= 15 && hour <= 23) {
-      option.disabled = false;
-    } else {
-      option.disabled = true;
-    }
-  }
-}
-
 
 function CheckForExistDB(date, time, table){
   const arrayColumn0 = GetArrays(0);
@@ -90,7 +67,7 @@ function CheckSubmit() {
   //importing values from form on index.php
   var name = document.getElementById('txtName').value;
   var phone = document.getElementById('txtPhone').value;
-  var date = document.getElementById('txtDate').value;
+  var day = document.getElementById('txtDate').value;
   var time = document.getElementById('txtTime').value;
   var table = document.getElementById('txtTable').value;
   var length = document.getElementById('txtLength').value;
@@ -106,66 +83,60 @@ function CheckSubmit() {
   //console.log("MONTH: " + mm);
   //console.log("CURRENT WEEKDAY: " + day);
 
+  if(day <= 4 && time == 13 || time == 14 || time == 24){
+    alert("Ledsen men Tiden du har valt är inte tillgänging, var god och välj en annan tid");
+    return;
+  }
 
-  if(date == 0){//Sunday
+
+  if(day == 0){//Sunday
     var BOOK_SUN = current_date_db.getDate();
 
     //Sunday
     document.getElementById('bkDate').value = yyyy + "-" + BOOK_SUN + "-" + mm;
-  }else if(date == 1){//Monday
+  }else if(day == 1){//Monday
     var BOOK_MON = current_date_db.getDate();
 
     //Monday
     document.getElementById('bkDate').value = yyyy + "-" + BOOK_MON + "-" + mm;
-  }else if(date == 2){//Tuesday
+  }else if(day == 2){//Tuesday
     var BOOK_TUE = current_date_db.getDate();
 
     //Tuesday
     document.getElementById('bkDate').value = yyyy + "-" + BOOK_TUE + "-" + mm;
-  }else if(date == 3){//Wednesday
+  }else if(day == 3){//Wednesday
     var BOOK_WED = current_date_db.getDate();
 
     //Wednesday
     document.getElementById('bkDate').value = yyyy + "-" + BOOK_WED + "-" + mm;
-  }else if(date == 4){//Thursday
+  }else if(day == 4){//Thursday
     var BOOK_THU = current_date_db.getDate();
 
     //Thursday
     document.getElementById('bkDate').value = yyyy + "-" + BOOK_THU + "-" + mm;
-  }else if(date == 5){//Friday
+  }else if(day == 5){//Friday
     var BOOK_FRI = current_date_db.getDate();
 
     //Friday
     document.getElementById('bkDate').value = yyyy + "-" + BOOK_FRI + "-" + mm;
-  }else if(date == 6){//Saturday
+  }else if(day == 6){//Saturday
     var BOOK_SAT = current_date_db.getDate();
 
     //Friday
     document.getElementById('bkDate').value = yyyy + "-" + BOOK_FRI + "-" + mm;
   }
 
-  //console.log("NAME: " + name);
-  //console.log("PHONE: " + phone);
-  //console.log("DATE: " + date);
-  //console.log("TIME: " + time);
-  //console.log("TABLE: " + table);
-  //console.log("LENGTH: " + length);
-  //console.log("");
-  //console.log("");
-  //console.log("");
+  
 
-  if(CheckForExistDB(date, time, table)){
+  if(CheckForExistDB(day, time, table)){
     alert("Ledsen men Tiden du har valt är inte tillgänging, var god och välj en annan tid");
-  }else if(!CheckForExistDB(date, time, table)){
+  }else if(!CheckForExistDB(day, time, table)){
     console.log("Submit");
     const form = document.getElementById('myForm');
     form.submit();
     console.log("Submit");
   }
 }
-
-
-
 
 
 
