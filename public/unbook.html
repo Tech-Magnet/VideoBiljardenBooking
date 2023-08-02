@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Avboka Bord</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="style2.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FPJBGKX7R0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FPJBGKX7R0');
+    </script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
+          authDomain: "videobiljardenorebrosite.firebaseapp.com",
+          databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "videobiljardenorebrosite",
+          storageBucket: "videobiljardenorebrosite.appspot.com",
+          messagingSenderId: "1042889427467",
+          appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
+</head>
+<body>
+    <div class="container">
+        <div class="py-5 text-center">
+          <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
+          <h2>Avboka Bord - Snooker</h2>
+        </div>
+      <fieldset>
+        <form id="bookingForm" name="frmBook" class="needs-validation">
+          <p>
+            <label for="phone">Telnr</label>
+            <input type="text"  class="form-control" name="txtPhone" id="txtPhone" value="" required>
+          </p>
+          <p>&nbsp;</p>
+          <p>
+            <input type="button" name="button" id="smt-button" value="Avboka Bord" class="btn btn-primary btn-lg btn-block" onclick="unbook();">
+          </p>
+        </form>
+      </fieldset>
+      <input type="button" name="button" id="smt-button" value="Tillbacka"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='index.html'">
+      <script>
+        function unbook(){
+            var database = firebase.database();
+        var phone_num = document.getElementById('txtPhone').value;
+
+        if(phone_num == ""){
+            document.getElementById('txtPhone').style.borderColor = "#de1d1d";
+            alert("Du kan inte fortsätta utan ett telefon nummer");
+            return;
+        }
+
+        // Create a reference to the "booking" node
+        var bookingRef = database.ref("booking");
+
+        // Create a query to find the entry with the specified phone number
+        var query = bookingRef.orderByChild("phone").equalTo(phone_num);
+
+        // Execute the query
+        query.once("value")
+          .then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              // Get the key of the entry to be deleted
+              var keyToDelete = childSnapshot.key;
+            
+              // Delete the entry from the database
+              database.ref("booking/" + keyToDelete).remove()
+                .then(function() {
+                  console.log("Entry with phone number " + phone_num + " successfully deleted.");
+                })
+                .catch(function(error) {
+                  console.error("Error deleting entry:", error);
+                });
+            });
+          })
+          .catch(function(error) {
+            console.error("Error searching for the entry:", error);
+          });
+        }
+    </script>
+</body>
+</html>
