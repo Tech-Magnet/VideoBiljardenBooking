@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Vithkuqi:wght@500&display=swap');
+
+.g-sign-in-button{
+    cursor: pointer;
+    border-style: groove;
+    width: max-content;
+    border-radius: 5px;
+}
+.content-wrapper{
+    display: flex;
+    font-family: 'Noto Sans Vithkuqi', sans-serif;
+}
+.text-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 25px;
+    padding-left: 10px;
+    margin-right: 25px;
+}

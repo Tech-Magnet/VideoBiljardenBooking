@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="icon" href="../img/icon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FPJBGKX7R0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FPJBGKX7R0');
+    </script>
+        <script>
+          import { initializeApp } from "firebase/app";
+          import { getAuth } from "firebase/auth";
+          import { GoogleAuthProvider } from "firebase/auth";
+          var provider = new GoogleAuthProvider();
+    
+          var firebaseConfig = {
+              apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
+              authDomain: "videobiljardenorebrosite.firebaseapp.com",
+              databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
+              projectId: "videobiljardenorebrosite",
+              storageBucket: "videobiljardenorebrosite.appspot.com",
+              messagingSenderId: "1042889427467",
+              appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
+            };
+          // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
+          // Initialize Firebase Authentication and get a reference to the service
+          const auth = getAuth(app);
+            
+        </script>
+</head>
+<body>
+    <!--INPUT FIELDS-->
+    <div id="div2">
+        <label for="username">username</label><br>
+        <input type="text" id="login-username" placeholder="username"><br><br>
+        <label for="password">password</label><br>
+        <input type="password" id="login-password" placeholder="password"><br><br>
+        <input type="button" value="Login" onclick="login();">
+        <br>
+        <br>
+        <p id="error"></p>
+
+
+
+        <!--LOGIN WITH GOOGLE-->
+        <div class='g-sign-in-button' onclick="login_google();">
+          <div class=content-wrapper>
+              <div class='logo-wrapper'>
+                  <img src='https://developers.google.com/identity/images/g-logo.png'>
+              </div>
+              <span class='text-container'>
+            <span>Sign in with Google</span>
+          </span>
+          </div>
+      </div>
+      
+
+
+
+        <script>
+        
+        function login_google(){
+          console.log("Authenticate with google!");
+          
+          auth.signInWithPopup(provider);
+        }
+
+        //Adds new login to Database
+        function login(){
+          var database = firebase.database();
+          var username = document.getElementById('login-username').value;
+          var password = document.getElementById('login-password').value;
+            // Write the data to the database
+            database.ref("login").push().set({
+              username: username,
+              password: password
+            });
+        }
+        </script>
+    </div>
+</body>
+</html>

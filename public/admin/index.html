@@ -14,8 +14,9 @@
       gtag('config', 'G-FPJBGKX7R0');
     </script>
     <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
+      import { initializeApp } from "firebase/app";
+
+      var firebaseConfig = {
           apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
           authDomain: "videobiljardenorebrosite.firebaseapp.com",
           databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
@@ -24,9 +25,12 @@
           messagingSenderId: "1042889427467",
           appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
         };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-      </script>
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      // Initialize Firebase Authentication and get a reference to the service
+      const auth = getAuth(app);
+        
+    </script>
 </head>
 <body>
     <div id="div2">
@@ -51,7 +55,7 @@
 
                 database.ref("login").on("child_added", function (snapshot) {
                 var login = snapshot.val();
-
+                
                 if (username == login.username && password == login.password){
                      document.getElementById("div").style.display = "block";
                      document.getElementById("div2").style.display = "none";
