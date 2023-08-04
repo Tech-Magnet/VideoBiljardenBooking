@@ -11,7 +11,7 @@ const firebaseApp = initializeApp({
     measurementId: "G-QPRV2F0T7Y"
 });
 const auth = getAuth(firebaseApp);
-connectAuthEmulator(auth, "http://localhost:9099");
+//connectAuthEmulator(auth, "http://localhost:9099");
 
 const loginEmailPassword = async () => {
     const loginEmail = document.getElementById('txtName').value;
