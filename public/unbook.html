@@ -41,15 +41,98 @@
             <label for="phone">Telnr</label>
             <input type="text"  class="form-control" name="txtPhone" id="txtPhone" value="" required>
           </p>
+          <p>
+            <label for="Day">Datum</label>
+            <select id="txtDay" name="txtDay" style="padding: 10px;">
+              <!--Week One (Current)-->
+              <option id="DATE-CURR-MON" value="mon">M&aringndag</option>
+              <option id="DATE-CURR-TUE" value="tis">Tisdag</option>
+              <option id="DATE-CURR-WED" value="ons">Onsdag</option>
+              <option id="DATE-CURR-THU" value="tor">Torsdag</option>
+              <option id="DATE-CURR-FRI" value="fre">Fredag</option>
+              <option id="DATE-CURR-SAT" value="lor">L&oumlrdag</option>
+              <option id="DATE-CURR-SUN" value="son">S&oumlndag</option>
+              <option disabled>-</option>
+              <option id="DATE-CURR-MON" value="mon_c">M&aringndag</option>
+              <option id="DATE-CURR-TUE" value="tis_c">Tisdag</option>
+              <option id="DATE-CURR-WED" value="ons_c">Onsdag</option>
+              <option id="DATE-CURR-THU" value="tor_c">Torsdag</option>
+              <option id="DATE-CURR-FRI" value="fre_c">Fredag</option>
+              <option id="DATE-CURR-SAT" value="lor_c">L&oumlrdag</option>
+              <option id="DATE-CURR-SUN" value="son_c">S&oumlndag</option>
+            </select>
+          </p>
+          <p>
+            <label for="txtTable">Bord</label>
+            <select id="txtTable" name="txtTable" style="padding: 10px;">
+              <option value="Bord_1">Bord 1</option>
+              <option value="Bord_2">Bord 2</option>
+            </select>
+          </p>
           <p>&nbsp;</p>
           <p>
             <input type="button" name="button" id="smt-button" value="Avboka Bord" class="btn btn-primary btn-lg btn-block" onclick="unbook();">
           </p>
         </form>
       </fieldset>
-      <input type="button" name="button" id="smt-button" value="Tillbacka"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='index.html'">
+      <input type="button" name="button" id="smt-button" value="Tillbaka"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='index.html'">
       <script>
         function unbook(){
+          var database = firebase.database();
+          var tableToDelete = document.getElementById('txtTable').value;  // Replace with the name you want to delete
+          var phoneToDelete = document.getElementById('txtPhone').value;  // Replace with the phone number you want to delete
+          var dayToDelete = document.getElementById('txtDay').value; // Replace with the day you want to delete
+
+          if(day.endsWith('_c')){
+            tableToDelete = tableToDelete + "_c";
+            dayToDelete = removeSuffix(dayToDelete, "_c");
+          }
+
+          // Create a reference to the "booking" node
+          var bookingRef = database.ref("booking");
+
+          // Create a query to find the nodes with matching attributes
+          var query = bookingRef.orderByChild("phone").equalTo(phoneToDelete);
+
+          // Execute the query to fetch the data
+          query.once("value")
+            .then(function(snapshot) {
+              snapshot.forEach(function(childSnapshot) {
+                var node = childSnapshot.val();
+
+                // Check if the attributes match
+                if (node.table === tableToDelete && node.day === dayToDelete) {
+                  // Delete the node
+                  bookingRef.child(childSnapshot.key).remove()
+                    .then(function() {
+                      console.log("Node deleted:", node);
+                    })
+                    .catch(function(error) {
+                      console.error("Error deleting node:", error);
+                    });
+                }
+              });
+            })
+            .catch(function(error) {
+              console.error("Error searching for nodes:", error);
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
         var database = firebase.database();
         var phone_num = document.getElementById('txtPhone').value;
 
@@ -84,7 +167,7 @@
           })
           .catch(function(error) {
             console.error("Error searching for the entry:", error);
-          });
+          });*/
         }
     </script>
 </body>
