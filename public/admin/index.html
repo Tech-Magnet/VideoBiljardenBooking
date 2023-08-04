@@ -3,197 +3,30 @@
 <head>
     <title>Admin Panel</title>
     <link rel="icon" href="../img/icon.png">
+    <link rel="stylesheet" href="style.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FPJBGKX7R0"></script>
+    <script type="module" src="index.js"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-FPJBGKX7R0');
     </script>
-    <script>
-      import { initializeApp } from "firebase/app";
-
-      var firebaseConfig = {
-          apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
-          authDomain: "videobiljardenorebrosite.firebaseapp.com",
-          databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
-          projectId: "videobiljardenorebrosite",
-          storageBucket: "videobiljardenorebrosite.appspot.com",
-          messagingSenderId: "1042889427467",
-          appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
-        };
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      // Initialize Firebase Authentication and get a reference to the service
-      const auth = getAuth(app);
-        
-    </script>
 </head>
 <body>
-    <div id="div2">
-        <label for="username">username</label><br>
-        <input type="text" id="login-username" placeholder="username"><br><br>
-        <label for="password">password</label><br>
-        <input type="password" id="login-password" placeholder="password"><br><br>
-        <input type="button" value="Login" onclick="login();">
-        <br>
-        <br>
-        <p id="error"></p>
-        <script>
-        var database = firebase.database();
-        var tableBody = document.querySelector("#bookingTable tbody");
-        var username = document.getElementById('login-username').value;
-        var password = document.getElementById('login-password').value;
-        
-
-            function login(){
-                var username = document.getElementById('login-username').value;
-                var password = document.getElementById('login-password').value;
-
-                database.ref("login").on("child_added", function (snapshot) {
-                var login = snapshot.val();
-                
-                if (username == login.username && password == login.password){
-                     document.getElementById("div").style.display = "block";
-                     document.getElementById("div2").style.display = "none";
-                }else{
-                     document.getElementById('error').innerTEXT = "Wrong Password or Username";
-                }
-                });
-                
-            }
-        </script>
-    </div>
-    <div id="div" style="display: none;">
-    <h3 style="color: #000000;">Akiva Bookningar</h3>
-    <table id="bookingTable" style="width:80vw" border="1">
-      <thead>
-        <tr>
-            <th> </tr>
-            <th>Namn</th>
-            <th>Telnr</th>
-            <th>Dag</th>
-            <th>Tid</th>
-            <th>Bord</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-    <script>
-        var database = firebase.database();
-        var tableBody = document.querySelector("#bookingTable tbody");
-
-        database.ref("booking").on("child_added", function (snapshot) {
-          var book = snapshot.val();
-        
-          var newRow = document.createElement("tr");
-        
-          var nameCell = document.createElement("td");
-          var phoneCell = document.createElement("td");
-          var dayCell = document.createElement("td");
-          var timeCell = document.createElement("td");
-          var tableCell = document.createElement("td");
-        
-          nameCell.textContent = book.name;
-          phoneCell.textContent = book.phone;
-          dayCell.textContent = book.day;
-          timeCell.textContent = book.time;
-          tableCell.textContent = book.table;
-        
-          newRow.appendChild(nameCell);
-          newRow.appendChild(phoneCell);
-          newRow.appendChild(dayCell);
-          newRow.appendChild(timeCell);
-          newRow.appendChild(tableCell);
-        
-          tableBody.appendChild(newRow);
-        });
-    </script>
-      <br>
-      <br>
-      <input type="button" name="button" id="smt-button" value="RENSA DATA💀"  class="btn btn-primary btn-lg btn-block" style="background-color: red;" onclick="clearDB()">
-        <script>
-            function clearDB(){
-
-                  var database = firebase.database();
-                  var characterToRemove = "_c"; // Replace this with the character you want to remove
-
-                  // Create a reference to the "booking" node
-                  var bookingRef = database.ref("booking");
-
-                  // Create a query to find the entries with "name" containing the specified character
-                  var query = bookingRef.orderByChild("table").endAt(characterToRemove + "\uf8ff");
-
-                  // Execute the query to fetch the data
-                  // Execute the query to fetch the data
-                  query.once("value")
-                    .then(function(snapshot) {
-                      // Loop through the query result to delete the matching entries
-                      snapshot.forEach(function(childSnapshot) {
-                        var keyToDelete = childSnapshot.key;
-
-                        // Delete the entry from the database
-                        database.ref("booking/" + keyToDelete).remove()
-                          .then(function() {
-                            console.log("Entry with name not ending with '" + characterToEndWith + "' successfully deleted.");
-                          })
-                          .catch(function(error) {
-                            console.error("Error deleting entry:", error);
-                          });
-                      });
-                    })
-                    .catch(function(error) {
-                      console.error("Error searching for the entries:", error);
-                    });
-
-
-                    var database = firebase.database();
-                    var characterToRemove = "_c"; // Replace this with the character you want to remove
-
-                    // Create a reference to the "booking" node
-                    var bookingRef = database.ref("booking");
-
-                    // Create a query to find the entries with "name" ending with the specified character
-                    var query = bookingRef.orderByChild("table").endAt(characterToRemove + "\uf8ff");
-
-                    // Execute the query to fetch the data
-                    query.once("value")
-                      .then(function(snapshot) {
-                        snapshot.forEach(function(childSnapshot) {
-                          // Get the key of the entry to be modified
-                          var keyToUpdate = childSnapshot.key;
-
-                          // Get the current "name" value
-                          var currentName = childSnapshot.val().name;
-                        
-                          // Check if the "name" ends with the specified character
-                          if (currentName.endsWith(characterToRemove)) {
-                            // Remove the character from the "name" attribute
-                            var updatedName = currentName.slice(0, -1);
-                          
-                            // Update the "name" attribute with the modified string
-                            var updates = {};
-                            updates["/booking/" + keyToUpdate + "/table"] = updatedName;
-                            database.ref().update(updates)
-                              .then(function() {
-                                console.log("Entry with name ending with '" + characterToRemove + "' has been updated.");
-                              })
-                              .catch(function(error) {
-                                console.error("Error updating entry:", error);
-                              });
-                          }
-                        });
-                      })
-                      .catch(function(error) {
-                        console.error("Error searching for the entries:", error);
-                      });
-
-                }
-        </script>
-        </div>
+  <div id="locked" class="container-canvas">
+    <h2 class="title-locked">Logga in p&aring admin portalen</h2>
+    <br>
+    <br>
+    <label for="username" class="login-label" id="usernameLabel">Andv&aumlrnamn</label><br>
+    <input type="text" class="login-fields" id="txtName"><br><br>
+    <label for="password" class="login-label" id="PasswordLabel">L&oumlsenord</label><br>
+    <input type="password" class="login-fields" id="txtPassword"><br><br>
+    <button id="btnLogin" class="login-fields2" style=>Logga In</button>
+    <br>
+    <br>
 </body>
 </html>
