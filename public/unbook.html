@@ -67,6 +67,7 @@
             <select id="txtTable" name="txtTable" style="padding: 10px;">
               <option value="Bord_1">Bord 1</option>
               <option value="Bord_2">Bord 2</option>
+              <!--<option value="Bord_3">Bord 3</option>-->
             </select>
           </p>
           <p>&nbsp;</p>
@@ -83,7 +84,7 @@
           var phoneToDelete = document.getElementById('txtPhone').value;  // Replace with the phone number you want to delete
           var dayToDelete = document.getElementById('txtDay').value; // Replace with the day you want to delete
 
-          if(day.endsWith('_c')){
+          if(dayToDelete.endsWith('_c')){
             tableToDelete = tableToDelete + "_c";
             dayToDelete = removeSuffix(dayToDelete, "_c");
           }
