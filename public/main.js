@@ -80,6 +80,8 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   var length = document.getElementById("txtLength").value;
   var table = document.getElementById("txtTable").value;
   var week = document.getElementById('txtWeek').value;
+  var endtime = parseInt(time) + parseInt(length);
+  console.log("ENDTIME: " + endtime);
   //console.log("TABLE: " + table);
   //console.log("LENGTH: " + length);
   var extraTime;
@@ -89,9 +91,9 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     extraTime == true;
   }
 
+  //adding the suffix to the table entry to symbolice that its for next week
   if(week == 'n'){
     table = table + "_c";
-    //day = removeSuffix(day, "_c");
   }
 
   if (extraTime == false && time == "13" || time == "14" || time == "24"){
@@ -99,22 +101,22 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     return;
   }
 
-  /*function removeSuffix(originalString, suffix) {
-    let regex = new RegExp(suffix + "$");
-    return originalString.replace(regex, "");
-  }*/
-
-  //console.log(time);
-  //console.log(extraTime);
-  //console.log(day);
-
 
   if(checkIfExixt(day, time, table) == true){
    alert("Tyverr men tiden du har valt är inte tillgänglig Error:0x02");
    return;
   }else if(checkIfExixt(day, time, table) == false){
+    database.ref("admin").push().set({
+      name: name,
+      phone: phone,
+      day: day,
+      time: time,
+      table: table,
+      length: length,
+      endtime: endtime
+    });
+
     for(var i = 0; i < length; i++){
-      console.log(length);
       // Write the data to the database
       database.ref("booking").push().set({
         name: name,
@@ -124,18 +126,16 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
         table: table
       });
 
-      
-      console.log("DATA INSERTED");
-      document.getElementByIdq('Status_p').innerText = 
       time = time - 1 + 2;
     }
+    console.log("DATA INSERTED");
+    document.getElementById('Status_p').innerText = 'Bokning tillagd';
+
     // Clear the input field after submitting
       document.getElementById("txtName").value = "";
       document.getElementById("txtPhone").value = "";
   }
 });
-
-
 
 
 

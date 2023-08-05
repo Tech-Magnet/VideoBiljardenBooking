@@ -89,6 +89,8 @@
             <th>Telnr</th>
             <th>Dag</th>
             <th>Tid</th>
+            <th>Slut</th>
+            <th>L&aumlngd</th>
             <th>Bord</th>
         </tr>
       </thead>
@@ -100,7 +102,7 @@
         var database = firebase.database();
         var tableBody = document.querySelector("#bookingTable tbody");
 
-        database.ref("booking").on("child_added", function (snapshot) {
+        database.ref("admin").on("child_added", function (snapshot) {
           var book = snapshot.val();
         
           var newRow = document.createElement("tr");
@@ -109,18 +111,25 @@
           var phoneCell = document.createElement("td");
           var dayCell = document.createElement("td");
           var timeCell = document.createElement("td");
+          var endTimeCell = document.createElement("td");
+          var lengthCell = document.createElement("td");
           var tableCell = document.createElement("td");
         
           nameCell.textContent = book.name;
           phoneCell.textContent = book.phone;
           dayCell.textContent = book.day;
           timeCell.textContent = book.time;
+          lengthCell.textContent = book.length;
+          endTimeCell.textContent = book.endtime;
+
           tableCell.textContent = book.table;
         
           newRow.appendChild(nameCell);
           newRow.appendChild(phoneCell);
           newRow.appendChild(dayCell);
           newRow.appendChild(timeCell);
+          newRow.appendChild(endTimeCell);
+          newRow.appendChild(lengthCell);
           newRow.appendChild(tableCell);
         
           tableBody.appendChild(newRow);
@@ -145,8 +154,9 @@
                   document.getElementById('PopUp_Warning').style.display  = 'none'
                   var database = firebase.database();
                   var characterToRemove = "_c"; // Replace this with the character you want to remove
-
+                  //BOOKING----------------------------------------------------------------------------------------
                   // Create a reference to the "booking" node
+                  //REMOVE WK 1
                   var bookingRef = database.ref("booking");
 
                   // Create a query to find the entries with "name" containing the specified character
@@ -174,7 +184,7 @@
                       console.error("Error searching for the entries:", error);
                     });
 
-
+                    //MOVE WK 2 to WK 1
                     var database = firebase.database();
                     var characterToRemove = "_c"; // Replace this with the character you want to remove
 
@@ -202,6 +212,83 @@
                             // Update the "name" attribute with the modified string
                             var updates = {};
                             updates["/booking/" + keyToUpdate + "/table"] = updatedName;
+                            database.ref().update(updates)
+                              .then(function() {
+                                console.log("Entry with name ending with '" + characterToRemove + "' has been updated.");
+                              })
+                              .catch(function(error) {
+                                console.error("Error updating entry:", error);
+                              });
+                          }
+                        });
+                      })
+                      .catch(function(error) {
+                        console.error("Error searching for the entries:", error);
+                      });
+
+
+                  //ADMIN--------------------------------------------------------------------------------------
+                  //REMOVE WK 1
+                  // Create a reference to the "admin" node
+                  var adminRef = database.ref("admin");
+
+                  // Create a query to find the entries with "name" containing the specified character
+                  var query = adminRef.orderByChild("table").endAt(characterToRemove + "\uf8ff");
+
+                  // Execute the query to fetch the data
+                  // Execute the query to fetch the data
+                  query.once("value")
+                    .then(function(snapshot) {
+                      // Loop through the query result to delete the matching entries
+                      snapshot.forEach(function(childSnapshot) {
+                        var keyToDelete = childSnapshot.key;
+                      
+                        // Delete the entry from the database
+                        database.ref("admin/" + keyToDelete).remove()
+                          .then(function() {
+                            console.log("Entry with name not ending with '" + characterToEndWith + "' successfully deleted.");
+                          })
+                          .catch(function(error) {
+                            console.error("Error deleting entry:", error);
+                          });
+                      });
+                    })
+                    .catch(function(error) {
+                      console.error("Error searching for the entries:", error);
+                    });
+                  
+
+
+
+
+                    //MOVE WK 2 to WK 1
+                    var database = firebase.database();
+                    var characterToRemove = "_c"; // Replace this with the character you want to remove
+                  
+                    // Create a reference to the "admin" node
+                    var adminRef = database.ref("admin");
+                  
+                    // Create a query to find the entries with "name" ending with the specified character
+                    var query = adminRef.orderByChild("table").endAt(characterToRemove + "\uf8ff");
+                  
+                    // Execute the query to fetch the data
+                    query.once("value")
+                      .then(function(snapshot) {
+                        snapshot.forEach(function(childSnapshot) {
+                          // Get the key of the entry to be modified
+                          var keyToUpdate = childSnapshot.key;
+                        
+                          // Get the current "name" value
+                          var currentName = childSnapshot.val().name;
+                        
+                          // Check if the "name" ends with the specified character
+                          if (currentName.endsWith(characterToRemove)) {
+                            // Remove the character from the "name" attribute
+                            var updatedName = currentName.slice(0, -1);
+                          
+                            // Update the "name" attribute with the modified string
+                            var updates = {};
+                            updates["/admin/" + keyToUpdate + "/table"] = updatedName;
                             database.ref().update(updates)
                               .then(function() {
                                 console.log("Entry with name ending with '" + characterToRemove + "' has been updated.");
