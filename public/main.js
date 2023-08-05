@@ -79,6 +79,7 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   var time = document.getElementById("txtTime").value;
   var length = document.getElementById("txtLength").value;
   var table = document.getElementById("txtTable").value;
+  var week = document.getElementById('txtWeek').value;
   //console.log("TABLE: " + table);
   //console.log("LENGTH: " + length);
   var extraTime;
@@ -88,9 +89,9 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     extraTime == true;
   }
 
-  if(day.endsWith('_c')){
+  if(week == 'n'){
     table = table + "_c";
-    day = removeSuffix(day, "_c");
+    //day = removeSuffix(day, "_c");
   }
 
   if (extraTime == false && time == "13" || time == "14" || time == "24"){
@@ -98,10 +99,10 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     return;
   }
 
-  function removeSuffix(originalString, suffix) {
+  /*function removeSuffix(originalString, suffix) {
     let regex = new RegExp(suffix + "$");
     return originalString.replace(regex, "");
-  }
+  }*/
 
   //console.log(time);
   //console.log(extraTime);
@@ -125,6 +126,7 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
 
       
       console.log("DATA INSERTED");
+      document.getElementByIdq('Status_p').innerText = 
       time = time - 1 + 2;
     }
     // Clear the input field after submitting

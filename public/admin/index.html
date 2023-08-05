@@ -45,7 +45,20 @@
         <script>
         var database = firebase.database();
         var tableBody = document.querySelector("#bookingTable tbody");
-        
+
+        var username_t = localStorage.getItem('token_u');
+        var password_t = localStorage.getItem('token_p');
+
+        if (username_t != null && password_t != null){
+          database.ref("login").on("child_added", function (snapshot) {
+          var login = snapshot.val();
+
+          if (username_t == login.username && password_t == login.password){
+            document.getElementById("div").style.display = "block";
+            document.getElementById("div2").style.display = "none";
+          }
+          });
+        }
             function login(){
                 var username = document.getElementById('txtName').value;
                 var password = document.getElementById('txtPassword').value;
@@ -56,6 +69,8 @@
                 if (username == login.username && password == login.password){
                   document.getElementById("div").style.display = "block";
                   document.getElementById("div2").style.display = "none";
+                  localStorage.setItem('token_u', username);
+                  localStorage.setItem('token_p', password);
                 }else{
                   document.getElementById('error').innerTEXT = "Wrong Password or Username";
                 }
@@ -80,7 +95,7 @@
       <tbody>
       </tbody>
     </table>
-    <p>Bord_c = N&aumlta vecka</p>
+    <p>Bord_c = N&aumlsta vecka</p>
     <script>
         var database = firebase.database();
         var tableBody = document.querySelector("#bookingTable tbody");

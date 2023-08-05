@@ -57,14 +57,13 @@
           <option id="DATE-CURR-FRI" value="fre">Fredag</option>
           <option id="DATE-CURR-SAT" value="lor">L&oumlrdag</option>
           <option id="DATE-CURR-SUN" value="son">S&oumlndag</option>
-          <option disabled>-</option>
-          <option id="DATE-CURR-MON" value="mon_c">M&aringndag</option>
-          <option id="DATE-CURR-TUE" value="tis_c">Tisdag</option>
-          <option id="DATE-CURR-WED" value="ons_c">Onsdag</option>
-          <option id="DATE-CURR-THU" value="tor_c">Torsdag</option>
-          <option id="DATE-CURR-FRI" value="fre_c">Fredag</option>
-          <option id="DATE-CURR-SAT" value="lor_c">L&oumlrdag</option>
-          <option id="DATE-CURR-SUN" value="son_c">S&oumlndag</option>
+        </select>
+      </p>
+      <p>
+        <label for="week">Vecka</label>
+        <select id="txtWeek" name="txtWeek" style="padding: 10px;">
+          <option id="DATE-CURR-MON" value="t">Den h&aumlr veckan</option>
+          <option id="DATE-CURR-TUE" value="n">N&aumlsta Vecka</option>
         </select>
       </p>
       <p>
@@ -105,6 +104,7 @@
         </select>
       </p>
       <p>&nbsp;</p>
+      <p id="Status_p" style="color: #00ff00"></p>
       <p>
         <input type="submit" name="button" id="smt-button" value="Boka Bord"  class="btn btn-primary btn-lg btn-block">
       </p>
@@ -145,13 +145,13 @@
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-    <div class="grid-item" id="TTN_NEW_mon" style="border-style: none; padding-bottom: 25px;"></div>
+    <!--<div class="grid-item" id="TTN_NEW_mon" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_NEW_tue" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_NEW_wed" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_NEW_thu" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_NEW_fri" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_NEW_sat" style="border-style: none; padding-bottom: 25px;"></div>
-    <div class="grid-item" id="TTN_NEW_sun" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_NEW_sun" style="border-style: none; padding-bottom: 25px;"></div>-->
     <div class="grid-item" id="TT_NEW_13_mon" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_NEW_13_tue" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_NEW_13_wed" style="background-color: #000;">13.00</div>
@@ -253,13 +253,13 @@
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
     <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-    <div class="grid-item" id="TTN_OLD_mon" style="border-style: none; padding-bottom: 25px;"></div>
+    <!--<div class="grid-item" id="TTN_OLD_mon" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_OLD_tue" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_OLD_wed" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_OLD_thu" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_OLD_fri" style="border-style: none; padding-bottom: 25px;"></div>
     <div class="grid-item" id="TTN_OLD_sat" style="border-style: none; padding-bottom: 25px;"></div>
-    <div class="grid-item" id="TTN_OLD_sun" style="border-style: none; padding-bottom: 25px;"></div>
+    <div class="grid-item" id="TTN_OLD_sun" style="border-style: none; padding-bottom: 25px;"></div>-->
     <div class="grid-item" id="TT_OLD_13_mon" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_OLD_13_tue" style="background-color: #000;">13.00</div>
     <div class="grid-item" id="TT_OLD_13_wed" style="background-color: #000;">13.00</div>
@@ -363,13 +363,13 @@
       <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
       <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
       <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-      <div class="grid-item" id="TTN_NEW_mon" style="border-style: none; padding-bottom: 25px;"></div>
+      <!--<div class="grid-item" id="TTN_NEW_mon" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_NEW_tue" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_NEW_wed" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_NEW_thu" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_NEW_fri" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_NEW_sat" style="border-style: none; padding-bottom: 25px;"></div>
-      <div class="grid-item" id="TTN_NEW_sun" style="border-style: none; padding-bottom: 25px;"></div>
+      <div class="grid-item" id="TTN_NEW_sun" style="border-style: none; padding-bottom: 25px;"></div>-->
       <div class="grid-item" id="TT_NEW_13_mon_c" style="background-color: #000;">13.00</div>
       <div class="grid-item" id="TT_NEW_13_tue_c" style="background-color: #000;">13.00</div>
       <div class="grid-item" id="TT_NEW_13_wed_c" style="background-color: #000;">13.00</div>
@@ -471,13 +471,13 @@
       <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
       <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
       <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-      <div class="grid-item" id="TTN_OLD_mon" style="border-style: none; padding-bottom: 25px;"></div>
+      <!--<div class="grid-item" id="TTN_OLD_mon" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_OLD_tue" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_OLD_wed" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_OLD_thu" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_OLD_fri" style="border-style: none; padding-bottom: 25px;"></div>
       <div class="grid-item" id="TTN_OLD_sat" style="border-style: none; padding-bottom: 25px;"></div>
-      <div class="grid-item" id="TTN_OLD_sun" style="border-style: none; padding-bottom: 25px;"></div>
+      <div class="grid-item" id="TTN_OLD_sun" style="border-style: none; padding-bottom: 25px;"></div>-->
       <div class="grid-item" id="TT_OLD_13_mon_c" style="background-color: #000;">13.00</div>
       <div class="grid-item" id="TT_OLD_13_tue_c" style="background-color: #000;">13.00</div>
       <div class="grid-item" id="TT_OLD_13_wed_c" style="background-color: #000;">13.00</div>
