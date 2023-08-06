@@ -8802,6 +8802,7 @@ textarea.form-control-lg{
 .grid-item {
     background-color: #ffffff;
     border: 1px solid #000000;
+    margin: 0px;
     padding: 20px;
     font-size: 30px;
     text-align: center;
