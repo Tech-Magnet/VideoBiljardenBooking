@@ -52,34 +52,3 @@ body{
     height: min-content;
     background-color: #ffffff;
 }
-.popup{
-    position: fixed;
-    width: 400px;
-    height: 200px;
-    background-color: #adadad;
-    color: #ff0000;
-    border-style: solid;
-    border-color: #ff0000;
-    border-radius: 5px;
-    left: 30%;
-    top: 30%;
-}
-.popup-btns{
-    position: fixed;
-    width: 400px;
-    height: max-content;
-    border-style: solid;
-    display: grid;
-}
-.cancel{
-    width: 40%;
-    height: 50px;
-    color: #000000;
-    background-color: #ffffff;
-}
-.clear-DATA{
-    width: 40%;
-    height: 50px;
-    color: #ffffff;
-    background-color: #ff0000;
-}

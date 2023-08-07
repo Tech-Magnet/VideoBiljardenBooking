@@ -96,7 +96,10 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     table = table + "_c";
   }
 
-  if (extraTime == false && time == "13" || time == "14" || time == "24"){
+  if (extraTime == false && time == "13" || time == "14" || time == "24" || endtime >= 24){
+    alert("Tyverr men tiden du har valt är inte tillgänglig Error:0x01");
+    return;
+  }else if (extraTime == true && endtime >= 25){
     alert("Tyverr men tiden du har valt är inte tillgänglig Error:0x01");
     return;
   }
@@ -201,24 +204,32 @@ function Start(){
     if(arrayColumn2[i] == "Bord_1"){
       if(arrayColumn0[i] == "son"){//SUNDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sun";
+        //console.log(ID_BUILD);
+        
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "mon"){//MONDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_mon";
+        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "tis"){//TUESDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_tue";
+        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_wed";
+        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "tor"){//THURSDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_thu";
+        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "fre"){//FRIDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_fri";
+        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "lor"){//SATURDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sat";
+        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }
     }else if(arrayColumn2[i] == "Bord_2"){
@@ -233,6 +244,7 @@ function Start(){
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_wed";
+        console.log(document.getElementById('TT_NEW_13_wed_c').style.backgroundColor);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "tor"){//THURSDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_thu";
