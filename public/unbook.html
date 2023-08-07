@@ -45,21 +45,21 @@
             <label for="Day">Datum</label>
             <select id="txtDay" name="txtDay" style="padding: 10px;">
               <!--Week One (Current)-->
-              <option id="DATE-CURR-MON" value="mon">M&aringndag</option>
-              <option id="DATE-CURR-TUE" value="tis">Tisdag</option>
-              <option id="DATE-CURR-WED" value="ons">Onsdag</option>
-              <option id="DATE-CURR-THU" value="tor">Torsdag</option>
-              <option id="DATE-CURR-FRI" value="fre">Fredag</option>
-              <option id="DATE-CURR-SAT" value="lor">L&oumlrdag</option>
-              <option id="DATE-CURR-SUN" value="son">S&oumlndag</option>
-              <option disabled>-</option>
-              <option id="DATE-CURR-MON" value="mon_c">M&aringndag</option>
-              <option id="DATE-CURR-TUE" value="tis_c">Tisdag</option>
-              <option id="DATE-CURR-WED" value="ons_c">Onsdag</option>
-              <option id="DATE-CURR-THU" value="tor_c">Torsdag</option>
-              <option id="DATE-CURR-FRI" value="fre_c">Fredag</option>
-              <option id="DATE-CURR-SAT" value="lor_c">L&oumlrdag</option>
-              <option id="DATE-CURR-SUN" value="son_c">S&oumlndag</option>
+              <option value="mon">M&aringndag</option>
+              <option value="tis">Tisdag</option>
+              <option value="ons">Onsdag</option>
+              <option value="tor">Torsdag</option>
+              <option value="fre">Fredag</option>
+              <option value="lor">L&oumlrdag</option>
+              <option value="son">S&oumlndag</option>
+            </select>
+          </p>
+          <p>
+            <label for="Week">Vecka</label>
+            <select id="txtWeek" name="txtWeek" style="padding: 10px;">
+              <!--Week One (Current)-->
+              <option value="t">Denna Vecka</option>
+              <option value="n">N&aumlsta Vecka</option>
             </select>
           </p>
           <p>
@@ -82,13 +82,13 @@
         function unbook(){
           var found = false;
           var database = firebase.database();
-          var tableToDelete = document.getElementById('txtTable').value;  // Replace with the name you want to delete
-          var phoneToDelete = document.getElementById('txtPhone').value;  // Replace with the phone number you want to delete
-          var dayToDelete = document.getElementById('txtDay').value; // Replace with the day you want to delete
+          var tableToDelete = document.getElementById('txtTable').value;
+          var phoneToDelete = document.getElementById('txtPhone').value;
+          var dayToDelete = document.getElementById('txtDay').value;
+          var weekToDelete = document.getElementById('txtWeek').value 
 
-          if(dayToDelete.endsWith('_c')){
+          if(weekToDelete == 'n'){
             tableToDelete = tableToDelete + "_c";
-            dayToDelete = removeSuffix(dayToDelete, "_c");
           }
 
           // Create a reference to the "booking" node

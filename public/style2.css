@@ -1443,7 +1443,7 @@ progress{
         --bs-gutter-y:3rem
     }
 }
-.table{
+/*.table{
     --bs-table-bg:transparent;
     --bs-table-striped-color:#212529;
     --bs-table-striped-bg:rgba(0, 0, 0, 0.05);
@@ -1590,8 +1590,8 @@ progress{
 .table-responsive{
     overflow-x:auto;
     -webkit-overflow-scrolling:touch
-}
-@media (max-width:575.98px){
+}*/
+/*@media (max-width:575.98px){
     .table-responsive-sm{
         overflow-x:auto;
         -webkit-overflow-scrolling:touch
@@ -1620,7 +1620,7 @@ progress{
         overflow-x:auto;
         -webkit-overflow-scrolling:touch
     }
-}
+}*/
 .form-label{
     margin-bottom:.5rem
 }
