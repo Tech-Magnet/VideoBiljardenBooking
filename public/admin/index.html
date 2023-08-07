@@ -78,8 +78,11 @@
                 
             }
         </script>
-    </div>
-    <div id="div" style="display: none;">
+  </div>
+  <div id="div" style="display: none;">
+
+
+    
     <h3 style="color: #000000;">Aktiva Bokningar</h3>
     <table id="bookingTable" style="width:80vw" border="1">
       <thead>
@@ -92,15 +95,92 @@
             <th>Slut</th>
             <th>L&aumlngd</th>
             <th>Bord</th>
+            <th>Vecka</th>
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <th>MONDAY</th>
+        </tr>
+      </tbody>
+      <tbody class="tb_1">
+      </tbody>
+      <tbody class="tb_1_2">
+      </tbody>
+      <tbody>
+        <tr>
+          <th>TISDAG</th>
+        </tr>
+      </tbody>
+      <tbody class="tb_2">
+      </tbody>
+      <tbody class="tb_2_2">
+      </tbody>
+      <tbody>
+        <tr>
+          <th>ONSDAG</th>
+        </tr>
+      </tbody>
+      <tbody class="tb_3">
+      </tbody>
+      <tbody class="tb_3_2">
+      </tbody>
+      <tbody>
+        <tr>
+          <th>TORSDAG</th>
+        </tr>
+      </tbody>
+      <tbody class="tb_4">
+      </tbody>
+      <tbody class="tb_4_2">
+      </tbody>
+      <tbody>
+        <tr>
+          <th>FREDAG</th>
+        </tr>
+      </tbody>
+      <tbody class="tb_5">
+      </tbody>
+      <tbody class="tb_5_2">
+      </tbody>
+      <tbody>
+        <tr>
+          <th>L&OumlRDAG</th>
+        </tr>
+      </tbody>
+      <tbody class="tb_6">
+      </tbody>
+      <tbody class="tb_6_2">
+      </tbody>
+      <tbody>
+        <tr>
+          <th>S&OumlNDAG</th>
+        </tr>
+      </tbody>
+      <tbody class="tb_7">
+      </tbody>
+      <tbody class="tb_7_2">
       </tbody>
     </table>
-    <p>Bord_c = N&aumlsta vecka</p>
+    <!--<p>Bord_c = N&aumlsta vecka</p>-->
     <script>
         var database = firebase.database();
-        var tableBody = document.querySelector("#bookingTable tbody");
+
+        var tableBody1 = document.querySelector(".tb_1");//MONDAY
+        var tableBody2 = document.querySelector(".tb_2");//TUESDAY
+        var tableBody3 = document.querySelector(".tb_3");//WEDNESDAY
+        var tableBody4 = document.querySelector(".tb_4");//THURSDAY
+        var tableBody5 = document.querySelector(".tb_5");//FRIDAY
+        var tableBody6 = document.querySelector(".tb_6");//SATURDAY
+        var tableBody7 = document.querySelector(".tb_7");//SUNDAY
+
+        var tableBody1_2 = document.querySelector(".tb_1_2");//MONDAY
+        var tableBody2_2 = document.querySelector(".tb_2_2");//TUESDAY
+        var tableBody3_2 = document.querySelector(".tb_3_2");//WEDNESDAY
+        var tableBody4_2 = document.querySelector(".tb_4_2");//THURSDAY
+        var tableBody5_2 = document.querySelector(".tb_5_2");//FRIDAY
+        var tableBody6_2 = document.querySelector(".tb_6_2");//SATURDAY
+        var tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY
 
         database.ref("admin").on("child_added", function (snapshot) {
           var book = snapshot.val();
@@ -114,6 +194,7 @@
           var endTimeCell = document.createElement("td");
           var lengthCell = document.createElement("td");
           var tableCell = document.createElement("td");
+          var WeekCell = document.createElement("td");
         
           nameCell.textContent = book.name;
           phoneCell.textContent = book.phone;
@@ -122,7 +203,20 @@
           lengthCell.textContent = book.length;
           endTimeCell.textContent = book.endtime;
 
-          tableCell.textContent = book.table;
+          var tableVar = book.table;
+          if (tableVar.endsWith('_c')){
+            tableVar = tableVar.replace("_c", "");
+            tableCell.textContent = tableVar;
+            WeekCell.textContent = 'Nästa';
+          }
+          else{
+            tableCell.textContent = tableVar;
+            WeekCell.textContent = 'Denna';
+          }
+          
+          
+          
+          //tableCell.textContent = book.table;
         
           newRow.appendChild(nameCell);
           newRow.appendChild(phoneCell);
@@ -131,8 +225,53 @@
           newRow.appendChild(endTimeCell);
           newRow.appendChild(lengthCell);
           newRow.appendChild(tableCell);
+          newRow.appendChild(WeekCell);
+
+          if(book.day == 'mon'){
+            if(WeekCell.textContent == 'Denna'){
+              tableBody1.appendChild(newRow);
+            }else {
+              tableBody1_2.appendChild(newRow);
+            }
+          }else if(book.day == 'tis') {
+            if(WeekCell.textContent == 'Denna'){
+              tableBody2.appendChild(newRow);
+            }else {
+              tableBody2_2.appendChild(newRow);
+            }
+          }else if(book.day == 'ons') {
+            if(WeekCell.textContent == 'Denna'){
+              tableBody3.appendChild(newRow);
+            }else {
+              tableBody3_2.appendChild(newRow);
+            }
+          }else if(book.day == 'tor') {
+            if(WeekCell.textContent == 'Denna'){
+              tableBody4.appendChild(newRow);
+            }else {
+              tableBody4_2.appendChild(newRow);
+            }
+          }else if(book.day == 'fre') {
+            if(WeekCell.textContent == 'Denna'){
+              tableBody5.appendChild(newRow);
+            }else {
+              tableBody5_2.appendChild(newRow);
+            }
+          }else if(book.day == 'lor') {
+            if(WeekCell.textContent == 'Denna'){
+              tableBody6.appendChild(newRow);
+            }else {
+              tableBody6_2.appendChild(newRow);
+            }
+          }else if(book.day == 'son') {
+            if(WeekCell.textContent == 'Denna'){
+              tableBody7.appendChild(newRow);
+            }else {
+              tableBody7_2.appendChild(newRow);
+            }
+          }
         
-          tableBody.appendChild(newRow);
+          //tableBody.appendChild(newRow);
         });
     </script>
     <div id="PopUp_Warning" class="popup" style="display: none;">
@@ -141,125 +280,7 @@
       <p>Detta kan p&aumlverka hela bokningsschemat</p>
       </center>
       <br>
-      <!--<div class="popup-btns">
-        <button id="cancel" onclick="document.getElementById('PopUp_Warning').style.display  = 'none';">Avbryt</button>
-        <button id="clear-DATA"onclick="clearDB();">RENSA DATA 💀</button>
-      </div>
     </div>
-      <br>
-      <br>
-      <input type="button" name="button" id="smt-button" value="RENSA DATA 💀"  class="btn btn-primary btn-lg btn-block" style="background-color: red;" onclick="document.getElementById('PopUp_Warning').style.display  = 'block'">
-        <script>
-            function clearDB(){
-                  document.getElementById('PopUp_Warning').style.display  = 'none'
-                  var database = firebase.database();
-                  var characterToEndWith = "_c"; // Character to check for at the end of "table"
-
-                  /*BOOKING--------------------------------------------------------------------*/
-                  // Create a reference to the "booking" node
-                  var bookingRef = database.ref("booking");
-
-                  // Step 1: Query for entries that end with "_c"
-                  var query = bookingRef.orderByChild("table").endAt(characterToEndWith + "\uf8ff");
-
-                  // Collect keys of entries that end with "_c"
-                  var keysToSave = [];
-                  query.once("value")
-                    .then(function(snapshot) {
-                      snapshot.forEach(function(childSnapshot) {
-                        keysToSave.push(childSnapshot.key);
-                      });
-                    
-                      // Step 2: Retrieve all entries and filter out keysToDelete
-                      bookingRef.once("value")
-                        .then(function(allSnapshot) {
-                          allSnapshot.forEach(function(childSnapshot) {
-                            var key = childSnapshot.key;
-                            if (!keysToSave.includes(key)) {
-                              // Delete the entry from the database
-                              bookingRef.child(key).remove()
-                                .then(function() {
-                                  console.log("Entry successfully deleted:", key);
-                                })
-                                .catch(function(error) {
-                                  console.error("Error deleting entry:", error);
-                                });
-                            }  else {
-                              // Remove "_c" from the "table" attribute
-                              var currentTable = childSnapshot.val().table;
-                              var updatedTable = currentTable.replace("_c", "");
-                            
-                              // Update the "table" attribute with the modified string
-                              bookingRef.child(key).update({ table: updatedTable })
-                                .then(function() {
-                                  console.log("Entry updated:", key);
-                                })
-                                .catch(function(error) {
-                                  console.error("Error updating entry:", error);
-                                });
-                            }
-                          });
-                        })
-                        .catch(function(error) {
-                          console.error("Error retrieving all entries:", error);
-                        });
-                      });
-
-
-
-
-
-                      /*ADMIN------------------------------------------------------------------------*/
-                      // Create a reference to the "booking" node
-                      var adminRef = database.ref("admin");
-                                      
-                      // Step 1: Query for entries that end with "_c"
-                      var query = adminRef.orderByChild("table").endAt(characterToEndWith + "\uf8ff");
-                                      
-                      // Collect keys of entries that end with "_c"
-                      var keysToSave = [];
-                      query.once("value")
-                        .then(function(snapshot) {
-                          snapshot.forEach(function(childSnapshot) {
-                            keysToSave.push(childSnapshot.key);
-                          });
-                        
-                          // Step 2: Retrieve all entries and filter out keysToDelete
-                          adminRef.once("value")
-                            .then(function(allSnapshot) {
-                              allSnapshot.forEach(function(childSnapshot) {
-                                var key = childSnapshot.key;
-                                if (!keysToSave.includes(key)) {
-                                  // Delete the entry from the database
-                                  adminRef.child(key).remove()
-                                    .then(function() {
-                                      console.log("Entry successfully deleted:", key);
-                                    })
-                                    .catch(function(error) {
-                                      console.error("Error deleting entry:", error);
-                                    });
-                                }  else {
-                                  // Remove "_c" from the "table" attribute
-                                  var currentTable = childSnapshot.val().table;
-                                  var updatedTable = currentTable.replace("_c", "");
-                                
-                                  // Update the "table" attribute with the modified string
-                                  adminRef.child(key).update({ table: updatedTable })
-                                    .then(function() {
-                                      console.log("Entry updated:", key);
-                                    })
-                                    .catch(function(error) {
-                                      console.error("Error updating entry:", error);
-                                    });
-                                }
-                              });
-                            })
-                            .catch(function(error) {
-                              console.error("Error retrieving all entries:", error);
-                            });
-                          });
-                }
-        </script>-->
-        </div>
+  </div>
 </body>
 </html>
