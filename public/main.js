@@ -79,30 +79,41 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   var table = document.getElementById("txtTable").value;
   var week = document.getElementById('txtWeek').value;
   var endtime = parseInt(time) + parseInt(length);
-  console.log("ENDTIME: " + endtime);
+  //console.log("ENDTIME: " + endtime);
   var extraTime;
   if (day == "mon" || day == "tis" || day == "ons" || day == "tor" || day == "son"){
     extraTime = false;
-  }else if(day == "fri" || day == "sat"){
-    extraTime == true;
+    //console.log("SET EXTRATIME TO FALSE");
+    //console.log("EXTRATIME IS SET TO: " + extraTime);
+  }else if(day == "fre" || day == "lor"){
+    extraTime = true;
+    //console.log("SET EXTRATIME TO TRUE");
+    //console.log("EXTRATIME IS SET TO: " + extraTime);
   }
+  //console.log("DAY: " + day);
+
+  //console.log("EXTRATIME STATUS: " + extraTime);
 
   //adding the suffix to the table entry to symbolice that its for next week
   if(week == 'n'){
     table = table + "_c";
   }
 
-  if (extraTime == false && time == "13" || time == "14" || endtime >= 24){
-    alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
-    return;
-  }else if (extraTime == true && endtime >= 25){
-    alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
-    return;
+  if (extraTime == false){
+    if (time == "13" || time == "14" || endtime >= 25){
+      alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
+      return;
+    }
+  }else if (extraTime == true){
+    if(endtime >= 26){
+      alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x02");
+      return;
+    }
   }
 
 
   if(checkIfExixt(day, time, table) == true){
-   alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x02");
+   alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x03");
    return;
   }else if(checkIfExixt(day, time, table) == false){
     database.ref("admin").push().set({

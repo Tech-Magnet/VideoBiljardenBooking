@@ -59,24 +59,23 @@
           }
           });
         }
-            function login(){
-                var username = document.getElementById('txtName').value;
-                var password = document.getElementById('txtPassword').value;
+        function login(){
+            var username = document.getElementById('txtName').value;
+            var password = document.getElementById('txtPassword').value;
 
-                database.ref("login").on("child_added", function (snapshot) {
-                var login = snapshot.val();
+            database.ref("login").on("child_added", function (snapshot) {
+            var login = snapshot.val();
 
-                if (username == login.username && password == login.password){
-                  document.getElementById("div").style.display = "block";
-                  document.getElementById("div2").style.display = "none";
-                  localStorage.setItem('token_u', username);
-                  localStorage.setItem('token_p', password);
-                }else{
-                  document.getElementById('error').innerTEXT = "Wrong Password or Username";
-                }
-                });
-                
+            if (username == login.username && password == login.password){
+              document.getElementById("div").style.display = "block";
+              document.getElementById("div2").style.display = "none";
+              localStorage.setItem('token_u', username);
+              localStorage.setItem('token_p', password);
+            }else{
+              document.getElementById('error').innerTEXT = "Wrong Password or Username";
             }
+            });
+        }
         </script>
   </div>
   <div id="div" style="display: none;">
@@ -201,7 +200,12 @@
           dayCell.textContent = book.day;
           timeCell.textContent = book.time;
           lengthCell.textContent = book.length;
-          endTimeCell.textContent = book.endtime;
+          var endTime = book.endtime;
+          if (endTime == '25'){
+            endTimeCell.textContent = '1';
+          }else{
+            endTimeCell.textContent = book.endtime;
+          }
 
           var tableVar = book.table;
           if (tableVar.endsWith('_c')){
