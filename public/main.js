@@ -42,7 +42,7 @@ function checkIfExixt(day, time, table){
   const arrayColumn1 = GetArrays(1);
   const arrayColumn2 = GetArrays(2);
 
-  let found = false
+  let found = false;
 
   for(i = 0; i < arrayColumn0.length; i++){
     if (arrayColumn0[i] == day && arrayColumn1[i] == time && arrayColumn2[i] == table){
@@ -51,9 +51,7 @@ function checkIfExixt(day, time, table){
       return true;
     }
   }
-  if (!found){
-    //console.log("NOT THE SAME AS ON FILE");
-    //console.log("ENTRY: " + date + ", " + time + ", " + table);
+  if (!found){//If not find matching data in the database return false to symbolice that this time is avalibe
     return false;
   }
 }
@@ -82,8 +80,6 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   var week = document.getElementById('txtWeek').value;
   var endtime = parseInt(time) + parseInt(length);
   console.log("ENDTIME: " + endtime);
-  //console.log("TABLE: " + table);
-  //console.log("LENGTH: " + length);
   var extraTime;
   if (day == "mon" || day == "tis" || day == "ons" || day == "tor" || day == "son"){
     extraTime = false;
@@ -96,17 +92,17 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     table = table + "_c";
   }
 
-  if (extraTime == false && time == "13" || time == "14" || time == "24" || endtime >= 24){
-    alert("Tyverr men tiden du har valt är inte tillgänglig Error:0x01");
+  if (extraTime == false && time == "13" || time == "14" || endtime >= 24){
+    alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
     return;
   }else if (extraTime == true && endtime >= 25){
-    alert("Tyverr men tiden du har valt är inte tillgänglig Error:0x01");
+    alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
     return;
   }
 
 
   if(checkIfExixt(day, time, table) == true){
-   alert("Tyverr men tiden du har valt är inte tillgänglig Error:0x02");
+   alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x02");
    return;
   }else if(checkIfExixt(day, time, table) == false){
     database.ref("admin").push().set({

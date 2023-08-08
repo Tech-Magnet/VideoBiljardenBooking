@@ -50,37 +50,37 @@
         <label for="Day">Datum</label>
         <select id="txtDay" name="txtDay" style="padding: 10px;">
           <!--Week One (Current)-->
-          <option id="DATE-CURR-MON" value="mon">M&aringndag</option>
-          <option id="DATE-CURR-TUE" value="tis">Tisdag</option>
-          <option id="DATE-CURR-WED" value="ons">Onsdag</option>
-          <option id="DATE-CURR-THU" value="tor">Torsdag</option>
-          <option id="DATE-CURR-FRI" value="fre">Fredag</option>
-          <option id="DATE-CURR-SAT" value="lor">L&oumlrdag</option>
-          <option id="DATE-CURR-SUN" value="son">S&oumlndag</option>
+          <option value="mon">M&aringndag</option>
+          <option value="tis">Tisdag</option>
+          <option value="ons">Onsdag</option>
+          <option value="tor">Torsdag</option>
+          <option value="fre">Fredag</option>
+          <option value="lor">L&oumlrdag</option>
+          <option value="son">S&oumlndag</option>
         </select>
       </p>
       <p>
         <label for="week">Vecka</label>
         <select id="txtWeek" name="txtWeek" style="padding: 10px;">
-          <option id="DATE-CURR-MON" value="t">Den h&aumlr veckan</option>
-          <option id="DATE-CURR-TUE" value="n">N&aumlsta Vecka</option>
+          <option value="t">Den h&aumlr veckan</option>
+          <option value="n">N&aumlsta Vecka</option>
         </select>
       </p>
       <p>
         <label for="time">Tid</label>
         <select id="txtTime" name="txtTime" style="padding: 10px;">
-          <option id="txtTime_13" value="13">13.00</option>
-          <option id="txtTime_14" value="14">14.00</option>
-          <option id="txtTime_15" value="15">15.00</option>
-          <option id="txtTime_16" value="16">16.00</option>
-          <option id="txtTime_17" value="17">17.00</option>
-          <option id="txtTime_18" value="18">18.00</option>
-          <option id="txtTime_19" value="19">19.00</option>
-          <option id="txtTime_20" value="20">20.00</option>
-          <option id="txtTime_21" value="21">21.00</option>
-          <option id="txtTime_22" value="22">22.00</option>
-          <option id="txtTime_23" value="23">23.00</option>
-          <option id="txtTime_24" value="24">24.00</option>
+          <option value="13">13.00</option>
+          <option value="14">14.00</option>
+          <option value="15">15.00</option>
+          <option value="16">16.00</option>
+          <option value="17">17.00</option>
+          <option value="18">18.00</option>
+          <option value="19">19.00</option>
+          <option value="20">20.00</option>
+          <option value="21">21.00</option>
+          <option value="22">22.00</option>
+          <option value="23">23.00</option>
+          <option value="24">24.00</option>
         </select>
       </p>
       <p>
@@ -111,22 +111,6 @@
     </form>
   </fieldset>
   <input type="button" name="button" id="smt-button" value="Avboka Bord"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='unbook.html'">
-
-<!--DISPLAY DATABASE DATA
-<div style="display: none;">
-  <h3 style="color: #000000;">Akiva Bookningar</h3>
-  <table class="db_tbl" id="bookingTable">
-    <thead>
-      <tr>
-        <th>Day</th>
-        <th>Tid</th>
-        <th>Table</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-</div>-->
 <br><br>
 <h2>&Oumlppettider</h2>
 <h4>M&aringn - Tors: 15 - 24</h4>
@@ -233,6 +217,7 @@
   <div class="grid-item" id="TT_NEW_24_sat">24.00</div>
   <div class="grid-item" id="TT_NEW_24_sun" style="background-color: #000;">24.00</div>
   </div>
+  <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 </div>
 <br>
 <br>
@@ -332,6 +317,7 @@
   <div class="grid-item" id="TT_OLD_24_sat">24.00</div>
   <div class="grid-item" id="TT_OLD_24_sun" style="background-color: #000;">24.00</div>
 </div>
+<p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 <br>
 <br>
 <br>
@@ -430,6 +416,7 @@
   <div class="grid-item" id="TT_NEW_24_sat_c">24.00</div>
   <div class="grid-item" id="TT_NEW_24_sun_c" style="background-color: #000;">24.00</div>
   </div>
+  <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 </div>
 <br>
 <br>
@@ -529,6 +516,7 @@
   <div class="grid-item" id="TT_OLD_24_sat_c">24.00</div>
   <div class="grid-item" id="TT_OLD_24_sun_c" style="background-color: #000;">24.00</div>
   </div>
+  <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 </div>
 <!--DISPLAY DATABASE DATA-->
 <div style="display: none;">
