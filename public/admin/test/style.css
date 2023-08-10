@@ -8,7 +8,7 @@ body{
     margin: auto;
     background-color: #f5f7fa;
     width: 500px;
-    height: 700px;
+    height: max-content;
     
 }
 .title-locked{
@@ -33,6 +33,7 @@ body{
     background-color: #0d6efd; 
     color: #ffffff;
     border-width: 1px;
+    cursor: pointer;
 }
 .text-container{
     width: max-content;

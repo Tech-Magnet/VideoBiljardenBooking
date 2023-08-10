@@ -8,7 +8,7 @@ body{
     margin: auto;
     background-color: #f5f7fa;
     width: 500px;
-    height: 700px;
+    height: max-content;
     
 }
 .title-locked{

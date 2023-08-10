@@ -176,21 +176,18 @@ database.ref("booking").on("child_added", function (snapshot) {
   var dayCell = document.createElement("td");
   var timeCell = document.createElement("td");
   var tableCell = document.createElement("td");
+  var phoneCell = document.createElement("td");
 
   // Set the content of the cells with the data from Firebase
-  //nameCell.textContent = book.name;
-  //phoneCell.textContent = book.phone;
   dayCell.textContent = book.day;
   timeCell.textContent = book.time;
   tableCell.textContent = book.table;
+  phoneCell.textContent = book.phone;
 
   // Append the cells to the row
-  //newRow.appendChild(nameCell);
-  //newRow.appendChild(phoneCell);
   newRow.appendChild(dayCell);
   newRow.appendChild(timeCell);
   newRow.appendChild(tableCell);
-
   // Append the row to the table body
   tableBody.appendChild(newRow);
   Start();
@@ -203,40 +200,29 @@ function Start(){
   const arrayColumn0 = GetArrays(0);
   const arrayColumn1 = GetArrays(1);
   const arrayColumn2 = GetArrays(2);
-  //console.log(arrayColumn0);
-  //console.log(arrayColumn1);
-  //console.log(arrayColumn2);
 
   for (i = 0; i < arrayColumn2.length; i++){
     if(arrayColumn2[i] == "Bord_1"){
       if(arrayColumn0[i] == "son"){//SUNDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sun";
-        //console.log(ID_BUILD);
-        
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "mon"){//MONDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_mon";
-        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "tis"){//TUESDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_tue";
-        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_wed";
-        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "tor"){//THURSDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_thu";
-        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "fre"){//FRIDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_fri";
-        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "lor"){//SATURDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sat";
-        //console.log(ID_BUILD);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }
     }else if(arrayColumn2[i] == "Bord_2"){
