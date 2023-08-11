@@ -165,13 +165,13 @@
       </tbody>
     </table>
 
-      <h3 style="color: #000000;">Aktiva Medlemsskap</h3>
+      <h3 style="color: #000000;">Aktiva Medlemskap</h3>
       <table id="paymentTable" style="width: 40vw;" border="1">
         <thead>
           <th>Namn</th>
           <th>TelNr</th>
-          <th>N&aumlsta Betalning</th>
           <th>Senaste Betalning</th>
+          <th>N&aumlsta Betalning</th>
         </thead>
         <tbody class="pay_tb_1">
         </tbody>
@@ -182,7 +182,7 @@
         <input type="text" class="login-fields" id="txtPhone"><br>
     
         <button id="btnCreate" class="login-fields2" onclick="AddData();">Registera Medlemskap</button>
-        <script defer>
+        <script>
           function AddData(){
             console.log("ADDING DATA");
               var name_member = document.getElementById('txtName_m').value;
@@ -262,13 +262,11 @@
               console.log("TRUE: " + expDate.toISOString().split('T')[0]);
 
               m_nameCell.textContent = members.name;
-              var names = members.name;
-              membersArr.push(names);
               m_phoneCell.textContent = members.phone;
               m_nextCell.textContent = members.next;
               m_lastCell.textContent = members.last;
               
-              
+              membersArr.push(members.phone);
               
               //PREPARING FOR ADDING TO NEW ROW OF TABLE
               newRow.appendChild(m_nameCell);
@@ -302,8 +300,7 @@
           var memberCell = document.createElement("td");
           
           
-          var name = book.name;
-          nameCell.textContent = name;
+          nameCell.textContent = book.name;
           phoneCell.textContent = book.phone;
           dayCell.textContent = book.day;
           timeCell.textContent = book.time;
@@ -328,8 +325,7 @@
             WeekCell.textContent = 'Denna';
           }
 
-          if (membersArr.includes(name)){
-
+          if (membersArr.includes(book.phone)){
             memberCell.textContent = "JA";
           }
           else{

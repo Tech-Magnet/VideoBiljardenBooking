@@ -237,7 +237,6 @@ function Start(){
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_wed";
-        console.log(document.getElementById('TT_NEW_13_wed_c').style.backgroundColor);
         document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(arrayColumn0[i] == "tor"){//THURSDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_thu";
