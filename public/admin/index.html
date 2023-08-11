@@ -85,7 +85,7 @@
 
     
     <h3 style="color: #000000;">Aktiva Bokningar</h3>
-    <table id="bookingTable" style="width:80vw" border="1">
+    <table id="bookingTable" style="width:80vw;" border="1">
       <thead>
         <tr>
             <th> </tr>
@@ -97,6 +97,7 @@
             <th>L&aumlngd</th>
             <th>Bord</th>
             <th>Vecka</th>
+            <th>Medlem</th>
         </tr>
       </thead>
       <tbody>
@@ -163,8 +164,66 @@
       <tbody class="tb_7_2">
       </tbody>
     </table>
-    <!--<p>Bord_c = N&aumlsta vecka</p>-->
+
+      <h3 style="color: #000000;">Aktiva Medlemskap</h3>
+      <table id="paymentTable" style="width: 40vw;" border="1">
+        <thead>
+          <th>Namn</th>
+          <th>TelNr</th>
+          <th>Senaste Betalning</th>
+          <th>N&aumlsta Betalning</th>
+        </thead>
+        <tbody class="pay_tb_1">
+        </tbody>
+      </table>
+        <label for="name" class="login-label">Name</label>
+        <input type="text" class="login-fields" id="txtName_m" style="margin-top: 10px;"><br>
+        <label for="phone" class="login-label">Phone</label>
+        <input type="text" class="login-fields" id="txtPhone"><br>
+    
+        <button id="btnCreate" class="login-fields2" onclick="AddData();">Registera Medlemskap</button>
+        <script>
+          function AddData(){
+            console.log("ADDING DATA");
+              var name_member = document.getElementById('txtName_m').value;
+              console.log("NAME IS: " + document.getElementById('txtName_m').value);
+              var phone_m = document.getElementById('txtPhone').value;
+
+              // Get the current date
+              const currentDate = new Date();
+
+              // Calculate the next month's date
+              const nextMonth = new Date(currentDate);
+              nextMonth.setMonth(currentDate.getMonth() + 1);
+
+              // Handle cases where the day of the next month might not exist (e.g., Jan 31st to Feb 28th/29th)
+              if (currentDate.getDate() > nextMonth.getDate()) {
+                  nextMonth.setDate(0); // This will set the date to the last day of the previous month
+              }
+
+              console.log("Current Date:", currentDate.toISOString().split('T')[0]);
+              var next_m = currentDate.toISOString().split('T')[0];
+              console.log("Next Month's Date:", nextMonth.toISOString().split('T')[0]);
+              var last_m = nextMonth.toISOString().split('T')[0];
+
+              //var next = current_date;
+              console.log(name_member);
+              console.log(phone_m);
+
+
+  
+              var database = firebase.database();
+                database.ref("members").push().set({
+                name: name_member,
+                phone: phone_m,
+                next: next_m,
+                last: last_m
+              });
+              console.log("DATA INSETED");
+          }
+          </script>
     <script>
+
         var database = firebase.database();
 
         var tableBody1 = document.querySelector(".tb_1");//MONDAY
@@ -183,6 +242,48 @@
         var tableBody6_2 = document.querySelector(".tb_6_2");//SATURDAY
         var tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY
 
+        const membersArr = [];
+        var memberStatus = false;
+        /*MEMBERS TABLE*/
+        database.ref("members").on("child_added", function (snapshot) {
+            var members = snapshot.val();
+            var tablebody_m = document.querySelector(".pay_tb_1");//Table Members
+            var newRow = document.createElement("tr");
+            
+            //CTRATES THE ELEMTS IN THE TABLE
+            var m_nameCell = document.createElement("td");
+            var m_phoneCell = document.createElement("td");
+            var m_nextCell = document.createElement("td");
+            var m_lastCell = document.createElement("td");
+
+            var expDate = new Date(members.last);
+            if(expDate >= new Date()){
+
+              console.log("TRUE: " + expDate.toISOString().split('T')[0]);
+
+              m_nameCell.textContent = members.name;
+              m_phoneCell.textContent = members.phone;
+              m_nextCell.textContent = members.next;
+              m_lastCell.textContent = members.last;
+              
+              membersArr.push(members.phone);
+              
+              //PREPARING FOR ADDING TO NEW ROW OF TABLE
+              newRow.appendChild(m_nameCell);
+              newRow.appendChild(m_phoneCell);
+              newRow.appendChild(m_nextCell);
+              newRow.appendChild(m_lastCell);
+
+            //ADDS IT TO THE TABLE
+            tablebody_m.appendChild(newRow);
+            }else{
+              //DELETES EXPIRED NODES
+              console.log("FALSE: " + expDate.toISOString().split('T')[0]);
+            }
+        });
+
+            
+
         database.ref("admin").on("child_added", function (snapshot) {
           var book = snapshot.val();
         
@@ -196,20 +297,24 @@
           var lengthCell = document.createElement("td");
           var tableCell = document.createElement("td");
           var WeekCell = document.createElement("td");
-        
+          var memberCell = document.createElement("td");
+          
+          
           nameCell.textContent = book.name;
           phoneCell.textContent = book.phone;
           dayCell.textContent = book.day;
           timeCell.textContent = book.time;
           lengthCell.textContent = book.length;
+          var name = book.name;
           var endTime = book.endtime;
+          var tableVar = book.table;
+
           if (endTime == '25'){
             endTimeCell.textContent = '1';
           }else{
             endTimeCell.textContent = book.endtime;
           }
 
-          var tableVar = book.table;
           if (tableVar.endsWith('_c')){
             tableVar = tableVar.replace("_c", "");
             tableCell.textContent = tableVar;
@@ -219,10 +324,13 @@
             tableCell.textContent = tableVar;
             WeekCell.textContent = 'Denna';
           }
-          
-          
-          
-          //tableCell.textContent = book.table;
+
+          if (membersArr.includes(book.phone)){
+            memberCell.textContent = "JA";
+          }
+          else{
+            memberCell.textContent = "NEJ";
+          }
         
           newRow.appendChild(nameCell);
           newRow.appendChild(phoneCell);
@@ -232,6 +340,7 @@
           newRow.appendChild(lengthCell);
           newRow.appendChild(tableCell);
           newRow.appendChild(WeekCell);
+          newRow.appendChild(memberCell);
 
           if(book.day == 'mon'){
             if(WeekCell.textContent == 'Denna'){
@@ -278,13 +387,6 @@
           }
         });
     </script>
-    <div id="PopUp_Warning" class="popup" style="display: none;">
-      <center>
-      <h3>&Aumlr du s&aumlker?</h3>
-      <p>Detta kan p&aumlverka hela bokningsschemat</p>
-      </center>
-      <br>
-    </div>
   </div>
 </body>
 </html>
