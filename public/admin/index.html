@@ -176,34 +176,48 @@
         <tbody class="pay_tb_1">
         </tbody>
       </table>
-        <label for="name" class="login-label" id="nameLabel">Name</label>
-        <input type="text" class="login-fields" id="txtName"><br>
-        <label for="phone" class="login-label" id="phoneLabel">Phone</label>
+        <label for="name" class="login-label">Name</label>
+        <input type="text" class="login-fields" id="txtName_m" style="margin-top: 10px;"><br>
+        <label for="phone" class="login-label">Phone</label>
         <input type="text" class="login-fields" id="txtPhone"><br>
     
         <button id="btnCreate" class="login-fields2" onclick="AddData();">Registera Medlemskap</button>
-        <script>
+        <script defer>
           function AddData(){
             console.log("ADDING DATA");
-              const current_date = new Date();
-              var name = document.getElementById('txtName').value;
-              var phone = document.getElementById('txtPhone').value;
-              var last = current_date;
-              current_date.setMonth(current_date.getMonth() + 1);
-              var next = current_date;
-              console.log(name);
-              console.log(phone);
-              console.log(next);
-              console.log(last);
-              
-              
+              var name_member = document.getElementById('txtName_m').value;
+              console.log("NAME IS: " + document.getElementById('txtName_m').value);
+              var phone_m = document.getElementById('txtPhone').value;
+
+              // Get the current date
+              const currentDate = new Date();
+
+              // Calculate the next month's date
+              const nextMonth = new Date(currentDate);
+              nextMonth.setMonth(currentDate.getMonth() + 1);
+
+              // Handle cases where the day of the next month might not exist (e.g., Jan 31st to Feb 28th/29th)
+              if (currentDate.getDate() > nextMonth.getDate()) {
+                  nextMonth.setDate(0); // This will set the date to the last day of the previous month
+              }
+
+              console.log("Current Date:", currentDate.toISOString().split('T')[0]);
+              var next_m = currentDate.toISOString().split('T')[0];
+              console.log("Next Month's Date:", nextMonth.toISOString().split('T')[0]);
+              var last_m = nextMonth.toISOString().split('T')[0];
+
+              //var next = current_date;
+              console.log(name_member);
+              console.log(phone_m);
+
+
   
               var database = firebase.database();
                 database.ref("members").push().set({
-                name: name,
-                phone: phone,
-                next: next,
-                last: last
+                name: name_member,
+                phone: phone_m,
+                next: next_m,
+                last: last_m
               });
               console.log("DATA INSETED");
           }
@@ -242,24 +256,62 @@
             var m_nextCell = document.createElement("td");
             var m_lastCell = document.createElement("td");
 
-            m_nameCell.textContent = members.name;
-            var names = members.name;
-            membersArr.push(names);
-            m_phoneCell.textContent = members.phone;
-            m_nextCell.textContent = members.next;
-            m_lastCell.textContent = members.last;
+            var expDate = new Date(members.last);
+            if(expDate >= new Date()){
+              console.log("TRUE: " + expDate.toISOString().split('T')[0]);
 
-
-            
-            //PREPARING FOR ADDING TO NEW ROW OF TABLE
-            newRow.appendChild(m_nameCell);
-            newRow.appendChild(m_phoneCell);
-            newRow.appendChild(m_nextCell);
-            newRow.appendChild(m_lastCell);
+              m_nameCell.textContent = members.name;
+              var names = members.name;
+              membersArr.push(names);
+              m_phoneCell.textContent = members.phone;
+              m_nextCell.textContent = members.next;
+              m_lastCell.textContent = members.last;
+              
+              
+              
+              //PREPARING FOR ADDING TO NEW ROW OF TABLE
+              newRow.appendChild(m_nameCell);
+              newRow.appendChild(m_phoneCell);
+              newRow.appendChild(m_nextCell);
+              newRow.appendChild(m_lastCell);
 
             //ADDS IT TO THE TABLE
             tablebody_m.appendChild(newRow);
-            });
+            }else{
+
+
+              //DELETES EXPIRED NODES
+              console.log("FALSE: " + expDate.toISOString().split('T')[0]);
+              var memberRef = database.ref("members");
+              // Create a query to find the nodes with matching attributes
+              var query = memberRef.orderByChild("last").equalTo(phoneToDelete);
+
+              // Execute the query to fetch the data
+              query.once("value")
+                .then(function(snapshot) {
+                  console.log("START QUERY");
+                  snapshot.forEach(function(childSnapshot) {
+                    var node = childSnapshot.val();
+          
+
+
+                      // Delete the node
+                      memberRef.child(childSnapshot.key).remove()
+                        .then(function() {
+                          console.log("Node deleted:", node);
+                          console.log("Node Deleted from members");
+                          found = true;
+                        })
+                        .catch(function(error) {
+                          console.error("Error deleting node:", error);
+                        });
+                  });
+                })
+                .catch(function(error) {
+                  console.error("Error searching for nodes:", error);
+                });
+            }
+        });
 
             
 
@@ -306,6 +358,7 @@
           }
 
           if (membersArr.includes(name)){
+
             memberCell.textContent = "JA";
           }
           else{
