@@ -88,7 +88,6 @@
     <table id="bookingTable" style="width:80vw;" border="1">
       <thead>
         <tr>
-            <th> </tr>
             <th>Namn</th>
             <th>Telnr</th>
             <th>Dag</th>
@@ -176,21 +175,46 @@
         <tbody class="pay_tb_1">
         </tbody>
       </table>
-        <label for="name" class="login-label">Name</label>
-        <input type="text" class="login-fields" id="txtName_m" style="margin-top: 10px;"><br>
-        <label for="phone" class="login-label">Phone</label>
-        <input type="text" class="login-fields" id="txtPhone"><br>
-    
+
+      <div style="display: flex;">
+        <label for="name" class="login-label">Namn</label>
+        <input type="text" class="login-fields" id="txtName_m" style="margin-top: 10px;">
+        </div>
+
+        <div style="display: flex;">
+        <label for="phone" class="login-label">Tel.Nr</label>
+        <input type="text" class="login-fields" id="txtPhone">
+        </div>
+
+        <div style="display: flex;">
+        <label for="last" class="login-label" id="lastLabel">Betald</label>
+        <input type="date" class="login-fields" id="txtLast">
+        </div>
+
         <button id="btnCreate" class="login-fields2" onclick="AddData();">Registera Medlemskap</button>
         <script>
           function AddData(){
             console.log("ADDING DATA");
               var name_member = document.getElementById('txtName_m').value;
-              console.log("NAME IS: " + document.getElementById('txtName_m').value);
               var phone_m = document.getElementById('txtPhone').value;
+              var last = document.getElementById('txtLast').value;
+
+              if (name_member == "" || phone_m == ""){
+                alert("Namn och Tel nr måste vara ifyllda");
+                return;
+              }
 
               // Get the current date
-              const currentDate = new Date();
+              var currentDate;
+              console.log(currentDate);
+
+              if(last == ""){
+                currentDate = new Date();
+                console.log(currentDate);
+              }else{
+                currentDate = new Date(last);
+                console.log(currentDate);
+              }
 
               // Calculate the next month's date
               const nextMonth = new Date(currentDate);
@@ -201,17 +225,16 @@
                   nextMonth.setDate(0); // This will set the date to the last day of the previous month
               }
 
-              console.log("Current Date:", currentDate.toISOString().split('T')[0]);
               var next_m = currentDate.toISOString().split('T')[0];
-              console.log("Next Month's Date:", nextMonth.toISOString().split('T')[0]);
               var last_m = nextMonth.toISOString().split('T')[0];
 
               //var next = current_date;
               console.log(name_member);
               console.log(phone_m);
+              console.log("LAST: " + last);
 
 
-  
+              
               var database = firebase.database();
                 database.ref("members").push().set({
                 name: name_member,
@@ -259,7 +282,7 @@
             var expDate = new Date(members.last);
             if(expDate >= new Date()){
 
-              console.log("TRUE: " + expDate.toISOString().split('T')[0]);
+              //console.log("TRUE: " + expDate.toISOString().split('T')[0]);
 
               m_nameCell.textContent = members.name;
               m_phoneCell.textContent = members.phone;
@@ -278,7 +301,7 @@
             tablebody_m.appendChild(newRow);
             }else{
               //DELETES EXPIRED NODES
-              console.log("FALSE: " + expDate.toISOString().split('T')[0]);
+              //console.log("FALSE: " + expDate.toISOString().split('T')[0]);
             }
         });
 
