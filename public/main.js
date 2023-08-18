@@ -79,21 +79,13 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   var table = document.getElementById("txtTable").value;
   var week = document.getElementById('txtWeek').value;
   var endtime = parseInt(time) + parseInt(length);
-  //console.log("ENDTIME: " + endtime);
+
   var extraTime;
   if (day == "mon" || day == "tis" || day == "ons" || day == "tor" || day == "son"){
     extraTime = false;
-    //console.log("SET EXTRATIME TO FALSE");
-    //console.log("EXTRATIME IS SET TO: " + extraTime);
   }else if(day == "fre" || day == "lor"){
     extraTime = true;
-    //console.log("SET EXTRATIME TO TRUE");
-    //console.log("EXTRATIME IS SET TO: " + extraTime);
   }
-  //console.log("DAY: " + day);
-
-  //console.log("EXTRATIME STATUS: " + extraTime);
-
   //adding the suffix to the table entry to symbolice that its for next week
   if(week == 'n'){
     table = table + "_c";
