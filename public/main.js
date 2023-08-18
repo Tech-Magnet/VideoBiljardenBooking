@@ -266,71 +266,71 @@ function Start(){
     }else if(arrayColumn2[i] == "Bord_1_c"){
       if(arrayColumn0[i] == "son"){//SUNDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_sun_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "mon"){//MONDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_mon_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "tis"){//TUESDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_tue_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_wed_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "tor"){//THURSDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_thu_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "fre"){//FRIDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_fri_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "lor"){//SATURDAY
         var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_sat_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }
     }else if(arrayColumn2[i] == "Bord_2_c"){
       if(arrayColumn0[i] == "son"){//SUNDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sun_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "mon"){//MONDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_mon_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "tis"){//TUESDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_tue_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_wed_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "tor"){//THURSDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_thu_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "fre"){//FRIDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_fri_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "lor"){//SATURDAY
         var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sat_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }
     }else if(arrayColumn2[i] == "Bord_3_c"){
       if(arrayColumn0[i] == "son"){//SUNDAY
         var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_sun_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "mon"){//MONDAY
         var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_mon_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "tis"){//TUESDAY
         var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_tue_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
         var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_wed_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "tor"){//THURSDAY
         var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_thu_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "fre"){//FRIDAY
         var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_fri_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }else if(arrayColumn0[i] == "lor"){//SATURDAY
         var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_sat_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }
     }
   }
