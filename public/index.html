@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="img/icon.png">
-  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="style.css">
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <!-- Google tag (gtag.js) -->
@@ -46,7 +46,7 @@
       </p>
       <p>
         <label for="phone">Telnr</label>
-        <input type="text"  class="form-control" name="txtPhone" id="txtPhone" placeholder="" value="" required>
+        <input type="number"  class="form-control" name="txtPhone" id="txtPhone" placeholder="" value="" required>
       </p>
       <p>
         <label for="Day">Datum</label>
@@ -134,90 +134,102 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-  <div class="grid-item" id="TT_NEW_13_mon" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_tue" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_wed" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_thu" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_fri">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_sat">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_sun" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_14_mon" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_tue" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_wed" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_thu" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_fri">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_sat">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_sun" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_15_mon">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_tue">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_wed">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_thu">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_fri">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_sat">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_sun">15.00</div>
-  <div class="grid-item" id="TT_NEW_16_mon">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_tue">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_wed">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_thu">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_fri">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_sat">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_sun">16.00</div>
-  <div class="grid-item" id="TT_NEW_17_mon">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_tue">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_wed">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_thu">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_fri">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_sat">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_sun">17.00</div>
-  <div class="grid-item" id="TT_NEW_18_mon">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_tue">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_wed">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_thu">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_fri">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_sat">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_sun">18.00</div>
-  <div class="grid-item" id="TT_NEW_19_mon">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_tue">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_wed">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_thu">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_fri">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_sat">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_sun">19.00</div>
-  <div class="grid-item" id="TT_NEW_20_mon">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_tue">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_wed">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_thu">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_fri">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_sat">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_sun">20.00</div>
-  <div class="grid-item" id="TT_NEW_21_mon">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_tue">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_wed">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_thu">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_fri">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_sat">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_sun">21.00</div>
-  <div class="grid-item" id="TT_NEW_22_mon">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_tue">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_wed">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_thu">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_fri">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_sat">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_sun">22.00</div>
-  <div class="grid-item" id="TT_NEW_23_mon">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_tue">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_wed">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_thu">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_fri">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_sat">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_sun">23.00</div>
-  <div class="grid-item" id="TT_NEW_24_mon" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_tue" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_wed" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_thu" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_fri">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_sat">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_sun" style="background-color: #000;">24.00</div>
+
+  <div class="grid-item" id="TT_1_13_mon" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_1_13_tis" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_1_13_ons" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_1_13_tor" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_1_13_fre">13.00</div>
+  <div class="grid-item" id="TT_1_13_lor">13.00</div>
+  <div class="grid-item" id="TT_1_13_son" style="background-color: #000; color: #000;">13.00</div>
+
+  <div class="grid-item" id="TT_1_14_mon" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_1_14_tis" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_1_14_ons" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_1_14_tor" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_1_14_fre">14.00</div>
+  <div class="grid-item" id="TT_1_14_lor">14.00</div>
+  <div class="grid-item" id="TT_1_14_son" style="background-color: #000; color: #000;">14.00</div>
+
+  <div class="grid-item" id="TT_1_15_mon">15.00</div>
+  <div class="grid-item" id="TT_1_15_tis">15.00</div>
+  <div class="grid-item" id="TT_1_15_ons">15.00</div>
+  <div class="grid-item" id="TT_1_15_tor">15.00</div>
+  <div class="grid-item" id="TT_1_15_fre">15.00</div>
+  <div class="grid-item" id="TT_1_15_lor">15.00</div>
+  <div class="grid-item" id="TT_1_15_son">15.00</div>
+
+  <div class="grid-item" id="TT_1_16_mon">16.00</div>
+  <div class="grid-item" id="TT_1_16_tis">16.00</div>
+  <div class="grid-item" id="TT_1_16_ons">16.00</div>
+  <div class="grid-item" id="TT_1_16_tor">16.00</div>
+  <div class="grid-item" id="TT_1_16_fre">16.00</div>
+  <div class="grid-item" id="TT_1_16_lor">16.00</div>
+  <div class="grid-item" id="TT_1_16_son">16.00</div>
+
+  <div class="grid-item" id="TT_1_17_mon">17.00</div>
+  <div class="grid-item" id="TT_1_17_tis">17.00</div>
+  <div class="grid-item" id="TT_1_17_ons">17.00</div>
+  <div class="grid-item" id="TT_1_17_tor">17.00</div>
+  <div class="grid-item" id="TT_1_17_fre">17.00</div>
+  <div class="grid-item" id="TT_1_17_lor">17.00</div>
+  <div class="grid-item" id="TT_1_17_son">17.00</div>
+
+  <div class="grid-item" id="TT_1_18_mon">18.00</div>
+  <div class="grid-item" id="TT_1_18_tis">18.00</div>
+  <div class="grid-item" id="TT_1_18_ons">18.00</div>
+  <div class="grid-item" id="TT_1_18_tor">18.00</div>
+  <div class="grid-item" id="TT_1_18_fre">18.00</div>
+  <div class="grid-item" id="TT_1_18_lor">18.00</div>
+  <div class="grid-item" id="TT_1_18_son">18.00</div>
+
+  <div class="grid-item" id="TT_1_19_mon">19.00</div>
+  <div class="grid-item" id="TT_1_19_tis">19.00</div>
+  <div class="grid-item" id="TT_1_19_ons">19.00</div>
+  <div class="grid-item" id="TT_1_19_tor">19.00</div>
+  <div class="grid-item" id="TT_1_19_fre">19.00</div>
+  <div class="grid-item" id="TT_1_19_lor">19.00</div>
+  <div class="grid-item" id="TT_1_19_son">19.00</div>
+
+  <div class="grid-item" id="TT_1_20_mon">20.00</div>
+  <div class="grid-item" id="TT_1_20_tis">20.00</div>
+  <div class="grid-item" id="TT_1_20_ons">20.00</div>
+  <div class="grid-item" id="TT_1_20_tor">20.00</div>
+  <div class="grid-item" id="TT_1_20_fre">20.00</div>
+  <div class="grid-item" id="TT_1_20_lor">20.00</div>
+  <div class="grid-item" id="TT_1_20_son">20.00</div>
+
+  <div class="grid-item" id="TT_1_21_mon">21.00</div>
+  <div class="grid-item" id="TT_1_21_tis">21.00</div>
+  <div class="grid-item" id="TT_1_21_ons">21.00</div>
+  <div class="grid-item" id="TT_1_21_tor">21.00</div>
+  <div class="grid-item" id="TT_1_21_fre">21.00</div>
+  <div class="grid-item" id="TT_1_21_lor">21.00</div>
+  <div class="grid-item" id="TT_1_21_son">21.00</div>
+
+  <div class="grid-item" id="TT_1_22_mon">22.00</div>
+  <div class="grid-item" id="TT_1_22_tis">22.00</div>
+  <div class="grid-item" id="TT_1_22_ons">22.00</div>
+  <div class="grid-item" id="TT_1_22_tor">22.00</div>
+  <div class="grid-item" id="TT_1_22_fre">22.00</div>
+  <div class="grid-item" id="TT_1_22_lor">22.00</div>
+  <div class="grid-item" id="TT_1_22_son">22.00</div>
+
+  <div class="grid-item" id="TT_1_23_mon">23.00</div>
+  <div class="grid-item" id="TT_1_23_tis">23.00</div>
+  <div class="grid-item" id="TT_1_23_ons">23.00</div>
+  <div class="grid-item" id="TT_1_23_tor">23.00</div>
+  <div class="grid-item" id="TT_1_23_fre">23.00</div>
+  <div class="grid-item" id="TT_1_23_lor">23.00</div>
+  <div class="grid-item" id="TT_1_23_son">23.00</div>
+
+  <div class="grid-item" id="TT_1_24_mon" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_1_24_tis" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_1_24_ons" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_1_24_tor" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_1_24_fre">24.00</div>
+  <div class="grid-item" id="TT_1_24_lor">24.00</div>
+  <div class="grid-item" id="TT_1_24_son" style="background-color: #000; color: #000;">24.00</div>
   </div>
   <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 </div>
@@ -234,90 +246,102 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-  <div class="grid-item" id="TT_OLD_13_mon" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_tue" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_wed" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_thu" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_fri">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_sat">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_sun" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_14_mon" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_tue" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_wed" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_thu" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_fri">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_sat">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_sun" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_15_mon">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_tue">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_wed">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_thu">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_fri">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_sat">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_sun">15.00</div>
-  <div class="grid-item" id="TT_OLD_16_mon">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_tue">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_wed">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_thu">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_fri">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_sat">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_sun">16.00</div>
-  <div class="grid-item" id="TT_OLD_17_mon">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_tue">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_wed">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_thu">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_fri">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_sat">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_sun">17.00</div>
-  <div class="grid-item" id="TT_OLD_18_mon">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_tue">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_wed">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_thu">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_fri">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_sat">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_sun">18.00</div>
-  <div class="grid-item" id="TT_OLD_19_mon">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_tue">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_wed">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_thu">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_fri">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_sat">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_sun">19.00</div>
-  <div class="grid-item" id="TT_OLD_20_mon">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_tue">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_wed">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_thu">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_fri">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_sat">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_sun">20.00</div>
-  <div class="grid-item" id="TT_OLD_21_mon">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_tue">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_wed">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_thu">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_fri">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_sat">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_sun">21.00</div>
-  <div class="grid-item" id="TT_OLD_22_mon">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_tue">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_wed">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_thu">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_fri">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_sat">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_sun">22.00</div>
-  <div class="grid-item" id="TT_OLD_23_mon">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_tue">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_wed">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_thu">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_fri">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_sat">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_sun">23.00</div>
-  <div class="grid-item" id="TT_OLD_24_mon" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_tue" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_wed" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_thu" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_fri">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_sat">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_sun" style="background-color: #000;">24.00</div>
+
+  <div class="grid-item" id="TT_2_13_mon" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_2_13_tis" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_2_13_ons" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_2_13_tor" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_2_13_fre">13.00</div>
+  <div class="grid-item" id="TT_2_13_lor">13.00</div>
+  <div class="grid-item" id="TT_2_13_son" style="background-color: #000; color: #000;">13.00</div>
+
+  <div class="grid-item" id="TT_2_14_mon" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_2_14_tis" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_2_14_ons" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_2_14_tor" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_2_14_fre">14.00</div>
+  <div class="grid-item" id="TT_2_14_lor">14.00</div>
+  <div class="grid-item" id="TT_2_14_son" style="background-color: #000; color: #000;">14.00</div>
+
+  <div class="grid-item" id="TT_2_15_mon">15.00</div>
+  <div class="grid-item" id="TT_2_15_tis">15.00</div>
+  <div class="grid-item" id="TT_2_15_ons">15.00</div>
+  <div class="grid-item" id="TT_2_15_tor">15.00</div>
+  <div class="grid-item" id="TT_2_15_fre">15.00</div>
+  <div class="grid-item" id="TT_2_15_lor">15.00</div>
+  <div class="grid-item" id="TT_2_15_son">15.00</div>
+
+  <div class="grid-item" id="TT_2_16_mon">16.00</div>
+  <div class="grid-item" id="TT_2_16_tis">16.00</div>
+  <div class="grid-item" id="TT_2_16_ons">16.00</div>
+  <div class="grid-item" id="TT_2_16_tor">16.00</div>
+  <div class="grid-item" id="TT_2_16_fre">16.00</div>
+  <div class="grid-item" id="TT_2_16_lor">16.00</div>
+  <div class="grid-item" id="TT_2_16_son">16.00</div>
+
+  <div class="grid-item" id="TT_2_17_mon">17.00</div>
+  <div class="grid-item" id="TT_2_17_tis">17.00</div>
+  <div class="grid-item" id="TT_2_17_ons">17.00</div>
+  <div class="grid-item" id="TT_2_17_tor">17.00</div>
+  <div class="grid-item" id="TT_2_17_fre">17.00</div>
+  <div class="grid-item" id="TT_2_17_lor">17.00</div>
+  <div class="grid-item" id="TT_2_17_son">17.00</div>
+
+  <div class="grid-item" id="TT_2_18_mon">18.00</div>
+  <div class="grid-item" id="TT_2_18_tis">18.00</div>
+  <div class="grid-item" id="TT_2_18_ons">18.00</div>
+  <div class="grid-item" id="TT_2_18_tor">18.00</div>
+  <div class="grid-item" id="TT_2_18_fre">18.00</div>
+  <div class="grid-item" id="TT_2_18_lor">18.00</div>
+  <div class="grid-item" id="TT_2_18_son">18.00</div>
+
+  <div class="grid-item" id="TT_2_19_mon">19.00</div>
+  <div class="grid-item" id="TT_2_19_tis">19.00</div>
+  <div class="grid-item" id="TT_2_19_ons">19.00</div>
+  <div class="grid-item" id="TT_2_19_tor">19.00</div>
+  <div class="grid-item" id="TT_2_19_fre">19.00</div>
+  <div class="grid-item" id="TT_2_19_lor">19.00</div>
+  <div class="grid-item" id="TT_2_19_son">19.00</div>
+
+  <div class="grid-item" id="TT_2_20_mon">20.00</div>
+  <div class="grid-item" id="TT_2_20_tis">20.00</div>
+  <div class="grid-item" id="TT_2_20_ons">20.00</div>
+  <div class="grid-item" id="TT_2_20_tor">20.00</div>
+  <div class="grid-item" id="TT_2_20_fre">20.00</div>
+  <div class="grid-item" id="TT_2_20_lor">20.00</div>
+  <div class="grid-item" id="TT_2_20_son">20.00</div>
+
+  <div class="grid-item" id="TT_2_21_mon">21.00</div>
+  <div class="grid-item" id="TT_2_21_tis">21.00</div>
+  <div class="grid-item" id="TT_2_21_ons">21.00</div>
+  <div class="grid-item" id="TT_2_21_tor">21.00</div>
+  <div class="grid-item" id="TT_2_21_fre">21.00</div>
+  <div class="grid-item" id="TT_2_21_lor">21.00</div>
+  <div class="grid-item" id="TT_2_21_son">21.00</div>
+
+  <div class="grid-item" id="TT_2_22_mon">22.00</div>
+  <div class="grid-item" id="TT_2_22_tis">22.00</div>
+  <div class="grid-item" id="TT_2_22_ons">22.00</div>
+  <div class="grid-item" id="TT_2_22_tor">22.00</div>
+  <div class="grid-item" id="TT_2_22_fre">22.00</div>
+  <div class="grid-item" id="TT_2_22_lor">22.00</div>
+  <div class="grid-item" id="TT_2_22_son">22.00</div>
+
+  <div class="grid-item" id="TT_2_23_mon">23.00</div>
+  <div class="grid-item" id="TT_2_23_tis">23.00</div>
+  <div class="grid-item" id="TT_2_23_ons">23.00</div>
+  <div class="grid-item" id="TT_2_23_tor">23.00</div>
+  <div class="grid-item" id="TT_2_23_fre">23.00</div>
+  <div class="grid-item" id="TT_2_23_lor">23.00</div>
+  <div class="grid-item" id="TT_2_23_son">23.00</div>
+
+  <div class="grid-item" id="TT_2_24_mon" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_2_24_tis" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_2_24_ons" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_2_24_tor" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_2_24_fre">24.00</div>
+  <div class="grid-item" id="TT_2_24_lor">24.00</div>
+  <div class="grid-item" id="TT_2_24_son" style="background-color: #000; color: #000;">24.00</div>
 </div>
 <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 <br>
@@ -333,90 +357,102 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-  <div class="grid-item" id="TT_NEXT_13_mon" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_tue" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_wed" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_thu" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_fri">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_sat">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_sun" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_14_mon" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_tue" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_wed" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_thu" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_fri">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_sat">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_sun" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_15_mon">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_tue">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_wed">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_thu">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_fri">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_sat">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_sun">15.00</div>
-  <div class="grid-item" id="TT_NEXT_16_mon">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_tue">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_wed">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_thu">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_fri">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_sat">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_sun">16.00</div>
-  <div class="grid-item" id="TT_NEXT_17_mon">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_tue">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_wed">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_thu">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_fri">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_sat">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_sun">17.00</div>
-  <div class="grid-item" id="TT_NEXT_18_mon">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_tue">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_wed">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_thu">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_fri">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_sat">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_sun">18.00</div>
-  <div class="grid-item" id="TT_NEXT_19_mon">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_tue">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_wed">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_thu">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_fri">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_sat">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_sun">19.00</div>
-  <div class="grid-item" id="TT_NEXT_20_mon">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_tue">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_wed">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_thu">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_fri">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_sat">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_sun">20.00</div>
-  <div class="grid-item" id="TT_NEXT_21_mon">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_tue">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_wed">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_thu">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_fri">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_sat">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_sun">21.00</div>
-  <div class="grid-item" id="TT_NEXT_22_mon">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_tue">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_wed">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_thu">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_fri">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_sat">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_sun">22.00</div>
-  <div class="grid-item" id="TT_NEXT_23_mon">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_tue">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_wed">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_thu">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_fri">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_sat">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_sun">23.00</div>
-  <div class="grid-item" id="TT_NEXT_24_mon" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_tue" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_wed" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_thu" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_fri">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_sat">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_sun" style="background-color: #000;">24.00</div>
+
+  <div class="grid-item" id="TT_3_13_mon" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_3_13_tis" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_3_13_ons" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_3_13_tor" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_3_13_fre">13.00</div>
+  <div class="grid-item" id="TT_3_13_lor">13.00</div>
+  <div class="grid-item" id="TT_3_13_son" style="background-color: #000; color: #000;">13.00</div>
+
+  <div class="grid-item" id="TT_3_14_mon" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_3_14_tis" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_3_14_ons" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_3_14_tor" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_3_14_fre">14.00</div>
+  <div class="grid-item" id="TT_3_14_lor">14.00</div>
+  <div class="grid-item" id="TT_3_14_son" style="background-color: #000; color: #000;">14.00</div>
+
+  <div class="grid-item" id="TT_3_15_mon">15.00</div>
+  <div class="grid-item" id="TT_3_15_tis">15.00</div>
+  <div class="grid-item" id="TT_3_15_ons">15.00</div>
+  <div class="grid-item" id="TT_3_15_tor">15.00</div>
+  <div class="grid-item" id="TT_3_15_fre">15.00</div>
+  <div class="grid-item" id="TT_3_15_lor">15.00</div>
+  <div class="grid-item" id="TT_3_15_son">15.00</div>
+
+  <div class="grid-item" id="TT_3_16_mon">16.00</div>
+  <div class="grid-item" id="TT_3_16_tis">16.00</div>
+  <div class="grid-item" id="TT_3_16_ons">16.00</div>
+  <div class="grid-item" id="TT_3_16_tor">16.00</div>
+  <div class="grid-item" id="TT_3_16_fre">16.00</div>
+  <div class="grid-item" id="TT_3_16_lor">16.00</div>
+  <div class="grid-item" id="TT_3_16_son">16.00</div>
+
+  <div class="grid-item" id="TT_3_17_mon">17.00</div>
+  <div class="grid-item" id="TT_3_17_tis">17.00</div>
+  <div class="grid-item" id="TT_3_17_ons">17.00</div>
+  <div class="grid-item" id="TT_3_17_tor">17.00</div>
+  <div class="grid-item" id="TT_3_17_fre">17.00</div>
+  <div class="grid-item" id="TT_3_17_lor">17.00</div>
+  <div class="grid-item" id="TT_3_17_son">17.00</div>
+
+  <div class="grid-item" id="TT_3_18_mon">18.00</div>
+  <div class="grid-item" id="TT_3_18_tis">18.00</div>
+  <div class="grid-item" id="TT_3_18_ons">18.00</div>
+  <div class="grid-item" id="TT_3_18_tor">18.00</div>
+  <div class="grid-item" id="TT_3_18_fre">18.00</div>
+  <div class="grid-item" id="TT_3_18_lor">18.00</div>
+  <div class="grid-item" id="TT_3_18_son">18.00</div>
+
+  <div class="grid-item" id="TT_3_19_mon">19.00</div>
+  <div class="grid-item" id="TT_3_19_tis">19.00</div>
+  <div class="grid-item" id="TT_3_19_ons">19.00</div>
+  <div class="grid-item" id="TT_3_19_tor">19.00</div>
+  <div class="grid-item" id="TT_3_19_fre">19.00</div>
+  <div class="grid-item" id="TT_3_19_lor">19.00</div>
+  <div class="grid-item" id="TT_3_19_son">19.00</div>
+
+  <div class="grid-item" id="TT_3_20_mon">20.00</div>
+  <div class="grid-item" id="TT_3_20_tis">20.00</div>
+  <div class="grid-item" id="TT_3_20_ons">20.00</div>
+  <div class="grid-item" id="TT_3_20_tor">20.00</div>
+  <div class="grid-item" id="TT_3_20_fre">20.00</div>
+  <div class="grid-item" id="TT_3_20_lor">20.00</div>
+  <div class="grid-item" id="TT_3_20_son">20.00</div>
+
+  <div class="grid-item" id="TT_3_21_mon">21.00</div>
+  <div class="grid-item" id="TT_3_21_tis">21.00</div>
+  <div class="grid-item" id="TT_3_21_ons">21.00</div>
+  <div class="grid-item" id="TT_3_21_tor">21.00</div>
+  <div class="grid-item" id="TT_3_21_fre">21.00</div>
+  <div class="grid-item" id="TT_3_21_lor">21.00</div>
+  <div class="grid-item" id="TT_3_21_son">21.00</div>
+
+  <div class="grid-item" id="TT_3_22_mon">22.00</div>
+  <div class="grid-item" id="TT_3_22_tis">22.00</div>
+  <div class="grid-item" id="TT_3_22_ons">22.00</div>
+  <div class="grid-item" id="TT_3_22_tor">22.00</div>
+  <div class="grid-item" id="TT_3_22_fre">22.00</div>
+  <div class="grid-item" id="TT_3_22_lor">22.00</div>
+  <div class="grid-item" id="TT_3_22_son">22.00</div>
+
+  <div class="grid-item" id="TT_3_23_mon">23.00</div>
+  <div class="grid-item" id="TT_3_23_tis">23.00</div>
+  <div class="grid-item" id="TT_3_23_ons">23.00</div>
+  <div class="grid-item" id="TT_3_23_tor">23.00</div>
+  <div class="grid-item" id="TT_3_23_fre">23.00</div>
+  <div class="grid-item" id="TT_3_23_lor">23.00</div>
+  <div class="grid-item" id="TT_3_23_son">23.00</div>
+
+  <div class="grid-item" id="TT_3_24_mon" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_3_24_tis" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_3_24_ons" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_3_24_tor" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_3_24_fre">24.00</div>
+  <div class="grid-item" id="TT_3_24_lor">24.00</div>
+  <div class="grid-item" id="TT_3_24_son" style="background-color: #000; color: #000;">24.00</div>
 </div>
 <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 <br>
@@ -432,90 +468,102 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-  <div class="grid-item" id="TT_NEW_13_mon_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_tue_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_wed_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_thu_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_fri_c">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_sat_c">13.00</div>
-  <div class="grid-item" id="TT_NEW_13_sun_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEW_14_mon_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_tue_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_wed_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_thu_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_fri_c">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_sat_c">14.00</div>
-  <div class="grid-item" id="TT_NEW_14_sun_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEW_15_mon_c">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_tue_c">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_wed_c">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_thu_c">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_fri_c">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_sat_c">15.00</div>
-  <div class="grid-item" id="TT_NEW_15_sun_c">15.00</div>
-  <div class="grid-item" id="TT_NEW_16_mon_c">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_tue_c">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_wed_c">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_thu_c">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_fri_c">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_sat_c">16.00</div>
-  <div class="grid-item" id="TT_NEW_16_sun_c">16.00</div>
-  <div class="grid-item" id="TT_NEW_17_mon_c">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_tue_c">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_wed_c">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_thu_c">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_fri_c">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_sat_c">17.00</div>
-  <div class="grid-item" id="TT_NEW_17_sun_c">17.00</div>
-  <div class="grid-item" id="TT_NEW_18_mon_c">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_tue_c">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_wed_c">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_thu_c">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_fri_c">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_sat_c">18.00</div>
-  <div class="grid-item" id="TT_NEW_18_sun_c">18.00</div>
-  <div class="grid-item" id="TT_NEW_19_mon_c">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_tue_c">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_wed_c">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_thu_c">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_fri_c">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_sat_c">19.00</div>
-  <div class="grid-item" id="TT_NEW_19_sun_c">19.00</div>
-  <div class="grid-item" id="TT_NEW_20_mon_c">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_tue_c">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_wed_c">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_thu_c">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_fri_c">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_sat_c">20.00</div>
-  <div class="grid-item" id="TT_NEW_20_sun_c">20.00</div>
-  <div class="grid-item" id="TT_NEW_21_mon_c">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_tue_c">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_wed_c">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_thu_c">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_fri_c">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_sat_c">21.00</div>
-  <div class="grid-item" id="TT_NEW_21_sun_c">21.00</div>
-  <div class="grid-item" id="TT_NEW_22_mon_c">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_tue_c">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_wed_c">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_thu_c">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_fri_c">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_sat_c">22.00</div>
-  <div class="grid-item" id="TT_NEW_22_sun_c">22.00</div>
-  <div class="grid-item" id="TT_NEW_23_mon_c">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_tue_c">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_wed_c">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_thu_c">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_fri_c">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_sat_c">23.00</div>
-  <div class="grid-item" id="TT_NEW_23_sun_c">23.00</div>
-  <div class="grid-item" id="TT_NEW_24_mon_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_tue_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_wed_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_thu_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_fri_c">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_sat_c">24.00</div>
-  <div class="grid-item" id="TT_NEW_24_sun_c" style="background-color: #000;">24.00</div>
+
+  <div class="grid-item" id="TT_1_13_mon_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_1_13_tis_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_1_13_ons_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_1_13_tor_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_1_13_fre_c">13.00</div>
+  <div class="grid-item" id="TT_1_13_lor_c">13.00</div>
+  <div class="grid-item" id="TT_1_13_son_c" style="background-color: #000; color: #000;">13.00</div>
+
+  <div class="grid-item" id="TT_1_14_mon_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_1_14_tis_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_1_14_ons_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_1_14_tor_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_1_14_fre_c">14.00</div>
+  <div class="grid-item" id="TT_1_14_lor_c">14.00</div>
+  <div class="grid-item" id="TT_1_14_son_c" style="background-color: #000; color: #000;">14.00</div>
+
+  <div class="grid-item" id="TT_1_15_mon_c">15.00</div>
+  <div class="grid-item" id="TT_1_15_tis_c">15.00</div>
+  <div class="grid-item" id="TT_1_15_ons_c">15.00</div>
+  <div class="grid-item" id="TT_1_15_tor_c">15.00</div>
+  <div class="grid-item" id="TT_1_15_fre_c">15.00</div>
+  <div class="grid-item" id="TT_1_15_lor_c">15.00</div>
+  <div class="grid-item" id="TT_1_15_son_c">15.00</div>
+
+  <div class="grid-item" id="TT_1_16_mon_c">16.00</div>
+  <div class="grid-item" id="TT_1_16_tis_c">16.00</div>
+  <div class="grid-item" id="TT_1_16_ons_c">16.00</div>
+  <div class="grid-item" id="TT_1_16_tor_c">16.00</div>
+  <div class="grid-item" id="TT_1_16_fre_c">16.00</div>
+  <div class="grid-item" id="TT_1_16_lor_c">16.00</div>
+  <div class="grid-item" id="TT_1_16_son_c">16.00</div>
+
+  <div class="grid-item" id="TT_1_17_mon_c">17.00</div>
+  <div class="grid-item" id="TT_1_17_tis_c">17.00</div>
+  <div class="grid-item" id="TT_1_17_ons_c">17.00</div>
+  <div class="grid-item" id="TT_1_17_tor_c">17.00</div>
+  <div class="grid-item" id="TT_1_17_fre_c">17.00</div>
+  <div class="grid-item" id="TT_1_17_lor_c">17.00</div>
+  <div class="grid-item" id="TT_1_17_son_c">17.00</div>
+
+  <div class="grid-item" id="TT_1_18_mon_c">18.00</div>
+  <div class="grid-item" id="TT_1_18_tis_c">18.00</div>
+  <div class="grid-item" id="TT_1_18_ons_c">18.00</div>
+  <div class="grid-item" id="TT_1_18_tor_c">18.00</div>
+  <div class="grid-item" id="TT_1_18_fre_c">18.00</div>
+  <div class="grid-item" id="TT_1_18_lor_c">18.00</div>
+  <div class="grid-item" id="TT_1_18_son_c">18.00</div>
+
+  <div class="grid-item" id="TT_1_19_mon_c">19.00</div>
+  <div class="grid-item" id="TT_1_19_tis_c">19.00</div>
+  <div class="grid-item" id="TT_1_19_ons_c">19.00</div>
+  <div class="grid-item" id="TT_1_19_tor_c">19.00</div>
+  <div class="grid-item" id="TT_1_19_fre_c">19.00</div>
+  <div class="grid-item" id="TT_1_19_lor_c">19.00</div>
+  <div class="grid-item" id="TT_1_19_son_c">19.00</div>
+
+  <div class="grid-item" id="TT_1_20_mon_c">20.00</div>
+  <div class="grid-item" id="TT_1_20_tis_c">20.00</div>
+  <div class="grid-item" id="TT_1_20_ons_c">20.00</div>
+  <div class="grid-item" id="TT_1_20_tor_c">20.00</div>
+  <div class="grid-item" id="TT_1_20_fre_c">20.00</div>
+  <div class="grid-item" id="TT_1_20_lor_c">20.00</div>
+  <div class="grid-item" id="TT_1_20_son_c">20.00</div>
+
+  <div class="grid-item" id="TT_1_21_mon_c">21.00</div>
+  <div class="grid-item" id="TT_1_21_tis_c">21.00</div>
+  <div class="grid-item" id="TT_1_21_ons_c">21.00</div>
+  <div class="grid-item" id="TT_1_21_tor_c">21.00</div>
+  <div class="grid-item" id="TT_1_21_fre_c">21.00</div>
+  <div class="grid-item" id="TT_1_21_lor_c">21.00</div>
+  <div class="grid-item" id="TT_1_21_son_c">21.00</div>
+
+  <div class="grid-item" id="TT_1_22_mon_c">22.00</div>
+  <div class="grid-item" id="TT_1_22_tis_c">22.00</div>
+  <div class="grid-item" id="TT_1_22_ons_c">22.00</div>
+  <div class="grid-item" id="TT_1_22_tor_c">22.00</div>
+  <div class="grid-item" id="TT_1_22_fre_c">22.00</div>
+  <div class="grid-item" id="TT_1_22_lor_c">22.00</div>
+  <div class="grid-item" id="TT_1_22_son_c">22.00</div>
+
+  <div class="grid-item" id="TT_1_23_mon_c">23.00</div>
+  <div class="grid-item" id="TT_1_23_tis_c">23.00</div>
+  <div class="grid-item" id="TT_1_23_ons_c">23.00</div>
+  <div class="grid-item" id="TT_1_23_tor_c">23.00</div>
+  <div class="grid-item" id="TT_1_23_fre_c">23.00</div>
+  <div class="grid-item" id="TT_1_23_lor_c">23.00</div>
+  <div class="grid-item" id="TT_1_23_son_c">23.00</div>
+
+  <div class="grid-item" id="TT_1_24_mon_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_1_24_tis_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_1_24_ons_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_1_24_tor_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_1_24_fre_c">24.00</div>
+  <div class="grid-item" id="TT_1_24_lor_c">24.00</div>
+  <div class="grid-item" id="TT_1_24_son_c" style="background-color: #000; color: #000;">24.00</div>
   </div>
   <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 </div>
@@ -532,90 +580,102 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-  <div class="grid-item" id="TT_OLD_13_mon_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_tue_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_wed_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_thu_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_fri_c">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_sat_c">13.00</div>
-  <div class="grid-item" id="TT_OLD_13_sun_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_OLD_14_mon_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_tue_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_wed_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_thu_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_fri_c">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_sat_c">14.00</div>
-  <div class="grid-item" id="TT_OLD_14_sun_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_OLD_15_mon_c">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_tue_c">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_wed_c">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_thu_c">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_fri_c">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_sat_c">15.00</div>
-  <div class="grid-item" id="TT_OLD_15_sun_c">15.00</div>
-  <div class="grid-item" id="TT_OLD_16_mon_c">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_tue_c">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_wed_c">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_thu_c">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_fri_c">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_sat_c">16.00</div>
-  <div class="grid-item" id="TT_OLD_16_sun_c">16.00</div>
-  <div class="grid-item" id="TT_OLD_17_mon_c">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_tue_c">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_wed_c">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_thu_c">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_fri_c">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_sat_c">17.00</div>
-  <div class="grid-item" id="TT_OLD_17_sun_c">17.00</div>
-  <div class="grid-item" id="TT_OLD_18_mon_c">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_tue_c">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_wed_c">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_thu_c">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_fri_c">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_sat_c">18.00</div>
-  <div class="grid-item" id="TT_OLD_18_sun_c">18.00</div>
-  <div class="grid-item" id="TT_OLD_19_mon_c">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_tue_c">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_wed_c">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_thu_c">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_fri_c">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_sat_c">19.00</div>
-  <div class="grid-item" id="TT_OLD_19_sun_c">19.00</div>
-  <div class="grid-item" id="TT_OLD_20_mon_c">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_tue_c">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_wed_c">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_thu_c">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_fri_c">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_sat_c">20.00</div>
-  <div class="grid-item" id="TT_OLD_20_sun_c">20.00</div>
-  <div class="grid-item" id="TT_OLD_21_mon_c">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_tue_c">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_wed_c">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_thu_c">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_fri_c">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_sat_c">21.00</div>
-  <div class="grid-item" id="TT_OLD_21_sun_c">21.00</div>
-  <div class="grid-item" id="TT_OLD_22_mon_c">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_tue_c">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_wed_c">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_thu_c">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_fri_c">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_sat_c">22.00</div>
-  <div class="grid-item" id="TT_OLD_22_sun_c">22.00</div>
-  <div class="grid-item" id="TT_OLD_23_mon_c">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_tue_c">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_wed_c">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_thu_c">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_fri_c">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_sat_c">23.00</div>
-  <div class="grid-item" id="TT_OLD_23_sun_c">23.00</div>
-  <div class="grid-item" id="TT_OLD_24_mon_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_tue_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_wed_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_thu_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_fri_c">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_sat_c">24.00</div>
-  <div class="grid-item" id="TT_OLD_24_sun_c" style="background-color: #000;">24.00</div>
+
+  <div class="grid-item" id="TT_2_13_mon_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_2_13_tis_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_2_13_ons_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_2_13_tor_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_2_13_fre_c">13.00</div>
+  <div class="grid-item" id="TT_2_13_lor_c">13.00</div>
+  <div class="grid-item" id="TT_2_13_son_c" style="background-color: #000; color: #000;">13.00</div>
+
+  <div class="grid-item" id="TT_2_14_mon_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_2_14_tis_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_2_14_ons_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_2_14_tor_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_2_14_fre_c">14.00</div>
+  <div class="grid-item" id="TT_2_14_lor_c">14.00</div>
+  <div class="grid-item" id="TT_2_14_son_c" style="background-color: #000; color: #000;">14.00</div>
+
+  <div class="grid-item" id="TT_2_15_mon_c">15.00</div>
+  <div class="grid-item" id="TT_2_15_tis_c">15.00</div>
+  <div class="grid-item" id="TT_2_15_ons_c">15.00</div>
+  <div class="grid-item" id="TT_2_15_tor_c">15.00</div>
+  <div class="grid-item" id="TT_2_15_fre_c">15.00</div>
+  <div class="grid-item" id="TT_2_15_lor_c">15.00</div>
+  <div class="grid-item" id="TT_2_15_son_c">15.00</div>
+
+  <div class="grid-item" id="TT_2_16_mon_c">16.00</div>
+  <div class="grid-item" id="TT_2_16_tis_c">16.00</div>
+  <div class="grid-item" id="TT_2_16_ons_c">16.00</div>
+  <div class="grid-item" id="TT_2_16_tor_c">16.00</div>
+  <div class="grid-item" id="TT_2_16_fre_c">16.00</div>
+  <div class="grid-item" id="TT_2_16_lor_c">16.00</div>
+  <div class="grid-item" id="TT_2_16_son_c">16.00</div>
+
+  <div class="grid-item" id="TT_2_17_mon_c">17.00</div>
+  <div class="grid-item" id="TT_2_17_tis_c">17.00</div>
+  <div class="grid-item" id="TT_2_17_ons_c">17.00</div>
+  <div class="grid-item" id="TT_2_17_tor_c">17.00</div>
+  <div class="grid-item" id="TT_2_17_fre_c">17.00</div>
+  <div class="grid-item" id="TT_2_17_lor_c">17.00</div>
+  <div class="grid-item" id="TT_2_17_son_c">17.00</div>
+
+  <div class="grid-item" id="TT_2_18_mon_c">18.00</div>
+  <div class="grid-item" id="TT_2_18_tis_c">18.00</div>
+  <div class="grid-item" id="TT_2_18_ons_c">18.00</div>
+  <div class="grid-item" id="TT_2_18_tor_c">18.00</div>
+  <div class="grid-item" id="TT_2_18_fre_c">18.00</div>
+  <div class="grid-item" id="TT_2_18_lor_c">18.00</div>
+  <div class="grid-item" id="TT_2_18_son_c">18.00</div>
+
+  <div class="grid-item" id="TT_2_19_mon_c">19.00</div>
+  <div class="grid-item" id="TT_2_19_tis_c">19.00</div>
+  <div class="grid-item" id="TT_2_19_ons_c">19.00</div>
+  <div class="grid-item" id="TT_2_19_tor_c">19.00</div>
+  <div class="grid-item" id="TT_2_19_fre_c">19.00</div>
+  <div class="grid-item" id="TT_2_19_lor_c">19.00</div>
+  <div class="grid-item" id="TT_2_19_son_c">19.00</div>
+
+  <div class="grid-item" id="TT_2_20_mon_c">20.00</div>
+  <div class="grid-item" id="TT_2_20_tis_c">20.00</div>
+  <div class="grid-item" id="TT_2_20_ons_c">20.00</div>
+  <div class="grid-item" id="TT_2_20_tor_c">20.00</div>
+  <div class="grid-item" id="TT_2_20_fre_c">20.00</div>
+  <div class="grid-item" id="TT_2_20_lor_c">20.00</div>
+  <div class="grid-item" id="TT_2_20_son_c">20.00</div>
+
+  <div class="grid-item" id="TT_2_21_mon_c">21.00</div>
+  <div class="grid-item" id="TT_2_21_tis_c">21.00</div>
+  <div class="grid-item" id="TT_2_21_ons_c">21.00</div>
+  <div class="grid-item" id="TT_2_21_tor_c">21.00</div>
+  <div class="grid-item" id="TT_2_21_fre_c">21.00</div>
+  <div class="grid-item" id="TT_2_21_lor_c">21.00</div>
+  <div class="grid-item" id="TT_2_21_son_c">21.00</div>
+
+  <div class="grid-item" id="TT_2_22_mon_c">22.00</div>
+  <div class="grid-item" id="TT_2_22_tis_c">22.00</div>
+  <div class="grid-item" id="TT_2_22_ons_c">22.00</div>
+  <div class="grid-item" id="TT_2_22_tor_c">22.00</div>
+  <div class="grid-item" id="TT_2_22_fre_c">22.00</div>
+  <div class="grid-item" id="TT_2_22_lor_c">22.00</div>
+  <div class="grid-item" id="TT_2_22_son_c">22.00</div>
+
+  <div class="grid-item" id="TT_2_23_mon_c">23.00</div>
+  <div class="grid-item" id="TT_2_23_tis_c">23.00</div>
+  <div class="grid-item" id="TT_2_23_ons_c">23.00</div>
+  <div class="grid-item" id="TT_2_23_tor_c">23.00</div>
+  <div class="grid-item" id="TT_2_23_fre_c">23.00</div>
+  <div class="grid-item" id="TT_2_23_lor_c">23.00</div>
+  <div class="grid-item" id="TT_2_23_son_c">23.00</div>
+
+  <div class="grid-item" id="TT_2_24_mon_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_2_24_tis_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_2_24_ons_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_2_24_tor_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_2_24_fre_c">24.00</div>
+  <div class="grid-item" id="TT_2_24_lor_c">24.00</div>
+  <div class="grid-item" id="TT_2_24_son_c" style="background-color: #000; color: #000;">24.00</div>
   </div>
   <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
 </div>
@@ -632,107 +692,104 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">Fredag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
-  <div class="grid-item" id="TT_NEXT_13_mon_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_tue_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_wed_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_thu_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_fri_c">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_sat_c">13.00</div>
-  <div class="grid-item" id="TT_NEXT_13_sun_c" style="background-color: #000;">13.00</div>
-  <div class="grid-item" id="TT_NEXT_14_mon_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_tue_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_wed_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_thu_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_fri_c">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_sat_c">14.00</div>
-  <div class="grid-item" id="TT_NEXT_14_sun_c" style="background-color: #000;">14.00</div>
-  <div class="grid-item" id="TT_NEXT_15_mon_c">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_tue_c">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_wed_c">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_thu_c">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_fri_c">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_sat_c">15.00</div>
-  <div class="grid-item" id="TT_NEXT_15_sun_c">15.00</div>
-  <div class="grid-item" id="TT_NEXT_16_mon_c">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_tue_c">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_wed_c">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_thu_c">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_fri_c">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_sat_c">16.00</div>
-  <div class="grid-item" id="TT_NEXT_16_sun_c">16.00</div>
-  <div class="grid-item" id="TT_NEXT_17_mon_c">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_tue_c">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_wed_c">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_thu_c">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_fri_c">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_sat_c">17.00</div>
-  <div class="grid-item" id="TT_NEXT_17_sun_c">17.00</div>
-  <div class="grid-item" id="TT_NEXT_18_mon_c">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_tue_c">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_wed_c">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_thu_c">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_fri_c">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_sat_c">18.00</div>
-  <div class="grid-item" id="TT_NEXT_18_sun_c">18.00</div>
-  <div class="grid-item" id="TT_NEXT_19_mon_c">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_tue_c">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_wed_c">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_thu_c">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_fri_c">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_sat_c">19.00</div>
-  <div class="grid-item" id="TT_NEXT_19_sun_c">19.00</div>
-  <div class="grid-item" id="TT_NEXT_20_mon_c">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_tue_c">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_wed_c">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_thu_c">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_fri_c">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_sat_c">20.00</div>
-  <div class="grid-item" id="TT_NEXT_20_sun_c">20.00</div>
-  <div class="grid-item" id="TT_NEXT_21_mon_c">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_tue_c">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_wed_c">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_thu_c">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_fri_c">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_sat_c">21.00</div>
-  <div class="grid-item" id="TT_NEXT_21_sun_c">21.00</div>
-  <div class="grid-item" id="TT_NEXT_22_mon_c">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_tue_c">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_wed_c">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_thu_c">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_fri_c">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_sat_c">22.00</div>
-  <div class="grid-item" id="TT_NEXT_22_sun_c">22.00</div>
-  <div class="grid-item" id="TT_NEXT_23_mon_c">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_tue_c">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_wed_c">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_thu_c">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_fri_c">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_sat_c">23.00</div>
-  <div class="grid-item" id="TT_NEXT_23_sun_c">23.00</div>
-  <div class="grid-item" id="TT_NEXT_24_mon_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_tue_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_wed_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_thu_c" style="background-color: #000;">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_fri_c">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_sat_c">24.00</div>
-  <div class="grid-item" id="TT_NEXT_24_sun_c" style="background-color: #000;">24.00</div>
+
+  <div class="grid-item" id="TT_3_13_mon_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_3_13_tis_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_3_13_ons_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_3_13_tor_c" style="background-color: #000; color: #000;">13.00</div>
+  <div class="grid-item" id="TT_3_13_fre_c">13.00</div>
+  <div class="grid-item" id="TT_3_13_lor_c">13.00</div>
+  <div class="grid-item" id="TT_3_13_son_c" style="background-color: #000; color: #000;">13.00</div>
+
+  <div class="grid-item" id="TT_3_14_mon_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_3_14_tis_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_3_14_ons_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_3_14_tor_c" style="background-color: #000; color: #000;">14.00</div>
+  <div class="grid-item" id="TT_3_14_fre_c">14.00</div>
+  <div class="grid-item" id="TT_3_14_lor_c">14.00</div>
+  <div class="grid-item" id="TT_3_14_son_c" style="background-color: #000; color: #000;">14.00</div>
+
+  <div class="grid-item" id="TT_3_15_mon_c">15.00</div>
+  <div class="grid-item" id="TT_3_15_tis_c">15.00</div>
+  <div class="grid-item" id="TT_3_15_ons_c">15.00</div>
+  <div class="grid-item" id="TT_3_15_tor_c">15.00</div>
+  <div class="grid-item" id="TT_3_15_fre_c">15.00</div>
+  <div class="grid-item" id="TT_3_15_lor_c">15.00</div>
+  <div class="grid-item" id="TT_3_15_son_c">15.00</div>
+
+  <div class="grid-item" id="TT_3_16_mon_c">16.00</div>
+  <div class="grid-item" id="TT_3_16_tis_c">16.00</div>
+  <div class="grid-item" id="TT_3_16_ons_c">16.00</div>
+  <div class="grid-item" id="TT_3_16_tor_c">16.00</div>
+  <div class="grid-item" id="TT_3_16_fre_c">16.00</div>
+  <div class="grid-item" id="TT_3_16_lor_c">16.00</div>
+  <div class="grid-item" id="TT_3_16_son_c">16.00</div>
+
+  <div class="grid-item" id="TT_3_17_mon_c">17.00</div>
+  <div class="grid-item" id="TT_3_17_tis_c">17.00</div>
+  <div class="grid-item" id="TT_3_17_ons_c">17.00</div>
+  <div class="grid-item" id="TT_3_17_tor_c">17.00</div>
+  <div class="grid-item" id="TT_3_17_fre_c">17.00</div>
+  <div class="grid-item" id="TT_3_17_lor_c">17.00</div>
+  <div class="grid-item" id="TT_3_17_son_c">17.00</div>
+
+  <div class="grid-item" id="TT_3_18_mon_c">18.00</div>
+  <div class="grid-item" id="TT_3_18_tis_c">18.00</div>
+  <div class="grid-item" id="TT_3_18_ons_c">18.00</div>
+  <div class="grid-item" id="TT_3_18_tor_c">18.00</div>
+  <div class="grid-item" id="TT_3_18_fre_c">18.00</div>
+  <div class="grid-item" id="TT_3_18_lor_c">18.00</div>
+  <div class="grid-item" id="TT_3_18_son_c">18.00</div>
+
+  <div class="grid-item" id="TT_3_19_mon_c">19.00</div>
+  <div class="grid-item" id="TT_3_19_tis_c">19.00</div>
+  <div class="grid-item" id="TT_3_19_ons_c">19.00</div>
+  <div class="grid-item" id="TT_3_19_tor_c">19.00</div>
+  <div class="grid-item" id="TT_3_19_fre_c">19.00</div>
+  <div class="grid-item" id="TT_3_19_lor_c">19.00</div>
+  <div class="grid-item" id="TT_3_19_son_c">19.00</div>
+
+  <div class="grid-item" id="TT_3_20_mon_c">20.00</div>
+  <div class="grid-item" id="TT_3_20_tis_c">20.00</div>
+  <div class="grid-item" id="TT_3_20_ons_c">20.00</div>
+  <div class="grid-item" id="TT_3_20_tor_c">20.00</div>
+  <div class="grid-item" id="TT_3_20_fre_c">20.00</div>
+  <div class="grid-item" id="TT_3_20_lor_c">20.00</div>
+  <div class="grid-item" id="TT_3_20_son_c">20.00</div>
+
+  <div class="grid-item" id="TT_3_21_mon_c">21.00</div>
+  <div class="grid-item" id="TT_3_21_tis_c">21.00</div>
+  <div class="grid-item" id="TT_3_21_ons_c">21.00</div>
+  <div class="grid-item" id="TT_3_21_tor_c">21.00</div>
+  <div class="grid-item" id="TT_3_21_fre_c">21.00</div>
+  <div class="grid-item" id="TT_3_21_lor_c">21.00</div>
+  <div class="grid-item" id="TT_3_21_son_c">21.00</div>
+  
+  <div class="grid-item" id="TT_3_22_mon_c">22.00</div>
+  <div class="grid-item" id="TT_3_22_tis_c">22.00</div>
+  <div class="grid-item" id="TT_3_22_ons_c">22.00</div>
+  <div class="grid-item" id="TT_3_22_tor_c">22.00</div>
+  <div class="grid-item" id="TT_3_22_fre_c">22.00</div>
+  <div class="grid-item" id="TT_3_22_lor_c">22.00</div>
+  <div class="grid-item" id="TT_3_22_son_c">22.00</div>
+
+  <div class="grid-item" id="TT_3_23_mon_c">23.00</div>
+  <div class="grid-item" id="TT_3_23_tis_c">23.00</div>
+  <div class="grid-item" id="TT_3_23_ons_c">23.00</div>
+  <div class="grid-item" id="TT_3_23_tor_c">23.00</div>
+  <div class="grid-item" id="TT_3_23_fre_c">23.00</div>
+  <div class="grid-item" id="TT_3_23_lor_c">23.00</div>
+  <div class="grid-item" id="TT_3_23_son_c">23.00</div>
+
+  <div class="grid-item" id="TT_3_24_mon_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_3_24_tis_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_3_24_ons_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_3_24_tor_c" style="background-color: #000; color: #000;">24.00</div>
+  <div class="grid-item" id="TT_3_24_fre_c">24.00</div>
+  <div class="grid-item" id="TT_3_24_lor_c">24.00</div>
+  <div class="grid-item" id="TT_3_24_son_c" style="background-color: #000; color: #000;">24.00</div>
   </div>
   <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
-</div>
-<!--DISPLAY DATABASE DATA-->
-<div style="display: none">
-  <h3 style="color: #000000;">Akiva Bookningar</h3>
-  <table class="db_tbl" id="bookingTable">
-    <thead>
-      <tr>
-        <th>Day</th>
-        <th>Tid</th>
-        <th>Table</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
 </div>
 </body>
 </html>

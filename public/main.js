@@ -158,180 +158,24 @@ var tableBody = document.querySelector("#bookingTable tbody");
 // Attach a listener to the "messages" node to get real-time updates
 database.ref("booking").on("child_added", function (snapshot) {
   var book = snapshot.val();
-  
-  // Create a new table row
-  var newRow = document.createElement("tr");
 
-  // Create table cells
-  //var nameCell = document.createElement("td");
-  //var phoneCell = document.createElement("td");
-  var dayCell = document.createElement("td");
-  var timeCell = document.createElement("td");
-  var tableCell = document.createElement("td");
-  var phoneCell = document.createElement("td");
-
-  // Set the content of the cells with the data from Firebase
-  dayCell.textContent = book.day;
-  timeCell.textContent = book.time;
-  tableCell.textContent = book.table;
-  phoneCell.textContent = book.phone;
-
-  // Append the cells to the row
-  newRow.appendChild(dayCell);
-  newRow.appendChild(timeCell);
-  newRow.appendChild(tableCell);
-  // Append the row to the table body
-  tableBody.appendChild(newRow);
-  Start();
-});
-
-
-function Start(){
-
-  //console.log("Start")
-  const arrayColumn0 = GetArrays(0);
-  const arrayColumn1 = GetArrays(1);
-  const arrayColumn2 = GetArrays(2);
-
-  for (i = 0; i < arrayColumn2.length; i++){
-    if(arrayColumn2[i] == "Bord_1"){
-      if(arrayColumn0[i] == "son"){//SUNDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sun";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "mon"){//MONDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_mon";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "tis"){//TUESDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_tue";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_wed";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "tor"){//THURSDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_thu";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "fre"){//FRIDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_fri";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "lor"){//SATURDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sat";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }
-    }else if(arrayColumn2[i] == "Bord_2"){
-      if(arrayColumn0[i] == "son"){//SUNDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_sun";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "mon"){//MONDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_mon";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "tis"){//TUESDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_tue";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_wed";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "tor"){//THURSDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_thu";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "fre"){//FRIDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_fri";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "lor"){//SATURDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_sat";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }
-    }else if(arrayColumn2[i] == "Bord_3"){
-      if(arrayColumn0[i] == "son"){//SUNDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_sun";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "mon"){//MONDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_mon";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "tis"){//TUESDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_tue";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_wed";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "tor"){//THURSDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_thu";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "fre"){//FRIDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_fri";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }else if(arrayColumn0[i] == "lor"){//SATURDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_sat";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-      }
-    }else if(arrayColumn2[i] == "Bord_1_c"){
-      if(arrayColumn0[i] == "son"){//SUNDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_sun_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "mon"){//MONDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_mon_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "tis"){//TUESDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_tue_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_wed_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "tor"){//THURSDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_thu_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "fre"){//FRIDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_fri_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "lor"){//SATURDAY
-        var ID_BUILD = "TT_OLD_" + arrayColumn1[i] + "_sat_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }
-    }else if(arrayColumn2[i] == "Bord_2_c"){
-      if(arrayColumn0[i] == "son"){//SUNDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sun_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "mon"){//MONDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_mon_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "tis"){//TUESDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_tue_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_wed_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "tor"){//THURSDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_thu_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "fre"){//FRIDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_fri_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "lor"){//SATURDAY
-        var ID_BUILD = "TT_NEW_" + arrayColumn1[i] + "_sat_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }
-    }else if(arrayColumn2[i] == "Bord_3_c"){
-      if(arrayColumn0[i] == "son"){//SUNDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_sun_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "mon"){//MONDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_mon_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "tis"){//TUESDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_tue_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "ons"){//WEDNESDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_wed_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "tor"){//THURSDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_thu_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "fre"){//FRIDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_fri_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }else if(arrayColumn0[i] == "lor"){//SATURDAY
-        var ID_BUILD = "TT_NEXT_" + arrayColumn1[i] + "_sat_c";
-        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-      }
-    }
+  if(book.table == 'Bord_1'){
+    var ID_BUILD = "TT_1_" + book.time + "_" + book.day;
+    document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+  }else if(book.table == 'Bord_2'){
+    var ID_BUILD = "TT_2_" + book.time + "_" + book.day;
+    document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+  }else if(book.table == 'Bord_3'){
+    var ID_BUILD = "TT_3_" + book.time + "_" + book.day;
+    document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+  }else if(book.table == 'Bord_1_c'){
+    var ID_BUILD = "TT_2_" + book.time + "_" + book.day + "_c";
+    document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
+  }else if(book.table == 'Bord_2_c'){
+    var ID_BUILD = "TT_2_" + book.time + "_" + book.day + "_c";
+    document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
+  }else if(book.table == 'Bord_3_c'){
+    var ID_BUILD = "TT_2_" + book.time + "_" + book.day + "_c";
+    document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
   }
-}
+});

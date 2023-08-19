@@ -54,3 +54,8 @@ body{
     height: min-content;
     background-color: #ffffff;
 }
+
+
+.removeMember:hover{
+    cursor: pointer;
+}
