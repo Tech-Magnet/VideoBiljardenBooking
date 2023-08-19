@@ -171,6 +171,7 @@
           <th>TelNr</th>
           <th>Senaste Betalning</th>
           <th>N&aumlsta Betalning</th>
+          <th>Ta Bort</th>
         </thead>
         <tbody class="pay_tb_1">
         </tbody>
@@ -190,6 +191,26 @@
         <label for="last" class="login-label" id="lastLabel">Betald</label>
         <input type="date" class="login-fields" id="txtLast">
         </div>
+        
+
+        <div style="display: flex;">
+          <label for="next" class="login-label" id="nextLabel">L&aumlngd</label>
+          <select class="login-fields" id="txtNext">
+            <!--Week One (Current)-->
+            <option value="1">1 M&aringnad</option>
+            <option value="2">2 M&aringnader</option>
+            <option value="3">3 M&aringnader</option>
+            <option value="4">4 M&aringnader</option>
+            <option value="5">5 M&aringnader</option>
+            <option value="6">6 M&aringnader</option>
+            <option value="7">7 M&aringnader</option>
+            <option value="8">8 M&aringnader</option>
+            <option value="9">9 M&aringnader</option>
+            <option value="10">10 M&aringnader</option>
+            <option value="11">11 M&aringnader</option>
+            <option value="12">12 M&aringnader</option>
+          </select>
+          </div>
 
         <button id="btnCreate" class="login-fields2" onclick="AddData();">Registera Medlemskap</button>
         <script>
