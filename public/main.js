@@ -144,13 +144,13 @@ database.ref("booking").on("child_added", function (snapshot) {
     var ID_BUILD = "TT_3_" + book.time + "_" + book.day;
     document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
   }else if(book.table == 'Bord_1_c'){
-    var ID_BUILD = "TT_2_" + book.time + "_" + book.day + "_c";
+    var ID_BUILD = "TT_1_" + book.time + "_" + book.day + "_c";
     document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
   }else if(book.table == 'Bord_2_c'){
     var ID_BUILD = "TT_2_" + book.time + "_" + book.day + "_c";
     document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
   }else if(book.table == 'Bord_3_c'){
-    var ID_BUILD = "TT_2_" + book.time + "_" + book.day + "_c";
+    var ID_BUILD = "TT_3_" + book.time + "_" + book.day + "_c";
     document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
   }
 
