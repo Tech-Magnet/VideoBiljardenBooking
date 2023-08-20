@@ -103,7 +103,6 @@
           // Execute the query to fetch the data
           query.once("value")
             .then(function(snapshot) {
-              console.log("START QUERY");
               snapshot.forEach(function(childSnapshot) {
                 var node = childSnapshot.val();
 
@@ -132,7 +131,6 @@
 
             query.once("value")
             .then(function(snapshot) {
-              console.log("SECOND QUERY");
               snapshot.forEach(function(childSnapshot) {
                 var node = childSnapshot.val();
 

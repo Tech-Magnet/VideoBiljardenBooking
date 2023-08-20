@@ -1,63 +1,21 @@
-// Function to import specified columns from the table into separate arrays
-function importColumnsToArrays(tableId, columnIndices) {
-  const table = document.getElementById(tableId);
-  const rows = table.getElementsByTagName('tr');
-  const columnArrays = [];
-  // Initialize separate arrays for each specified column
-  for (let i = 0; i < columnIndices.length; i++) {
-    columnArrays.push([]);
-  }
-  // Iterate through the rows and extract values for each specified column
-  for (let i = 0; i < rows.length; i++) {
-    const row = rows[i];
-    const cells = row.getElementsByTagName('td');
-    for (let j = 0; j < columnIndices.length; j++) {
-      const columnIndex = columnIndices[j];
-      if (cells.length > columnIndex) {
-        columnArrays[j].push(cells[columnIndex].innerText);
-      }
-    }
-  }
-  return columnArrays;
-}
-
-function GetArrays(index){
-  // Usage example: Importing columns 0, 1, and 2 into separate arrays
-  const tableId = 'bookingTable';
-  const columnIndices = [0, 1, 2];
-  const [arrayColumn0, arrayColumn1, arrayColumn2] = importColumnsToArrays(tableId, columnIndices);
-
-  if(index == 0){
-    return arrayColumn0;
-  }else if (index == 1){
-    return arrayColumn1
-  }else if (index == 2){
-    return arrayColumn2;
-  }
-}
-
-
 function checkIfExixt(day, time, table){
-  const arrayColumn0 = GetArrays(0);
-  const arrayColumn1 = GetArrays(1);
-  const arrayColumn2 = GetArrays(2);
 
   let found = false;
+  var CheckTime = time;
 
-  for(i = 0; i < arrayColumn0.length; i++){
-    if (arrayColumn0[i] == day && arrayColumn1[i] == time && arrayColumn2[i] == table){
-      console.log("SAME DATA AS ON FILE");
-      found = true;
-      return true;
+    for(i = 0; i < DayArr.length; i++){
+
+      if (DayArr[i] == day && TimeArr[i] == CheckTime && TableArr[i] == table){
+        console.log("SAME DATA AS ON FILE");
+        found = true;
+        return true;
+      }
     }
-  }
+
   if (!found){//If not find matching data in the database return false to symbolice that this time is avalibe
     return false;
   }
 }
-
-
-
 
 
 
@@ -74,11 +32,12 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   var name = document.getElementById("txtName").value;
   var phone = document.getElementById("txtPhone").value;
   var day = document.getElementById("txtDay").value;
-  var time = document.getElementById("txtTime").value;
-  var length = document.getElementById("txtLength").value;
+  var time = parseInt(document.getElementById("txtTime").value);
+  var length = parseInt(document.getElementById("txtLength").value);
   var table = document.getElementById("txtTable").value;
   var week = document.getElementById('txtWeek').value;
-  var endtime = parseInt(time) + parseInt(length);
+  var endtime = time + length;
+
 
   var extraTime;
   if (day == "mon" || day == "tis" || day == "ons" || day == "tor" || day == "son"){
@@ -93,21 +52,34 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
 
   if (extraTime == false){
     if (time == "13" || time == "14" || endtime >= 25){
-      alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
+      alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig");
+      console.log("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
       return;
     }
   }else if (extraTime == true){
     if(endtime >= 26){
-      alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x02");
+      alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig");
+      console.log("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x02");
       return;
     }
   }
 
+  if(phone.length != 10){
+    alert("Ogiltight Telefon Nummer");
+    return;
+  }
+var time_t = time;
+  for(let i = 0; i < length; i++){
+    if(checkIfExixt(day, time_t, table) == true){
+      alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig");
+      console.log("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x03");
+      return;
+    }else{
+      time_t++;
+    }
+  }
 
-  if(checkIfExixt(day, time, table) == true){
-   alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x03");
-   return;
-  }else if(checkIfExixt(day, time, table) == false){
+  
     database.ref("admin").push().set({
       name: name,
       phone: phone,
@@ -128,7 +100,7 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
         table: table
       });
 
-      time = time - 1 + 2;
+      time++;
     }
     console.log("DATA INSERTED");
     document.getElementById('Status_p').innerText = 'Bokning tillagd';
@@ -136,7 +108,6 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     // Clear the input field after submitting
       document.getElementById("txtName").value = "";
       document.getElementById("txtPhone").value = "";
-  }
 });
 
 
@@ -154,6 +125,10 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
 var database = firebase.database();
 // Get a reference to the table body
 var tableBody = document.querySelector("#bookingTable tbody");
+
+const TimeArr =  [];
+const DayArr = [];
+const TableArr = [];
 
 // Attach a listener to the "messages" node to get real-time updates
 database.ref("booking").on("child_added", function (snapshot) {
@@ -178,4 +153,8 @@ database.ref("booking").on("child_added", function (snapshot) {
     var ID_BUILD = "TT_2_" + book.time + "_" + book.day + "_c";
     document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
   }
+
+  TimeArr.push(book.time);
+  DayArr.push(book.day);
+  TableArr.push(book.table);
 });
