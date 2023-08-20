@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "videobiljardenorebrosite",
+    "private_key_id": "d6b7df3ec8bccf3f8d6d91b54652df35e3b0e3ec",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDo0Q9hZo3PjU+r\nvO8/gc+/uPFNo98Slgh4wo/xRWr8Qi/W0hoHbJCFFrrIPSu+t7t4n96zetCVPOEQ\nxino7w0PCF2kPaKe+nH0JwEoxCEAaHzr0ILw5+Mxfu+Sc5S6QL73XgyhnVN1TvkZ\nTORMrSLZrpKmFIB07y+afaZ/LtkZsJKT5r3IYeO89BqMN1g0X5bgGsz2UMYu3R6O\nh0R4WLphUHfLF+0Nwgh06rvnszBCEnJX1TuEsJ0Nij7IHQj/W0UNNMGraWhqjWIv\n8oavt3SB5feuSaChfTzOXHqaZ0FUoMKIo1/tGNslcSSH/PnGEJYUiL9Tsfx/j5Un\n0U3IiGrlAgMBAAECggEAA7k66z5g0esl1TkqLxRW68SRS2zDB8Dm4B47KiCHmQLq\npp9pSNQc2Ea9nwU8xV9FPCUmbS1vgkDdLU+rYkKB2CCJ9Yis01PDGHoP49nbLe6o\njNGivn1JnhmJywhWiRy5poArveFOcT0IRot7HUTUSVyoPh1sKTKddXWWq528CClJ\n0Oi/9Qp8Jekc+C108z6sOpjfQc64NZCRXYWJdtbqM7S8HiU8AZx4jjXILP257IbZ\n27gw9Zls2cVnzAx/oOG5ltOeyVivVXMk5/i2dHSi9L7Qe+lpZ/UtOefjWO6bJc/x\ntqyDso/WVR62/sWlc5MnyCPPq92jrAQQ4gJy1Pm6YQKBgQD9oxjHaKsC6e3+8IBr\nIkDw7Ns93Rtn1Z7y/wFY+qSFhC+kSEB+tg7EYNMlnETe58eiSWB1nMq0CGy8CT35\nXOK0i6gxcqZbhq38aI/iNwa1PDUPcIfKJt+eV1Ic3coEEqTe/aJJo+B3vfl1X1Fn\nAX1Rk/xZpKJ2A6LpzExc9QigUQKBgQDq/E7pMg5ubN6SJ47CPVHICV4fw7Ddz6Ev\nKV/8QFlMxPbcVTScVlzOb0XGi8U0gwMywFRJZYuDsg2eZWilDg1PsINq5wgAxH5j\nwYkL0tT01FcYLam+X0gh2APVAjEvpCT0cqWm771w+D9HPVrhUTA5ZhEaqQBAWbbM\novVzOdwwVQKBgGjCvdBXVhMdBjU/pvsZKdOZMTELK2+m10EsvKTA2cVgBMGJKkJr\n9gt8ppmpQvUCrP1F63aIrVzRAgBknNlrWSQTbwQFg9rX9PMFSTC5Y6bl2FCpPRzt\nE332OS89GFy4Sqrj/e0GqActS2UEWr396oIQarGoA4ZVGCwTOxNGDisRAoGAG5G4\njGGEEe6R+mHLvPxGwQpgUae683sttQPMsCK4l2owcE9K2eDECLBDZnT1kSCh2m14\nNhhE0xGryV6qdVr9stDJylwKs1RaY8fMFWgJ9iOHiF2rIZu6McZPRMl6DdXbRBbD\nWp+cAUoO2oPXSsIkv0c7UH5teh9MdBvWYktyivUCgYEAsFk74X0C3IV14J80J5JA\ntD65x4E0e9NRIYwhcboasg1wC+NyDVZe9uQz2oGzu9k84sHxxFw5TR2wCR/SLQk0\nfBq8/TCqtC5W6G/6Y+ySlMUbZXamhCsTg+brO0G+ZGk0htptDYRCO887yxMtvpFK\nMZWoKmg4K4GZwYY2hULBpuU=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-1ggs6@videobiljardenorebrosite.iam.gserviceaccount.com",
+    "client_id": "117698584754356635312",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-1ggs6%40videobiljardenorebrosite.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }

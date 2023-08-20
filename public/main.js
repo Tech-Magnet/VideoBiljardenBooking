@@ -64,7 +64,14 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     }
   }
 
+  if(name.length < 2){
+    document.getElementById('txtName').style.borderColor = '#ff0000';
+    alert("Ogiltigt Namn");
+    return;
+  }
+
   if(phone.length != 10){
+    document.getElementById('txtPhone').style.borderColor = '#ff0000';
     alert("Ogiltight Telefon Nummer");
     return;
   }
