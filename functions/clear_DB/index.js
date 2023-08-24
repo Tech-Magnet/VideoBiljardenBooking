@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAcc.json');
+const serviceAccount = require('E:\\authFiles\\videobiljardenorebrosite-firebase-adminsdk-ai3e6-789074e772.json');
 
 // Initialize Firebase Admin SDK with your credentials
 admin.initializeApp({
