@@ -10,14 +10,25 @@ admin.initializeApp({
 // Your database update logic here
 const database = admin.database();
 
-var bookingVar = false;
-var adminVar = false;
-var utyk = 0
-var Del = false;
-//var Del = false;
+(async () => {
+  try {
+    await deleteOld("booking");
+    await deleteOld("admin");
+    console.log("Old Data Deleted");
 
-deleteOld("booking");
-deleteOld("admin");
+    await updateNew("booking");
+    await updateNew("admin");
+    console.log("New Data Updated");
+
+    // All database operations are completed here
+    // You can proceed with any other actions
+    console.log("All Operations done, Exiting Program");
+    //admin.app().delete();
+  } catch (error) {
+    console.error("Error:", error);
+    admin.app().delete();
+  }
+})();
 
 //if(Del == true){
 //    updateNew("booking");
@@ -63,10 +74,7 @@ function deleteOld(node) {
 
 
 
-
-
-
-function updateNew(node) {
+async function updateNew(node) {
     var NodeRef = database.ref(node);
     var valuesToSearch = ["Bord_1_c", "Bord_2_c", "Bord_3_c"];
 
@@ -116,16 +124,6 @@ function updateNew(node) {
                     });
             });
 
-            if (node == "booking") {
-                bookingVar = true;
-            } else if (node == "admin") {
-                adminVar = true;
-            }
-
-            // Exit
-            if (bookingVar == true && adminVar == true) {
-                admin.app().delete();
-            }
         })
         .catch(function (error) {
             console.error("Error querying data:", error);
