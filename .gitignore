@@ -64,3 +64,6 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+#Servive Acc Cred
+functions/clear_DB/videobiljardenorebrosite-firebase-adminsdk-dhw68-75d79ec6b6.json
