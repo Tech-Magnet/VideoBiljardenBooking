@@ -15,7 +15,28 @@ admin.initializeApp({
   // Example:
   const database = admin.database();
 
-        // Call deleteOld for 'booking' and 'admin'
+
+(async () => {
+  try {
+    await deleteOld("booking");
+    await deleteOld("admin");
+    console.log("Old Data Deleted");
+
+    await updateNew("booking");
+    await updateNew("admin");
+    console.log("New Data Updated");
+
+    // All database operations are completed here
+    // You can proceed with any other actions
+    console.log("All Operations done, Exiting Program");
+    //admin.app().delete();
+  } catch (error) {
+    console.error("Error:", error);
+    admin.app().delete();
+  }
+})();
+
+// Call deleteOld for 'booking' and 'admin'
 deleteOld('booking')
   .then(() => {
     // Once deleteOld is done, call updateNew for 'booking'
@@ -37,6 +58,7 @@ deleteOld('booking')
     console.error('Error:', error);
   });
 
+
 async function deleteOld(node) {
   const NodeRef = database.ref(node);
   const valuesToDelete = ["Bord_1", "Bord_2", "Bord_3"];
@@ -56,6 +78,7 @@ async function deleteOld(node) {
   });
 
   await Promise.all(promises);
+
   return Promise.resolve();
 }
 
@@ -115,5 +138,4 @@ async function updateNew(node) {
         .catch(function (error) {
             console.error("Error querying data:", error);
         });
-        return Promise.resolve();
-        }
+}
