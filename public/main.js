@@ -32,11 +32,15 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   var name = document.getElementById("txtName").value;
   var phone = document.getElementById("txtPhone").value;
   var day = document.getElementById("txtDay").value;
-  var time = parseInt(document.getElementById("txtTime").value);
-  var length = parseInt(document.getElementById("txtLength").value);
+  var time = parseFloat(document.getElementById("txtTime").value);
+  var length = parseFloat(document.getElementById("txtLength").value);
   var table = document.getElementById("txtTable").value;
   var week = document.getElementById('txtWeek').value;
-  var endtime = time + length;
+  var end_c = length / 2 
+  var endtime = time + end_c;
+  var length2 = length / 2;
+  var endtime2 = endtime + length;
+  
 
 
   var extraTime;
@@ -51,7 +55,7 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   }
 
   if (extraTime == false){
-    if (time == "13" || time == "14" || endtime >= 25){
+    if (time == "13.0" || time == "13.5" || time == "14.0" || time == "14.5" || endtime >= 25){
       alert("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig");
       console.log("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
       return;
@@ -82,7 +86,7 @@ var time_t = time;
       console.log("Tyverr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x03");
       return;
     }else{
-      time_t++;
+      time_t = time_t + 0.5;
     }
   }
 
@@ -93,8 +97,8 @@ var time_t = time;
       day: day,
       time: time,
       table: table,
-      length: length,
-      endtime: endtime
+      length: length2,
+      endtime: endtime2
     });
 
     for(var i = 0; i < length; i++){
@@ -107,7 +111,8 @@ var time_t = time;
         table: table
       });
 
-      time++;
+      time = time + 0.5;
+      console.log(time);
     }
     console.log("DATA INSERTED");
     document.getElementById('Status_p').innerText = 'Bokning tillagd';
