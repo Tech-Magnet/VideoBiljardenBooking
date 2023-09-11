@@ -1,36 +1,21 @@
-const admin = require('firebase-admin');
-const serviceAccount = require('./videobiljardenorebrosite-firebase-adminsdk-dhw68-75d79ec6b6.json');
+const admin = require("firebase-admin");
+//const schedule = require("node-schedule");
 
-// Initialize Firebase Admin SDK with your credentials
+// Initialize Firebase Admin SDK with credentials
+const serviceAccount = require("./videobiljardenorebrosite-firebase-adminsdk-dhw68-75d79ec6b6.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app/'
+  databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app"
 });
 
-// Your database update logic here
-const database = admin.database();
+// Define a scheduled job to run every Sunday at midnight
+//const scheduledJob = schedule.scheduleJob("0 0 * * 0", () => {
+  // Perform data cleanup and transition here
+  // Query, delete, and update data in your Firebase Realtime Database
+  // Example:
+  const database = admin.database();
 
-/*(async () => {
-  try {
-    await deleteOld("booking");
-    await deleteOld("admin");
-    console.log("Old Data Deleted");
-
-    await updateNew("booking");
-    await updateNew("admin");
-    console.log("New Data Updated");
-
-    // All database operations are completed here
-    // You can proceed with any other actions
-    console.log("All Operations done, Exiting Program");
-    //admin.app().delete();
-  } catch (error) {
-    console.error("Error:", error);
-    admin.app().delete();
-  }
-})();*/
-
-// Call deleteOld for 'booking' and 'admin'
+        // Call deleteOld for 'booking' and 'admin'
 deleteOld('booking')
   .then(() => {
     // Once deleteOld is done, call updateNew for 'booking'
@@ -101,7 +86,7 @@ async function updateNew(node) {
     Promise.all(promises)
         .then(function (results) {
             const TableArr_m = [];
-            
+
             results.forEach(function (snapshotData) {
                 for (const key in snapshotData) {
                     if (snapshotData.hasOwnProperty(key)) {
@@ -131,4 +116,4 @@ async function updateNew(node) {
             console.error("Error querying data:", error);
         });
         return Promise.resolve();
-}
+        }
