@@ -39,7 +39,6 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
   var end_c = length / 2 
   var endtime = time + end_c;
   var length2 = length / 2;
-  var endtime2 = endtime + length;
   
 
 
@@ -98,7 +97,7 @@ var time_t = time;
       time: time,
       table: table,
       length: length2,
-      endtime: endtime2
+      endtime: endtime
     });
 
     for(var i = 0; i < length; i++){
