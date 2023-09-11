@@ -10,6 +10,7 @@ admin.initializeApp({
 // Your database update logic here
 const database = admin.database();
 
+
 (async () => {
   try {
     await deleteOld("booking");
@@ -28,7 +29,30 @@ const database = admin.database();
     console.error("Error:", error);
     admin.app().delete();
   }
-})();
+})();*/
+
+// Call deleteOld for 'booking' and 'admin'
+deleteOld('booking')
+  .then(() => {
+    // Once deleteOld is done, call updateNew for 'booking'
+    return updateNew('booking');
+  })
+  .then(() => {
+    // After updateNew for 'booking', call deleteOld for 'admin'
+    return deleteOld('admin');
+  })
+  .then(() => {
+    // Finally, call updateNew for 'admin'
+    return updateNew('admin');
+  })
+  .then(() => {
+    // All operations are complete, you can now perform any final tasks
+    admin.app().delete();
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+
 
 async function deleteOld(node) {
   const NodeRef = database.ref(node);
@@ -49,6 +73,8 @@ async function deleteOld(node) {
   });
 
   await Promise.all(promises);
+
+  return Promise.resolve();
 }
 
 
@@ -107,4 +133,4 @@ async function updateNew(node) {
         .catch(function (error) {
             console.error("Error querying data:", error);
         });
-}*/
+}
