@@ -1,5 +1,11 @@
 const admin = require("firebase-admin");
-//const schedule = require("node-schedule");
+const functions = require('firebase-functions');
+
+exports.scheduledFunctionCrontab = functions.pubsub.schedule('0 0 * * 0')
+  .timeZone('Europe/Stockholm') // Set the timezone to Europe/Stockholm (Sweden)
+  .onRun((context) => {
+    console.log('This will be run every Sunday at midnight in Sweden!');
+
 
 // Initialize Firebase Admin SDK with credentials
 const serviceAccount = require("./videobiljardenorebrosite-firebase-adminsdk-dhw68-75d79ec6b6.json");
@@ -8,11 +14,7 @@ admin.initializeApp({
   databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app"
 });
 
-// Define a scheduled job to run every Sunday at midnight
-//const scheduledJob = schedule.scheduleJob("0 0 * * 0", () => {
-  // Perform data cleanup and transition here
-  // Query, delete, and update data in your Firebase Realtime Database
-  // Example:
+
   const database = admin.database();
 
 
@@ -139,3 +141,8 @@ async function updateNew(node) {
             console.error("Error querying data:", error);
         });
 }
+
+
+
+    return null;
+  });
