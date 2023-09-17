@@ -25,16 +25,6 @@
   },
   "functions": [
     {
-      "source": "rt_test",
-      "codebase": "rt_test",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log"
-      ]
-    },
-    {
       "source": "cleardb",
       "codebase": "cleardb",
       "ignore": [
