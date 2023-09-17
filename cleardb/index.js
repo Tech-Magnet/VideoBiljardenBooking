@@ -1,40 +1,41 @@
-const {onSchedule} = require("firebase-functions/v2/scheduler");
+const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
 admin.initializeApp();
 
-exports.cleardb = onSchedule("0 0 * * 0", async (event) => {
-    logger.log('This will be run every Sunday at midnight in Sweden!');
 
-
+exports.cleardb = onRequest((request, response) => {
     const database = admin.database();
-
-    (async () => {
-      try {
-        await deleteOld("booking");
-        await deleteOld("admin");
-        logger.log("Old Data Deleted");
-      
-        await updateNew("booking");
-        await updateNew("admin");
-        logger.log("New Data Updated");
-      
-        // All database operations are completed here
-        // You can proceed with any other actions
-        logger.log("All Operations done, Exiting Program");
-        admin.app().delete();
-      } catch (error) {
-        logger.error("Error:", error);
-        admin.app().delete();
-      }
-    })();
+    const bookingRef = database.ref('booking');
 
 
-    // Call deleteOld for 'booking' and 'admin'
+      (async () => {
+        try {
+          await deleteOld("booking");
+          await deleteOld("admin");
+          logger.log("Old Data Deleted");
+        
+          await updateNew("booking");
+          await updateNew("admin");
+          logger.log("New Data Updated");
+        
+          // All database operations are completed here
+          // You can proceed with any other actions
+          logger.log("All Operations done, Exiting Program");
+          response.send("DONE!");
+        } catch (error) {
+          logger.error("Error:", error);
+          response.send("DONE!");
+        }
+      })();
+
+
+      // Call deleteOld for 'booking' and 'admin'
     deleteOld('booking')
         .then(() => {
           // Once deleteOld is done, call updateNew for 'booking'
           return updateNew('booking');
+          response.send("DONE!");
         })
         .then(() => {
           // After updateNew for 'booking', call deleteOld for 'admin'
@@ -46,6 +47,7 @@ exports.cleardb = onSchedule("0 0 * * 0", async (event) => {
         })
         .then(() => {
           // All operations are complete, you can now perform any final tasks
+          response.send("DONE!");
           admin.app().delete();
         })
         .catch((error) => {
@@ -68,7 +70,7 @@ exports.cleardb = onSchedule("0 0 * * 0", async (event) => {
               snapshot.forEach(childSnapshot => {
                 const keyToDelete = childSnapshot.key;
                 deletionPromises.push(NodeRef.child(keyToDelete).remove());
-                //deletionPromises.push(logger.info(keyToDelete));
+                deletionPromises.push(logger.info("DELETED CHILD: " + keyToDelete));
               });
               return Promise.all(deletionPromises);
             });
@@ -135,4 +137,4 @@ exports.cleardb = onSchedule("0 0 * * 0", async (event) => {
             });
     }
     return null;
-});
+  });
