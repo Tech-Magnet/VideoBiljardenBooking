@@ -1,61 +1,42 @@
-const {onRequest} = require("firebase-functions/v2/https");
+const {onSchedule} = require("firebase-functions/v2/scheduler");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
 admin.initializeApp();
 
+exports.cleardb = onSchedule("0 0 * * 0", async (event) => {
+    logger.log('This will be run every Sunday at midnight in Sweden!');
 
-exports.dbtest = onRequest((request, response) => {
+
     const database = admin.database();
-    const bookingRef = database.ref('booking');
-  
-    /*bookingRef.once('value')
-      .then((snapshot) => {
-        const days = [];
-        snapshot.forEach((childSnapshot) => {
-          const day = childSnapshot.val().day;
-          if (day) {
-            days.push(day);
-          }
-        });
-  
-        response.status(200).json({ days });
-        return null;
-      })
-      .catch((error) => {
-        logger.error('Error fetching data:', error);
-        response.status(500).json({ error: 'Internal Server Error' });
-      });*/
+
+    (async () => {
+      try {
+        await deleteOld("booking");
+        await deleteOld("admin");
+        logger.log("Old Data Deleted");
+      
+        await updateNew("booking");
+        await updateNew("admin");
+        logger.log("New Data Updated");
+      
+        // All database operations are completed here
+        // You can proceed with any other actions
+        logger.log("All Operations done, Exiting Program");
+        admin.app().delete();
+      } catch (error) {
+        logger.error("Error:", error);
+        admin.app().delete();
+      }
+    })();
 
 
-      (async () => {
-        try {
-          await deleteOld("booking");
-          await deleteOld("admin");
-          console.log("Old Data Deleted");
-        
-          //await updateNew("booking");
-          //await updateNew("admin");
-          //console.log("New Data Updated");
-        
-          // All database operations are completed here
-          // You can proceed with any other actions
-          console.log("All Operations done, Exiting Program");
-          response.send("DONE!");
-        } catch (error) {
-          console.error("Error:", error);
-          response.send("DONE!");
-        }
-      })();
-
-
-      // Call deleteOld for 'booking' and 'admin'
+    // Call deleteOld for 'booking' and 'admin'
     deleteOld('booking')
         .then(() => {
           // Once deleteOld is done, call updateNew for 'booking'
-          //return updateNew('booking');
-          response.send("DONE!");
-        });
-        /*.then(() => {
+          return updateNew('booking');
+        })
+        .then(() => {
           // After updateNew for 'booking', call deleteOld for 'admin'
           return deleteOld('admin');
         })
@@ -68,8 +49,8 @@ exports.dbtest = onRequest((request, response) => {
           admin.app().delete();
         })
         .catch((error) => {
-          console.error('Error:', error);
-        });*/
+          logger.error('Error:', error);
+        });
 
 
 
@@ -86,8 +67,8 @@ exports.dbtest = onRequest((request, response) => {
               const deletionPromises = [];
               snapshot.forEach(childSnapshot => {
                 const keyToDelete = childSnapshot.key;
-                //deletionPromises.push(NodeRef.child(keyToDelete).remove());
-                deletionPromises.push(logger.info(keyToDelete));
+                deletionPromises.push(NodeRef.child(keyToDelete).remove());
+                //deletionPromises.push(logger.info(keyToDelete));
               });
               return Promise.all(deletionPromises);
             });
@@ -114,7 +95,7 @@ exports.dbtest = onRequest((request, response) => {
                         return snapshot.val();
                     })
                     .catch(function (error) {
-                        console.error("Error querying data:", error);
+                        logger.error("Error querying data:", error);
                     })
             );
         });
@@ -140,20 +121,18 @@ exports.dbtest = onRequest((request, response) => {
                 TableArr_m.forEach(function (entry) {
                     NodeRef.child(entry.key).update({ "table": entry.updatedTable })
                         .then(function () {
-                            console.log("Node updated:", node);
-                            console.log("Node Updated in " + node);
+                            logger.log("Node updated:", node);
+                            logger.log("Node Updated in " + node);
                         })
                         .catch(function (error) {
-                            console.error("Error updating node:", error);
+                            logger.error("Error updating node:", error);
                         });
                 });
 
             })
             .catch(function (error) {
-                console.error("Error querying data:", error);
+                logger.error("Error querying data:", error);
             });
     }
     return null;
-    });
-
-
+});

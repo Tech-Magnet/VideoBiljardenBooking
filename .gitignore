@@ -64,7 +64,3 @@ node_modules/
 
 # dotenv environment variables file
 .env
-
-# Service Acc cred
-functions/videobiljardenorebrosite-firebase-adminsdk-dhw68-75d79ec6b6.json
-rt_test/videobiljardenorebrosite-firebase-adminsdk-dhw68-75d79ec6b6.json

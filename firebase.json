@@ -25,8 +25,8 @@
   },
   "functions": [
     {
-      "source": "functions",
-      "codebase": "default",
+      "source": "rt_test",
+      "codebase": "rt_test",
       "ignore": [
         "node_modules",
         ".git",
@@ -35,8 +35,8 @@
       ]
     },
     {
-      "source": "rt_test",
-      "codebase": "rt_test",
+      "source": "cleardb",
+      "codebase": "cleardb",
       "ignore": [
         "node_modules",
         ".git",
