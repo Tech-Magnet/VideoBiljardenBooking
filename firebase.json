@@ -18,12 +18,25 @@
     "singleProjectMode": true,
     "auth": {
       "port": 9099
+    },
+    "functions": {
+      "port": 5001
     }
   },
   "functions": [
     {
       "source": "functions",
       "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ]
+    },
+    {
+      "source": "rt_test",
+      "codebase": "rt_test",
       "ignore": [
         "node_modules",
         ".git",
