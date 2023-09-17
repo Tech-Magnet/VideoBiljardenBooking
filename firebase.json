@@ -18,12 +18,15 @@
     "singleProjectMode": true,
     "auth": {
       "port": 9099
+    },
+    "functions": {
+      "port": 5001
     }
   },
   "functions": [
     {
-      "source": "functions",
-      "codebase": "default",
+      "source": "cleardb",
+      "codebase": "cleardb",
       "ignore": [
         "node_modules",
         ".git",

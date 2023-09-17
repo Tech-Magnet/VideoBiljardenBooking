@@ -227,6 +227,9 @@
                 alert("Namn och Tel nr måste vara ifyllda");
                 return;
               }
+              if(phone_m.length != 10 || name_member < 2){
+                alert("Ogilight Telefon Nummer eller Namn");
+              }
 
               // Get the current date
               var currentDate;
