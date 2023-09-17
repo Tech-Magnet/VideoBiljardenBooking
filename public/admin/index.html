@@ -365,8 +365,49 @@
 
             }else{
               //DELETES EXPIRED NODES
-              console.log("EXPIRED: " + expDate.toISOString().split('T')[0]);
-              console.log(memebers.phone);
+
+              //CALCUTE PREVIUS MONTH
+              // Create a new Date object
+              var currentDate = new Date();
+
+              // Get the year and month
+              var year = currentDate.getFullYear();
+              var month = currentDate.getMonth();
+
+              // Format the date as "YYYY-MM"
+              var formattedDate = year + "-" + (month < 10 ? "0" : "") + month;
+
+              if(formattedDate == year + "-00"){
+                year = year - 1;
+                formattedDate = year + "-12";
+              }
+
+
+              //DELETING NODES
+              var database = firebase.database();
+              const nodeRef = database.ref('members');
+
+              const substringToMatch = formattedDate;
+
+              // Create a query to find child nodes where the attribute contains the substring
+              const query = nodeRef.orderByChild('last').startAt(substringToMatch).endAt(substringToMatch + '\uf8ff');
+
+              query.once('value')
+                .then((snapshot) => {
+                  snapshot.forEach((childSnapshot) => {
+                    // Delete the child node
+                    childSnapshot.ref.remove()
+                      .then(() => {
+                        console.log('Child node deleted:', childSnapshot.key);
+                      })
+                      .catch((error) => {
+                        console.error('Error deleting child node:', error);
+                      });
+                  });
+                })
+                .catch((error) => {
+                  console.error('Error querying data:', error);
+                });
             }
         });
 
