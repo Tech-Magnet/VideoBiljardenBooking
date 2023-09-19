@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 //Firebase SDKs
 import { initializeApp } from "firebase/app";
-import { getAnalytics, logEvent } from "firebase/analytics";
 import { getDatabase, ref, child, get } from "firebase/database";
 
 @Component({
@@ -11,7 +10,7 @@ import { getDatabase, ref, child, get } from "firebase/database";
 })
 export class CalendarComponent {
 
-  constructor() {
+  ngAfterViewInit() {
     const firebaseConfig = {
       apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
       authDomain: "videobiljardenorebrosite.firebaseapp.com",
@@ -24,12 +23,8 @@ export class CalendarComponent {
     };
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  }
 
-  
 
-  ngAfterViewInit() {
     //this.changeBackgroundColor("TT_1_15_tis");
     const dbRef = ref(getDatabase());
     //Full node
@@ -69,7 +64,7 @@ export class CalendarComponent {
     const element = document.getElementById(id);
     if (element) {
       element.style.backgroundColor = "#f00";
-      console.log("Set cell id: " + id + " to Red");
+      //console.log("Set cell id: " + id + " to Red");
     }else{
       console.warn("element with id: " + id + ", does not exist in the DOM :(");
     }

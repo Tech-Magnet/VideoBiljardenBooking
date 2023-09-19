@@ -1,0 +1,80 @@
+<h1 style="text-align: center;">Boka Bord - Snooker</h1>
+
+<form #formCreate="ngForm" (ngSubmit)="onFormSubmit()" id="form-create">
+    <label for="name">Namn</label><br>
+    <input type="text" [(ngModel)]="formData.Name" class="input" id="name_fld" name="name" required/><br>
+
+    <label for="phone">Tel nr</label><br>
+    <input type="text" [(ngModel)]="formData.Phone" class="input" id="phone_fld" name="phone" required/><br>
+
+    <label for="day">Dag</label><br>
+    <select [(ngModel)]="formData.Day" class="input" id="day_fld" name="day">
+        <option value="mon">Måndag</option>
+        <option value="tis">Tisdag</option>
+        <option value="ons">Onsdag</option>
+        <option value="tor">Torsdag</option>
+        <option value="fre">Fredag</option>
+        <option value="lor">Lördag</option>
+        <option value="son">Söndag</option>
+    </select><br>
+
+    <label for="week">Vecka</label><br>
+    <select [(ngModel)]="formData.Week" class="input" id="week_fld" name="week">
+        <option value="">Denna Vecka</option>
+        <option value="_c">Nästa Vecka</option>
+    </select><br>
+
+    <label for="time">Tid</label><br>
+        <select [(ngModel)]="formData.Time" class="input" id="time_fld" name="time">
+          <option value="13">13.00</option>
+          <option value="13.5">13.30</option>
+          <option value="14">14.00</option>
+          <option value="14.5">14.30</option>
+          <option value="15">15.00</option>
+          <option value="15.5">15.30</option>
+          <option value="16">16.00</option>
+          <option value="16.5">16.30</option>
+          <option value="17">17.00</option>
+          <option value="17.5">17.30</option>
+          <option value="18">18.00</option>
+          <option value="18.5">18.30</option>
+          <option value="19">19.00</option>
+          <option value="19.5">19.30</option>
+          <option value="20">20.00</option>
+          <option value="20.5">20.30</option>
+          <option value="21">21.00</option>
+          <option value="21.5">21.30</option>
+          <option value="22">22.00</option>
+          <option value="22.5">22.30</option>
+          <option value="23">23.00</option>
+          <option value="23.5">13.00</option>
+          <option value="24">24.00</option>
+        </select><br>
+
+        <label for="length">Längd</label><br>
+        <select [(ngModel)]="formData.Length" class="input" id="length_fld" name="length">
+          <option value="1">30 Min</option>
+          <option value="2">1 Timme</option>
+          <option value="3">1.5 Timme</option>
+          <option value="4">2 Timmar</option>
+          <option value="5">2.5 Timme</option>
+          <option value="6">3 Timmar</option>
+          <option value="7">3.5 Timmar</option>
+          <option value="8">4 Timmar</option>
+          <option value="9">4.5 Timmar</option>
+          <option value="10">5 Timmar</option>
+          <option value="11">5.5 Timmar</option>
+          <option value="12">6 Timmar</option>
+          <option value="13">6.5 Timmar</option>
+          <option value="14">7 Timmar</option>
+        </select><br>
+
+        <label for="table">Bord</label><br>
+        <select [(ngModel)]="formData.Table" class="input" id="table_fld" name="table">
+          <option value="Bord_1">Bord 1</option>
+          <option value="Bord_2">Bord 2</option>
+          <option value="Bord_3">Bord 3</option>
+        </select><br><br>
+
+        <button type="submit" class="input-btn">Boka Tid</button>
+</form>
