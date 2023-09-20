@@ -74,7 +74,7 @@ export class CreateComponent {
               time = time + 0.5;
               console.log("DONE");
             }
-            
+            window.location.reload();
           }
         })
         .catch((error: any) => {
