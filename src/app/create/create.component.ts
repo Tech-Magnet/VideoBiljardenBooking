@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, logEvent } from "firebase/analytics";
+import * as database from "firebase/database";
 
 @Component({
   selector: 'app-create',
@@ -21,10 +22,6 @@ export class CreateComponent {
     Table: 'Bord_1'
   };
 
-  ngAfterViewInit() {
-    
-
-  }
   onFormSubmit() {
     const firebaseConfig = {
       apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
@@ -44,10 +41,9 @@ export class CreateComponent {
     let name = this.formData.Name;
     let phone = this.formData.Phone;
     let day = this.formData.Day;
-    let time = this.formData.Time;
-    let length = this.formData.Length;
+    let time = parseFloat(this.formData.Time);
+    let length = parseFloat(this.formData.Length);
     let table = this.formData.Table;
-
     table = table + this.formData.Week;
 
     if (name.length <= 2 || phone.length != 10 || phone.match(/^[0-9]+$/) == null){
@@ -56,6 +52,73 @@ export class CreateComponent {
       return;
     }else{
       console.log("Data Valid");
+      this.checkBooking(time, day, table)
+        .then((found: boolean) => {
+          if (found) {
+            console.log("Data Found");
+          } else {
+            // Handle case where no matching booking was found
+            console.log("Data Not found");
+            console.log(length)
+            
+            for (let i = 0; i < length; i++) {
+              console.info("Writing new Data to Database...");
+              const db = database.getDatabase();
+              database.push(database.ref(db, 'booking/'), {
+                day: day,
+                name: name,
+                phone: phone,
+                table: table,
+                time: time
+              });
+              time = time + 0.5;
+              console.log("DONE");
+            }
+            
+          }
+        })
+        .catch((error: any) => {
+          // Handle any errors that occurred during the checkBooking process
+          console.error("An error Accured: " + error);
+        });
+    }
+  }
+
+
+  async checkBooking(time: number, day: string, table: string) {
+    try {
+      const dbRef = database.ref(database.getDatabase());
+      const snapshot = await database.get(database.child(dbRef, 'booking/'));
+  
+      if (snapshot.exists()) {
+        const dataArray: any = [];
+  
+        snapshot.forEach((childSnapshot: any) => {
+          const data = childSnapshot.val();
+          dataArray.push(data);
+        });
+  
+        for (let i = 0; i < dataArray.length; i++) {
+          const node = dataArray[i];
+  
+          // Data From RTDB
+          let time_rtdb = node.time;
+          let day_rtdb = node.day;
+          let table_rtdb = node.table;
+
+          //console.log("DATABASE DATA: " + time_rtdb + ", " + day_rtdb + ", " + table_rtdb);
+          //console.log("FORM DATA: " + time + ", " + day + ", " + table);
+  
+          if (time == time_rtdb && day == day_rtdb && table == table_rtdb) {
+            return true; // Found a match, return true
+          }
+        }
+      }
+  
+      return false; // No matching records found
+    } catch (error) {
+      console.error(error);
+      throw error; // Propagate the error
     }
   }
 }

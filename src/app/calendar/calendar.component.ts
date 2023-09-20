@@ -25,7 +25,6 @@ export class CalendarComponent {
     const app = initializeApp(firebaseConfig);
 
 
-    //this.changeBackgroundColor("TT_1_15_tis");
     const dbRef = ref(getDatabase());
     //Full node
     const dataArray: any = [];
