@@ -36,7 +36,7 @@ export class CreateComponent {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-    logEvent(analytics, "Booking Made");
+    logEvent(analytics, "Booking Created");
 
     let name = this.formData.Name;
     let phone = this.formData.Phone;

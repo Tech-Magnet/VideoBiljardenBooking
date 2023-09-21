@@ -1,0 +1,31 @@
+.input{
+    width: 80vw;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: #4b79e3;
+}
+input:focus{
+    color:#212529;
+    background-color:#fff;
+    border-color:#86b7fe;
+    outline:0;
+    box-shadow:0 0 0 .25rem rgba(13,110,253,.25);
+}
+.input-btn{
+    width: 120px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #4b79e3;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    text-align: center;
+}
+.input-btn:hover{
+    background-color: #3d60b3;
+}
+#form-create{
+    padding-left: 50px;
+}

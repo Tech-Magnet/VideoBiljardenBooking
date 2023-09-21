@@ -7,12 +7,20 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CreateComponent } from './create/create.component';
 
 import { FormsModule } from '@angular/forms';
+import { UnbookPageComponent } from './unbook-page/unbook-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { RemoveComponent } from './remove/remove.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarComponent,
-    CreateComponent
+    CreateComponent,
+    UnbookPageComponent,
+    HomePageComponent,
+    AdminPageComponent,
+    RemoveComponent
   ],
   imports: [
     BrowserModule,
