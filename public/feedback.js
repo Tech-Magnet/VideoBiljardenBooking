@@ -27,5 +27,4 @@ function feedback_panel_tgl(type){
     document.getElementById('fb_panel').style.display = "none";
     document.getElementById('booking_page').style.display = "block";
   }
-    
 }
