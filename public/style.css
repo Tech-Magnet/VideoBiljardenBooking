@@ -4603,21 +4603,21 @@ textarea.form-control-lg{
     clear: both;
 }
 
+
+/*FEEDBACK*/
 .feedback-btn{
     border-radius: 15%;
     position: fixed;
     left: 10px;
-    bottom: 10px;
+    bottom: 5000px;
     cursor: pointer;
     display: block;
 }
-
 .feedback-panel{
     display: none;
     background-color: #fff;
     border-color: var(--bs-primary);
 }
-
 .feedback-send{
     border-radius: 10px;
     color: #fff;
