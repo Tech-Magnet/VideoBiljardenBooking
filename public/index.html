@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="img/icon.png">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <!-- Google tag (gtag.js) -->
@@ -31,8 +32,27 @@
     firebase.initializeApp(firebaseConfig);
   </script>
   <script defer type="text/javascript" src="main.js"></script>
+  <script defer type="text/javascript" src="feedback.js"></script>
 </head>
 <body>
+  <button class="feedback-btn" onclick="feedback_panel_tgl('on')"><span style="padding-top: 5px;" class="material-symbols-outlined">feedback</span></button>
+<div id="fb_panel" class="feedback-panel">
+  <center>
+    <h1>Skicka Feedback</h1>
+    <span onclick="feedback_panel_tgl('off')" id="fb_close" class="material-symbols-outlined">close</span>
+  </center>
+  <div style="padding-left: 20px;">
+    <label>Medelande</label>
+    <div style="display: flex;">
+    <textarea id="feedback-fld" placeholder="Feedback"></textarea>
+    <button class="feedback-send" onclick="sendFeedback();">
+      <span><img src="/img/icons/send_white_24dp.svg"></span>
+    </button>
+    </div>
+    <br>
+  </div>
+  </div>
+  <div id="booking_page" style="display: block;">
   <div class="container">
     <div class="py-5 text-center">
       <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
@@ -42,11 +62,11 @@
     <form id="bookingForm" name="frmBook" class="needs-validation">
       <p>
         <label for="Name">Namn</label>
-        <input type="text" class="form-control" name="txtName" id="txtName" placeholder="Namn" value="" required>
+        <input type="text" class="form-control" name="txtName" id="txtName" value="" required>
       </p>
       <p>
         <label for="phone">Telnr</label>
-        <input type="number"  class="form-control" name="txtPhone" id="txtPhone" placeholder="" value="" required>
+        <input type="number"  class="form-control" name="txtPhone" id="txtPhone" value="" required>
       </p>
       <p>
         <label for="Day">Datum</label>
@@ -130,7 +150,9 @@
     </form>
   </fieldset>
   <input type="button" name="button" id="smt-button" value="Avboka Bord"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='unbook.html'">
-<br><br>
+<br>
+<br>
+</div>
 <h2>&Oumlppettider</h2>
 <h4>M&aringn - Tors: 15 - 24</h4>
 <h4>Fre - L&oumlr: 13 - 01</h4>
@@ -1335,6 +1357,7 @@
   <div class="grid-item" id="TT_3_24_son_c" style="background-color: #000; color: #000;"></div>
   </div>
   <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad timme</p>
+</div>
 </div>
 </body>
 </html>
