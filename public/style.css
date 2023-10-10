@@ -4609,7 +4609,7 @@ textarea.form-control-lg{
     border-radius: 15%;
     position: fixed;
     left: 10px;
-    bottom: 5000px;
+    bottom: 20px;
     cursor: pointer;
     display: block;
 }
@@ -4636,4 +4636,7 @@ textarea.form-control-lg{
 }
 #fb_close:hover{
     cursor: pointer;
+}
+#feedback-fld{
+    width: 80vw;
 }
