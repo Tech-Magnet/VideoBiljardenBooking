@@ -1,9 +1,16 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+/*import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getDatabase, ref, push, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
-import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
+import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";*/
+
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, push, set, onValue } from "firebase/database";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import { getPerformance } from "firebase/performance";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
@@ -27,72 +34,16 @@ const appCheck = initializeAppCheck(app, {
 });
 
 
-onAuthStateChanged(auth, (user) => {
+/*onAuthStateChanged(auth, (user) => {
     if(user){//Logged in
         document.getElementById('Admin-Div').style.display = "block";
     }else{ //Not Logged In
         window.location.pathname = "admin/login/";
     }
-});
+});*/
 
 
-/*function AddMember(){
-    console.log("Adding New Member...");
-    var name_m = document.getElementById('member_name').value;
-    var phone_m = document.getElementById('member_phone').value;
-    var last = document.getElementById('member_last_payment').value;
-    var next = document.getElementById('member_next_payment').value;
-
-    next = parseInt(next);
-
-    if (name_m == "" || phone_m == ""){
-      alert("Namn och Tel nr måste vara ifyllda");
-      return;
-    }
-
-    if(phone_m.length != 10 || name_member < 2){
-      alert("Ogilight Telefon Nummer eller Namn");
-    }
-
-    // Get the current date
-    var currentDate;
-
-    if(last == ""){
-      currentDate = new Date();
-    }else{
-      currentDate = new Date(last);
-    }
-
-    // Calculate the next month's date
-    const nextMonth = new Date(currentDate);
-    nextMonth.setMonth(currentDate.getMonth() + next);
-
-    // Handle cases where the day of the next month might not exist (e.g., Jan 31st to Feb 28th/29th)
-    if (currentDate.getDate() > nextMonth.getDate()) {
-        nextMonth.setDate(0); // This will set the date to the last day of the previous month
-    }
-
-    var next_m = nextMonth.toISOString().split('T')[0];
-    var last_m = currentDate.toISOString().split('T')[0];
-
-    //var next = current_date;
-    console.log(name_member);
-    console.log(phone_m);
-
-    ref("members").push.set({
-        name: name_m,
-        phone: phone_m,
-        next: next_m,
-        last: last_m
-    });
-    console.log("Member Added");
-}*/
-
-
-
-
-export function remove_member(phoneToDelete){
-  console.log("hijfrhuidrtfghyu");
+function remove_member(phoneToDelete){
 
     const dbref = ref(database, "members");
 
@@ -109,22 +60,22 @@ export function remove_member(phoneToDelete){
         entries.push(entry); 
       }
 
+      console.log(entries);
+
+
+
       for (var i = 0; i < entries.length; i++ ){
 
         let key = entries[i].namef;
         console.log("KEY: ", key);
-        let data = entries[i].dataf;
-        console.log("DATA: ", data[3]);
+        let data = entries[i].dataf.phone;
+        console.log("DATA: ", data);
 
-        /*if(data.includes(phoneToDelete)){
-            ref("members/" + key).remove()
-            .then(() => {
-                console.log("Member Removed");
-            })
-            .catch(error => {
-                console.log("An Error Occured");
-            });
-        }*/
+        if(data == phoneToDelete){
+
+          console.log("Match Found", key, data, phoneToDelete);
+            ref("members/" + key).remove();
+        }
       }
     });
 }
@@ -144,7 +95,7 @@ const AddMember = async () => {
     return;
   }
 
-  if(phone_m.length != 10 || name_member < 2){
+  if(phone_m.length != 10 || name_m < 2){
     alert("Ogilight Telefon Nummer eller Namn");
     console.log("Data Transaction Cancelled");
   }
@@ -171,7 +122,7 @@ const AddMember = async () => {
   var last_m = currentDate.toISOString().split('T')[0];
 
   //var next = current_date;
-  console.log(name_member);
+  console.log(name_m);
   console.log(phone_m);
 
   ref("members").push.set({
@@ -183,14 +134,20 @@ const AddMember = async () => {
   console.log("Member Added");
 }
 
-
 document.getElementById('btnCreate_member').addEventListener("click", AddMember);
-//document.getElementById('btnCreate_member').addEventListener("click", console.log("TEST!!!"));
-/*window.onload = () => {
-  console.log(document.getElementById('btnCreate_member'));
-    
-    
-}*/
+
+const elements = document.getElementsByClassName('delete_member_btn');
+
+for (let i = 0; i < elements.length; i++){
+
+  elements[i].addEventListener('click', function () {
+    remove_member(elements[i].getAttribute('member_phone_number'));
+  });
+
+}
+
+
+
 
 
 /*window.onload = () => {
