@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
@@ -35,6 +35,16 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
+const logout = async () => {
+
+  try {
+      const userCredential = await signOut(auth);
+      console.log("SUCCESSFULLY LOGGED OUT");
+      window.location.reload();
+  }catch (error){
+      console.error("An Error Occured", error);
+  }
+}
 
 function remove_member(phoneToDelete){
   console.log("Deleting Member", phoneToDelete);
@@ -71,6 +81,8 @@ function remove_member(phoneToDelete){
             next: null,
             last: null
           });
+          console.log("MEMBER DELETED");
+          window.reload();
         }
       }
     });
@@ -131,49 +143,10 @@ const AddMember = async () => {
   });
 
   console.log("Member Added");
+  window.reload();
 }
 
 document.getElementById('btnCreate_member').addEventListener("click", AddMember);
-
-
-
-function memberSearch(phone){
-  const dbref = ref(database, "members");
-
-  onValue(dbref, (snapshot) => {
-
-    const data = snapshot.val();
-    const entries2 = [];
-
-    for (const key in data) {
-      const entry = {
-          namef: key,
-          dataf: data[key]
-        };
-      entries2.push(entry); 
-    }
-
-
-    let isMember = "NEJ";
-
-    for (var i = 0; i < entries2.length; i++ ){
-
-      let key = entries2[i].namef;
-      let data = entries2[i].dataf.phone;
-
-      
-
-      if(data == phone){
-        isMember = "JA";
-      }
-
-      
-    }
-
-    //logic
-
-  });
-}
 
 
 window.onload = () => {
@@ -186,15 +159,17 @@ window.onload = () => {
   var tableBody5 = document.querySelector(".tb_5");//FRIDAY
   var tableBody6 = document.querySelector(".tb_6");//SATURDAY
   var tableBody7 = document.querySelector(".tb_7");//SUNDAY
+  
+  /*
   //Week 2
-  /*var tableBody1_2 = document.querySelector(".tb_1_2");//MONDAY
+  var tableBody1_2 = document.querySelector(".tb_1_2");//MONDAY
   var tableBody2_2 = document.querySelector(".tb_2_2");//TUESDAY
   var tableBody3_2 = document.querySelector(".tb_3_2");//WEDNESDAY
   var tableBody4_2 = document.querySelector(".tb_4_2");//THURSDAY
   var tableBody5_2 = document.querySelector(".tb_5_2");//FRIDAY
   var tableBody6_2 = document.querySelector(".tb_6_2");//SATURDAY
-  var tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY*/
-
+  var tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY
+  */
 
   const dbref = ref(database, "admin");
 
@@ -383,28 +358,23 @@ window.onload = () => {
     }
   });
 
+  document.getElementById('btnLogOut').addEventListener("click", logout);
 
 
+  //Adds a delay for the delete buttons to be correctly added
+  setTimeout(function() {
 
+    const elements = document.getElementsByClassName('delete_member_btn');
+    
+    for (let i = 0; i < elements.length; i++){
 
-
-
-
-
-
-
-
-  const elements = document.getElementsByClassName('delete_member_btn');
-  console.log("Quering Elemts");
-  for (let i = 0; i < elements.length; i++){
-    console.log(elements);
-
-  
-    elements[i].addEventListener('click', function () {
+      elements[i].addEventListener('click', function () {
       remove_member(elements[i].getAttribute('member_phone_number'));
-    });
-  
-  }
+      });
+      
+    }
+    console.log("Elements Loaded");
+  }, 1000);
 
 }
 

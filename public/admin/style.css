@@ -19,7 +19,6 @@ body{
     width: 400px;
     height: 50px;
     margin-left: 50px;
-    /*padding: 20px;*/
     margin-bottom: 20px;
     font-size: 25px;
 }
@@ -57,4 +56,43 @@ body{
 
 .removeMember:hover{
     cursor: pointer;
+}
+
+.confirmLogOut{
+    display: block;
+    position: fixed;
+    background-color: #adadad;
+    border-radius: 5px;
+    border-color: #000000;
+    border-style: solid;
+    width: 30svw;
+    height: 30svh;
+    top: 40svh;
+    left: 30svw;
+
+
+
+    /*width: 50%;*/
+    margin: 0 auto;
+    text-align: center;
+}
+
+.logOut-btns-div{
+    display:flex; 
+    flex-wrap: wrap;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.logOut-btns{
+    width: 410px;
+    height: 50px;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif; 
+    background-color: #0d6efd; 
+    color: #ffffff;
+    border-width: 1px;
+    cursor: pointer;
+    margin: 10px;
 }

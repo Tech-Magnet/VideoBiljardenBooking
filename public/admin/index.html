@@ -140,15 +140,31 @@
           </div>
 
         <button id="btnCreate_member" class="login-fields2">Registera Medlemskap</button>
-
-
-        <button id="delete-member" class="delete_member_btn" member_phone_number="0723150770">Registera Medlemskap</button>
-        <button id="delete-member" class="delete_member_btn" member_phone_number="0723150770">Registera Medlemskap</button>
-        <button id="delete-member" class="delete_member_btn" member_phone_number="0723150770">Registera Medlemskap</button>
-        <button id="delete-member" class="delete_member_btn" member_phone_number="0723150770">Registera Medlemskap</button>
-        <button id="delete-member" class="delete_member_btn" member_phone_number="0723150770">Registera Medlemskap</button>
-
+        <br>
+        <br>
+        <br>
+        <br>
         
+        <button class="login-fields2" onclick="ShowLogOutPanel()">Logga Ut</button>
+  </div>
+  <script>
+    function ShowLogOutPanel(){
+      document.getElementById('confirmLogOut').style.display = "block";
+      document.getElementById('Admin-Div').style.opacity = 0.3;
+    }
+    function HideLogOutPanel(){
+      document.getElementById('confirmLogOut').style.display = "none";
+      document.getElementById('Admin-Div').style.opacity = 1;
+    }
+  </script>
+  <div id="confirmLogOut" class="confirmLogOut" style="display: none;">
+    <center>
+    <h3>Logga Ut?</h3>
+    <div class="logOut-btns-div">
+      <button class="logOut-btns" onclick="HideLogOutPanel();">Avbryt</button>
+      <button id="btnLogOut" class="logOut-btns">Logga Ut</button>
+    </div>
+    </center>
   </div>
 </body>
 </html>

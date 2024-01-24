@@ -27,14 +27,14 @@ const loginEmailPassword = async () => {
 
     console.log("Logging In...");
 
-    const loginEmail = document.getElementById('login-email').value;
-    const loginPassword = document.getElementById('login-password').value;
+    let loginEmail = document.getElementById('login-email').value;
+    let loginPassword = document.getElementById('login-password').value;
 
     if(!loginEmail.includes("@")){
         loginEmail = loginEmail + "@orebrobiljarden.se";
     }
 
-    if(loginPassword < 6){
+    if(loginPassword.length < 6){
         loginPassword = loginPassword + "123";
     }
 
