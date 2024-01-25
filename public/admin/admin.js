@@ -29,9 +29,9 @@ const appCheck = initializeAppCheck(app, {
 
 onAuthStateChanged(auth, (user) => {
     if(user){//Logged in
-        document.getElementById('Admin-Div').style.display = "block";
+      document.getElementById('Admin-Div').style.display = "block";
     }else{ //Not Logged In
-        window.location.pathname = "admin/login/";
+      window.location.pathname = "admin/login/";
     }
 });
 

@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
@@ -32,6 +32,12 @@ function remove_booking(){
   const table_in = document.getElementById('txtTable').value;
 
   console.log("Deleting Booking", phone_in);
+
+  logEvent(analytics, 'booking_removed', {
+    booking_made: 'false',
+    day: date_in,
+    table: table_in
+  });
 
 
 //Admin

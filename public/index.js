@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
@@ -117,6 +117,14 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
           time_t = time_t + 0.5;
         }
     }
+
+    logEvent(analytics, 'booking_made', {
+      booking_made: 'true',
+      name: name,
+      day: day,
+      table: table,
+      length: length
+    });
 
     const newPostKey_admin = push(child(ref(database), "/admin")).key;
 
