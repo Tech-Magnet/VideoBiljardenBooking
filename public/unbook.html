@@ -6,30 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/icon.png">
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FPJBGKX7R0"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-FPJBGKX7R0');
-    </script>
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-          apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
-          authDomain: "videobiljardenorebrosite.firebaseapp.com",
-          databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
-          projectId: "videobiljardenorebrosite",
-          storageBucket: "videobiljardenorebrosite.appspot.com",
-          messagingSenderId: "1042889427467",
-          appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-      </script>
+    <script type="module" src="unbook.js"></script>
 </head>
 <body>
     <div class="container">
@@ -41,7 +18,7 @@
         <form id="bookingForm" name="frmBook" class="needs-validation">
           <p>
             <label for="phone">Telnr</label>
-            <input type="text"  class="form-control" name="txtPhone" id="txtPhone" value="" required>
+            <input type="text" class="form-control" name="txtPhone" id="txtPhone" value="" required>
           </p>
           <p>
             <label for="Day">Datum</label>
@@ -75,92 +52,10 @@
           <p>&nbsp;</p>
           <p id="status_p" style="color: #00ff00;"></p>
           <p>
-            <input type="button" name="button" id="smt-button" value="Avboka Bord" class="btn btn-primary btn-lg btn-block" onclick="unbook();">
+            <input type="button" name="button" id="unbook-btn" value="Avboka Bord" class="btn btn-primary btn-lg btn-block">
           </p>
         </form>
       </fieldset>
-      <input type="button" name="button" id="smt-button" value="Tillbaka"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='index.html'">
-      <script>
-        function unbook(){
-          var found = false;
-          var database = firebase.database();
-          var tableToDelete = document.getElementById('txtTable').value;
-          var phoneToDelete = document.getElementById('txtPhone').value;
-          var dayToDelete = document.getElementById('txtDay').value;
-          var weekToDelete = document.getElementById('txtWeek').value;
-
-          if(weekToDelete == 'n'){
-            tableToDelete = tableToDelete + "_c";
-          }
-
-          // Create a reference to the "booking" node
-          var bookingRef = database.ref("booking");
-          
-          // Create a query to find the nodes with matching attributes
-          var query = bookingRef.orderByChild("phone").equalTo(phoneToDelete);
-          
-
-          // Execute the query to fetch the data
-          query.once("value")
-            .then(function(snapshot) {
-              snapshot.forEach(function(childSnapshot) {
-                var node = childSnapshot.val();
-
-                // Check if the attributes match
-                if (node.table === tableToDelete && node.day === dayToDelete) {
-                  // Delete the node
-                  bookingRef.child(childSnapshot.key).remove()
-                    .then(function() {
-                      console.log("Node deleted:", node);
-                      console.log("Node Deleted from booking");
-                      found = true;
-                    })
-                    .catch(function(error) {
-                      console.error("Error deleting node:", error);
-                    });
-                }
-              });
-            })
-            .catch(function(error) {
-              console.error("Error searching for nodes:", error);
-            });
-
-            var adminRef = database.ref("admin");
-
-            var query = adminRef.orderByChild("phone").equalTo(phoneToDelete);
-
-            query.once("value")
-            .then(function(snapshot) {
-              snapshot.forEach(function(childSnapshot) {
-                var node = childSnapshot.val();
-
-                // Check if the attributes match
-                if (node.table === tableToDelete && node.day === dayToDelete) {
-                  // Delete the node
-                  adminRef.child(childSnapshot.key).remove()
-                    .then(function() {
-                      console.log("Node deleted:", node);
-                      console.log("Node Deleted from Admin");
-                      document.getElementById('status_p').innerText = "Tid Avbokad";
-                      document.getElementById('status_p').style.color = '#00ff00';
-                      found == true;
-                    })
-                    .catch(function(error) {
-                      console.error("Error deleting node:", error);
-                      document.getElementById('status_p').innerText("Ett Error Upstod, var god och försök igen");
-                      document.getElementById('status_p').style.color = '#ff0000';
-                    });
-                }
-              });
-            })
-            .catch(function(error) {
-              console.error("Error searching for nodes:", error);
-            });
-            if (found == false){
-              document.getElementById('status_p').innerText = "Ingen tid hittades";
-              document.getElementById('status_p').style.color = '#ff0000';
-            }
-        }
-    </script>
+      <input type="button" value="Tillbaka" class="btn btn-primary btn-lg btn-block" onclick="window.location.pathname = ''">
 </body>
 </html>

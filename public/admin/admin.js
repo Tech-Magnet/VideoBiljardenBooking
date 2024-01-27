@@ -29,9 +29,9 @@ const appCheck = initializeAppCheck(app, {
 
 onAuthStateChanged(auth, (user) => {
     if(user){//Logged in
-        document.getElementById('Admin-Div').style.display = "block";
+      document.getElementById('Admin-Div').style.display = "block";
     }else{ //Not Logged In
-        window.location.pathname = "admin/login/";
+      window.location.pathname = "admin/login/";
     }
 });
 
@@ -138,8 +138,8 @@ const AddMember = async () => {
   set(ref(database, "/members" + '/' + newPostKey), {
     name: name_m,
     phone: phone_m,
-    next: next_m,
-    last: last_m
+    next: last_m,
+    last: next_m
   });
 
   console.log("Member Added");
@@ -291,17 +291,7 @@ window.onload = () => {
     }
   });
 
-
-
-
-
-
-
-
-
-
-
-  //Add Members
+  //Display Members
 
   const dbref2 = ref(database, "members");
 
@@ -325,8 +315,8 @@ window.onload = () => {
 
       let name = entries[i].dataf.name;
       let phone = entries[i].dataf.phone;
-      let last = entries[i].dataf.last;
-      let next = entries[i].dataf.next;
+      let last = entries[i].dataf.next;
+      let next = entries[i].dataf.last;
 
       var newLine = document.createElement("tr");
 
@@ -377,262 +367,3 @@ window.onload = () => {
   }, 1000);
 
 }
-
-
-/*window.onload = () => {
-
-    const membersArr = [];
-    var memberStatus = false;
-
-    //MEMBERS TABLE
-    database.ref("members").on("child_added", function (snapshot) {
-      var members = snapshot.val();
-      var tablebody_m = document.querySelector(".pay_tb_1");//Table Members
-      var newRow = document.createElement("tr");
-      
-      //CREATES THE ELEMTS IN THE TABLE
-      var m_nameCell = document.createElement("td");
-      var m_phoneCell = document.createElement("td");
-      var m_nextCell = document.createElement("td");
-      var m_lastCell = document.createElement("td");
-      var m_removeCell = document.createElement("td");
-
-      var m_removeLink = document.createElement("a");
-        m_removeLink.style.color = "#ff0000";
-        m_removeLink.style.textDecoration = "underline";
-        m_removeLink.className = "removeMember";
-        m_removeLink.textContent = "Ta Bort";
-
-      var expDate = new Date(members.last);
-
-      if(expDate >= new Date()){
-
-        m_nameCell.textContent = members.name;
-        m_phoneCell.textContent = members.phone;
-        m_nextCell.textContent = members.next;
-        m_lastCell.textContent = members.last;
-        m_removeLink.onclick = function(){remove_member(members.phone)};
-
-        membersArr.push(members.phone);
-
-        //PREPARING FOR ADDING TO NEW ROW OF TABLE
-        newRow.appendChild(m_nameCell);
-        newRow.appendChild(m_phoneCell);
-        newRow.appendChild(m_nextCell);
-        newRow.appendChild(m_lastCell);
-        newRow.appendChild(m_removeCell);
-        m_removeCell.appendChild(m_removeLink);
-
-        //ADDS IT TO THE TABLE
-        tablebody_m.appendChild(newRow);
-}*/
-
-
-
-
-
-
-
-/*
-
-<script>
-
-
-        //MEMBERS TABLE
-        database.ref("members").on("child_added", function (snapshot) {
-            var members = snapshot.val();
-            var tablebody_m = document.querySelector(".pay_tb_1");//Table Members
-            var newRow = document.createElement("tr");
-            
-            //CREATES THE ELEMTS IN THE TABLE
-            var m_nameCell = document.createElement("td");
-            var m_phoneCell = document.createElement("td");
-            var m_nextCell = document.createElement("td");
-            var m_lastCell = document.createElement("td");
-            var m_removeCell = document.createElement("td");
-
-            var m_removeLink = document.createElement("a");
-              m_removeLink.style.color = "#ff0000";
-              m_removeLink.style.textDecoration = "underline";
-              m_removeLink.className = "removeMember";
-              m_removeLink.textContent = "Ta Bort";
-
-            var expDate = new Date(members.last);
-
-            if(expDate >= new Date()){
-
-              m_nameCell.textContent = members.name;
-              m_phoneCell.textContent = members.phone;
-              m_nextCell.textContent = members.next;
-              m_lastCell.textContent = members.last;
-              m_removeLink.onclick = function(){remove_member(members.phone)};
-
-              membersArr.push(members.phone);
-
-              //PREPARING FOR ADDING TO NEW ROW OF TABLE
-              newRow.appendChild(m_nameCell);
-              newRow.appendChild(m_phoneCell);
-              newRow.appendChild(m_nextCell);
-              newRow.appendChild(m_lastCell);
-              newRow.appendChild(m_removeCell);
-              m_removeCell.appendChild(m_removeLink);
-
-              //ADDS IT TO THE TABLE
-              tablebody_m.appendChild(newRow);
-
-            }else{
-              //DELETES EXPIRED NODES
-
-              //CALCUTE PREVIUS MONTH
-              // Create a new Date object
-              var currentDate = new Date();
-
-              // Get the year and month
-              var year = currentDate.getFullYear();
-              var month = currentDate.getMonth();
-
-              // Format the date as "YYYY-MM"
-              var formattedDate = year + "-" + (month < 10 ? "0" : "") + month;
-
-              if(formattedDate == year + "-00"){
-                year = year - 1;
-                formattedDate = year + "-12";
-              }
-
-
-              //DELETING NODES
-              var database = firebase.database();
-              const nodeRef = database.ref('members');
-
-              const substringToMatch = formattedDate;
-
-              // Create a query to find child nodes where the attribute contains the substring
-              const query = nodeRef.orderByChild('last').startAt(substringToMatch).endAt(substringToMatch + '\uf8ff');
-
-              query.once('value')
-                .then((snapshot) => {
-                  snapshot.forEach((childSnapshot) => {
-                    // Delete the child node
-                    childSnapshot.ref.remove()
-                      .then(() => {
-                        console.log('Child node deleted:', childSnapshot.key);
-                      })
-                      .catch((error) => {
-                        console.error('Error deleting child node:', error);
-                      });
-                  });
-                })
-                .catch((error) => {
-                  console.error('Error querying data:', error);
-                });
-            }
-        });
-
-            
-
-        database.ref("admin").on("child_added", function (snapshot) {
-          var book = snapshot.val();
-        
-          var newRow = document.createElement("tr");
-        
-          var nameCell = document.createElement("td");
-          var phoneCell = document.createElement("td");
-          var dayCell = document.createElement("td");
-          var timeCell = document.createElement("td");
-          var endTimeCell = document.createElement("td");
-          var lengthCell = document.createElement("td");
-          var tableCell = document.createElement("td");
-          var WeekCell = document.createElement("td");
-          var memberCell = document.createElement("td");
-          
-          
-          nameCell.textContent = book.name;
-          phoneCell.textContent = book.phone;
-          dayCell.textContent = book.day;
-          timeCell.textContent = book.time;
-          lengthCell.textContent = book.length;
-          var name = book.name;
-          var endTime = book.endtime;
-          var tableVar = book.table;
-
-          if (endTime == '25'){
-            endTimeCell.textContent = '1';
-          }else{
-            endTimeCell.textContent = book.endtime;
-          }
-
-          if (tableVar.endsWith('_c')){
-            tableVar = tableVar.replace("_c", "");
-            tableCell.textContent = tableVar;
-            WeekCell.textContent = 'Nästa';
-          }
-          else{
-            tableCell.textContent = tableVar;
-            WeekCell.textContent = 'Denna';
-          }
-
-          if (membersArr.includes(book.phone)){
-            memberCell.textContent = "JA";
-          }
-          else{
-            memberCell.textContent = "NEJ";
-          }
-        
-          newRow.appendChild(nameCell);
-          newRow.appendChild(phoneCell);
-          newRow.appendChild(dayCell);
-          newRow.appendChild(timeCell);
-          newRow.appendChild(endTimeCell);
-          newRow.appendChild(lengthCell);
-          newRow.appendChild(tableCell);
-          newRow.appendChild(WeekCell);
-          newRow.appendChild(memberCell);
-
-          if(book.day == 'mon'){
-            if(WeekCell.textContent == 'Denna'){
-              tableBody1.appendChild(newRow);
-            }else {
-              tableBody1_2.appendChild(newRow);
-            }
-          }else if(book.day == 'tis') {
-            if(WeekCell.textContent == 'Denna'){
-              tableBody2.appendChild(newRow);
-            }else {
-              tableBody2_2.appendChild(newRow);
-            }
-          }else if(book.day == 'ons') {
-            if(WeekCell.textContent == 'Denna'){
-              tableBody3.appendChild(newRow);
-            }else {
-              tableBody3_2.appendChild(newRow);
-            }
-          }else if(book.day == 'tor') {
-            if(WeekCell.textContent == 'Denna'){
-              tableBody4.appendChild(newRow);
-            }else {
-              tableBody4_2.appendChild(newRow);
-            }
-          }else if(book.day == 'fre') {
-            if(WeekCell.textContent == 'Denna'){
-              tableBody5.appendChild(newRow);
-            }else {
-              tableBody5_2.appendChild(newRow);
-            }
-          }else if(book.day == 'lor') {
-            if(WeekCell.textContent == 'Denna'){
-              tableBody6.appendChild(newRow);
-            }else {
-              tableBody6_2.appendChild(newRow);
-            }
-          }else if(book.day == 'son') {
-            if(WeekCell.textContent == 'Denna'){
-              tableBody7.appendChild(newRow);
-            }else {
-              tableBody7_2.appendChild(newRow);
-            }
-          }
-        });
-    </script>
-
-
-*/

@@ -25,8 +25,6 @@ onAuthStateChanged(auth, (user) => {
 
 const loginEmailPassword = async () => {
 
-    console.log("Logging In...");
-
     let loginEmail = document.getElementById('login-email').value;
     let loginPassword = document.getElementById('login-password').value;
 
@@ -37,11 +35,6 @@ const loginEmailPassword = async () => {
     if(loginPassword.length < 6){
         loginPassword = loginPassword + "123";
     }
-
-    console.log(loginEmail);
-    console.log(loginPassword);
-
-    
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
