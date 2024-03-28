@@ -1,6 +1,6 @@
 function sendFeedback(){
 
-    var feedback_data = "@everyone " + document.getElementById('feedback-fld').value;
+  var feedback_data = "@everyone " + document.getElementById('feedback-fld').value;
 
   const request = new XMLHttpRequest();
   request.open("POST", "https://discord.com/api/webhooks/1153849127441018900/TvS-1R0ZaZ6BIvFpnrnBRsI_vabCBjBJBU3aVnkJcQI59PH7icNB6qpDGXVShXa1CTgR");

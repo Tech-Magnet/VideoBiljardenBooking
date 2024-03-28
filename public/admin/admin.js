@@ -1,48 +1,53 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
-import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+import { getFirebase, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
+import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
-    authDomain: "videobiljardenorebrosite.firebaseapp.com",
-    databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "videobiljardenorebrosite",
-    storageBucket: "videobiljardenorebrosite.appspot.com",
-    messagingSenderId: "1042889427467",
-    appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
-    measurementId: "G-FPJBGKX7R0"
+  apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
+  authDomain: "videobiljardenorebrosite.firebaseapp.com",
+  databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "videobiljardenorebrosite",
+  storageBucket: "videobiljardenorebrosite.appspot.com",
+  messagingSenderId: "1042889427467",
+  appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
+  measurementId: "G-FPJBGKX7R0"
 };
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const database = getDatabase(app);
+const firebase = getFirebase(app);
 const Performance = getPerformance(app);
 const appCheck = initializeAppCheck(app, {
-    provider: new ReCaptchaV3Provider('6LcgzkcpAAAAAGBLYci24KiGkfRRYmUbAW58_84W'),
-    isTokenAutoRefreshEnabled: true
+  provider: new ReCaptchaV3Provider('6LcgzkcpAAAAAGBLYci24KiGkfRRYmUbAW58_84W'),
+  isTokenAutoRefreshEnabled: true
 });
 
 
 onAuthStateChanged(auth, (user) => {
-    if(user){//Logged in
+  if(user){//Logged in
+    const userDoc = getDoc(doc(firestore, "users", user.uid));
+    if(userDoc.data().isAdmin == true){
       document.getElementById('Admin-Div').style.display = "block";
-    }else{ //Not Logged In
-      window.location.pathname = "admin/login/";
     }
+  }else{ //Not Logged In
+    window.location.pathname = "admin/login/";
+  }
 });
 
 const logout = async () => {
 
   try {
-      const userCredential = await signOut(auth);
-      console.log("SUCCESSFULLY LOGGED OUT");
-      window.location.reload();
+    const userCredential = await signOut(auth);
+    console.log("SUCCESSFULLY LOGGED OUT");
+    window.location.reload();
   }catch (error){
-      console.error("An Error Occured", error);
+    console.error("An Error Occured", error);
   }
 }
 
@@ -58,9 +63,9 @@ function remove_member(phoneToDelete){
 
       for (const key in data) {
         const entry = {
-            namef: key,
-            dataf: data[key]
-          };
+          namef: key,
+          dataf: data[key]
+        };
         entries.push(entry); 
       }
 
@@ -207,9 +212,9 @@ window.onload = () => {
 
         for (const key in data) {
           const entry = {
-              namef: key,
-              dataf: data[key]
-            };
+            namef: key,
+            dataf: data[key]
+          };
           entries2.push(entry); 
         }
 
@@ -302,9 +307,9 @@ window.onload = () => {
 
     for (const key in data) {
       const entry = {
-          namef: key,
-          dataf: data[key]
-        };
+        namef: key,
+        dataf: data[key]
+      };
       entries.push(entry); 
     }
 

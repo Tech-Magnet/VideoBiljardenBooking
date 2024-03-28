@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Vithkuqi:wght@500&family=Roboto:wght@700&display=swap');
+
+body{
+  font-family: 'Noto Sans Vithkuqi', sans-serif;
+}
+.bookingCard{
+  padding-left: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #0d6efd;
+  border-width: 3px;
+  margin-bottom: 10px;
+}
