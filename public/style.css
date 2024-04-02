@@ -8684,3 +8684,13 @@ textarea.form-control-lg{
 #feedback-fld{
     width: 80vw;
 }
+.bookingCard{
+    padding-left: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #0d6efd;
+    border-width: 3px;
+    margin-top: 10px;
+    /*margin-bottom: 10px;*/
+    cursor: pointer;
+  }

@@ -16,46 +16,53 @@
         </div>
       <fieldset>
         <form id="bookingForm" name="frmBook" class="needs-validation">
-          <p>
-            <label for="phone">Telnr</label>
-            <input type="text" class="form-control" name="txtPhone" id="txtPhone" value="" required>
+          <p id="loggedInMessage" style="display: none;">
+            <label>Logged in as <span id="spanUserLoggedIn"></span></label>
           </p>
-          <p>
+          <p id="form-phone">
+            <label for="phone">Telnr</label>
+            <input type="text" class="form-control" name="txtPhone" id="txtPhone" value="">
+          </p>
+          <p id="form-day">
             <label for="Day">Datum</label>
             <select id="txtDay" name="txtDay" style="padding: 10px;">
               <!--Week One (Current)-->
-              <option value="mon">M&aringndag</option>
-              <option value="tis">Tisdag</option>
-              <option value="ons">Onsdag</option>
-              <option value="tor">Torsdag</option>
-              <option value="fre">Fredag</option>
-              <option value="lor">L&oumlrdag</option>
-              <option value="son">S&oumlndag</option>
+              <option value="Måndag">M&aringndag</option>
+              <option value="Tisdag">Tisdag</option>
+              <option value="Onsdag">Onsdag</option>
+              <option value="Torsdag">Torsdag</option>
+              <option value="Fredag">Fredag</option>
+              <option value="Lördag">L&oumlrdag</option>
+              <option value="Söndag">S&oumlndag</option>
             </select>
           </p>
-          <p>
+          <p id="form-week">
             <label for="Week">Vecka</label>
             <select id="txtWeek" name="txtWeek" style="padding: 10px;">
               <!--Week One (Current)-->
-              <option value="t">Denna Vecka</option>
-              <option value="n">N&aumlsta Vecka</option>
+              <option value="Denna Vecka">Denna Vecka</option>
+              <option value="Nästa Vecka">N&aumlsta Vecka</option>
             </select>
           </p>
-          <p>
+          <p id="form-table">
             <label for="txtTable">Bord</label>
             <select id="txtTable" name="txtTable" style="padding: 10px;">
-              <option value="Bord_1">Bord 1</option>
-              <option value="Bord_2">Bord 2</option>
-              <option value="Bord_3">Bord 3</option>
+              <option value="1">Bord 1</option>
+              <option value="2">Bord 2</option>
+              <option value="3">Bord 3</option>
             </select>
           </p>
           <p>&nbsp;</p>
           <p id="status_p" style="color: #00ff00;"></p>
-          <p>
+          <p id="form-unbook-btn">
             <input type="button" name="button" id="unbook-btn" value="Avboka Bord" class="btn btn-primary btn-lg btn-block">
           </p>
         </form>
       </fieldset>
       <input type="button" value="Tillbaka" class="btn btn-primary btn-lg btn-block" onclick="window.location.pathname = ''">
+      <br>
+      <div id=bookingContainer class="bookingContainer" style="display: none;">
+        <h3 style="margin-top: 10px;">Vilken Tid vill du Avboka?</h3>
+      </div>
 </body>
 </html>

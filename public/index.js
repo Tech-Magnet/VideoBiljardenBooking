@@ -1,6 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+import { getFirestore, addDoc, collection, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 
@@ -18,10 +20,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const database = getDatabase(app);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
 const Performance = getPerformance(app);
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider('6LcgzkcpAAAAAGBLYci24KiGkfRRYmUbAW58_84W'),
   isTokenAutoRefreshEnabled: true
+});
+
+onAuthStateChanged(auth, (user) => {
+  if(user){
+    document.getElementById('loggedInMessage').style.display = "block";
+    document.getElementById('spanUserLoggedIn').innerText = user.email;
+    document.getElementById('form-name').style.display = "none";
+    document.getElementById('form-phone').style.display = "none";
+    document.getElementById('form-email').style.display = "none";
+  }
 });
 
 const TimeArr =  [];
@@ -31,7 +45,7 @@ const TableArr = [];
 function checkIfExixt(day, time, table){
 
   let found = false;
-  var CheckTime = time;
+  let CheckTime = time;
 
   for(let i = 0; i < DayArr.length; i++){
 
@@ -52,32 +66,43 @@ function checkIfExixt(day, time, table){
 //WRITE TO DB
   
 // Add an event listener to the form submit
-document.getElementById("bookingForm").addEventListener("submit", function (event) {
+document.getElementById("bookingForm").addEventListener("submit", async function  (event) {
   event.preventDefault();
 
   // Get the data from the input field
-  var name = document.getElementById("txtName").value;
-  var phone = document.getElementById("txtPhone").value;
-  var day = document.getElementById("txtDay").value;
-  var time = parseFloat(document.getElementById("txtTime").value);
-  var length = parseFloat(document.getElementById("txtLength").value);
-  var table = document.getElementById("txtTable").value;
-  var week = document.getElementById('txtWeek').value;
-  var end_c = length / 2 
-  var endtime = time + end_c;
-  var length2 = length / 2;
+  let name = document.getElementById("txtName").value;
+  let phone = document.getElementById("txtPhone").value;
+  let day_raw = document.getElementById("txtDay").value;
+  let time = parseFloat(document.getElementById("txtTime").value);
+  let length = parseFloat(document.getElementById("txtLength").value);
+  let table = document.getElementById("txtTable").value;
+  let week = document.getElementById('txtWeek').value;
+  let end_c = length / 2 
+  let endtime = time + end_c;
+  let length2 = length / 2;
 
+  let day = day_raw.split(" ")[0]
+  let sort = day_raw.split(" ")[1]
 
-
-  var extraTime;
-  if (day == "mon" || day == "tis" || day == "ons" || day == "tor" || day == "son"){
+  let extraTime;
+  if (day == "Måndag" || day == "Tisdag" || day == "Onsdag" || day == "Torsdag" || day == "Söndag"){
     extraTime = false;
-  }else if(day == "fre" || day == "lor"){
+  }else if(day == "Fredag" || day == "Lördag"){
     extraTime = true;
   }
-  //adding the suffix to the table entry to symbolice that its for next week
-  if(week == 'n'){
-    table = table + "_c";
+
+  if(!auth.currentUser){
+    if(name.length < 2){
+      document.getElementById('txtName').style.borderColor = '#ff0000';
+      alert("Ogiltigt Namn");
+      return;
+    }
+
+    if(phone.length != 10){
+      document.getElementById('txtPhone').style.borderColor = '#ff0000';
+      alert("Ogiltight Telefon Nummer");
+      return;
+    }
   }
 
   if (extraTime == false){
@@ -94,28 +119,16 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     }
   }
 
-  if(name.length < 2){
-    document.getElementById('txtName').style.borderColor = '#ff0000';
-    alert("Ogiltigt Namn");
-    return;
-  }
-
-  if(phone.length != 10){
-    document.getElementById('txtPhone').style.borderColor = '#ff0000';
-    alert("Ogiltight Telefon Nummer");
-    return;
-  }
-
-  var time_t = time;
+  let timeSnapshot = time;
 
   for(let i = 0; i < length; i++){
-      if(checkIfExixt(day, time_t, table) == true){
-        alert("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig");
-        console.log("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x03");
-        return;
-      }else{
-        time_t = time_t + 0.5;
-      }
+    if(checkIfExixt(day, timeSnapshot, table) == true){
+      alert("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig");
+      console.error("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x03");
+      return;
+    }else{
+      timeSnapshot = timeSnapshot + 0.5;
+    }
   }
 
   logEvent(analytics, 'booking_made', {
@@ -123,12 +136,13 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     name: name,
     day: day,
     table: table,
-    length: length
+    length: length,
+    logged_in: auth.currentUser != null
   });
 
-  const newPostKey_admin = push(child(ref(database), "/admin")).key;
+  //const newPostKey_admin = push(child(ref(database), "/admin")).key;
 
-  set(ref(database, "/admin/" + newPostKey_admin), {
+  /*set(ref(database, "/admin/" + newPostKey_admin), {
     name: name,
     phone: phone,
     day: day,
@@ -136,11 +150,48 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     table: table,
     length: length2,
     endtime: endtime
-  });
+  });*/
 
-  console.log("Booking Added to admin table");
+  if(auth.currentUser){
+    console.log(auth.currentUser)
 
-  for(var i = 0; i < length; i++){
+    let userDoc = await getDoc(doc(firestore, "users", auth.currentUser.uid))
+
+    await addDoc(collection(firestore, "bookings"), {
+      day: day,
+      email: auth.currentUser.email,
+      endtime: parseFloat(endtime),
+      length: parseFloat(length2),
+      name: userDoc.data().name,
+      phone: userDoc.data().phone,
+      sort:  sort,
+      table: parseInt(table),
+      time: parseFloat(time),
+      week: week
+    })
+  }else{
+    await addDoc(collection(firestore, "bookings"), {
+      day: day,
+      email: document.getElementById('txtEmail').value,
+      endtime: parseFloat(endtime),
+      length: parseFloat(length2),
+      name: name,
+      phone: phone,
+      sort: parseInt(sort),
+      table: parseInt(table),
+      time: parseFloat(time) ,
+      week: week
+    }).then(() => {
+      console.log("Documant Successfully Added");
+    }).catch((error) => {
+      console.error("An error occured ", error);
+      alert(error);
+    })
+  }
+
+
+
+  /*for(var i = 0; i < length; i++){
 
     // Write the data to the database
     const newPostKey_booking = push(child(ref(database), "/booking")).key;
@@ -154,7 +205,8 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
       });
 
     time = time + 0.5;
-  }
+  }*/
+
   console.log("DATA INSERTED");
   document.getElementById('Status_p').innerText = 'Bokning tillagd';
 
@@ -168,7 +220,7 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
 
 //READ FROM DATABASE
 
-const dbref = ref(database, "booking");
+/*const dbref = ref(database, "booking");
 
 onValue(dbref, (snapshot) => {
 
@@ -210,4 +262,4 @@ onValue(dbref, (snapshot) => {
     DayArr.push(entries[i].dataf.day);
     TableArr.push(entries[i].dataf.table);
   }
-});
+});*/
