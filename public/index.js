@@ -6,6 +6,8 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 
+//test
+
 const firebaseConfig = {
   apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
   authDomain: "videobiljardenorebrosite.firebaseapp.com",
@@ -19,7 +21,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const database = getDatabase(app);
+//const database = getDatabase(app);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 const Performance = getPerformance(app);

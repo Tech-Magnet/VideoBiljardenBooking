@@ -6,9 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/icon.png">
     <link rel="stylesheet" href="style.css">
-    <script type="module" src="unbook.js"></script>
+    <script type="module" src="unbook_module.js"></script>
+    <!--IMPORTS FUNCTIONS TO GLOBAL SCOPE-->
+    <script type="module">
+      import { remove_booking } from "/unbook_module.js";
+
+      window.removeBooking = remove_booking;
+    </script>
+
 </head>
 <body>
+  
     <div class="container">
         <div class="py-5 text-center">
           <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
@@ -64,5 +72,6 @@
       <div id=bookingContainer class="bookingContainer" style="display: none;">
         <h3 style="margin-top: 10px;">Vilken Tid vill du Avboka?</h3>
       </div>
+    <button onclick="window.removeBooking('')">TEST BUTTON</button>
 </body>
 </html>
