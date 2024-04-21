@@ -30,27 +30,36 @@ const appCheck = initializeAppCheck(app, {
 
 onAuthStateChanged(auth, async (user) => {
   if(user){
+
     document.getElementById('form-phone').style.display = "none";
-    document.getElementById('form-day').style.display = "none";
-    document.getElementById('form-week').style.display = "none";
-    document.getElementById('form-table').style.display = "none";
     document.getElementById('form-unbook-btn').style.display = "none";
 
     document.getElementById('spanUserLoggedIn').innerText = user.email;
     document.getElementById('loggedInMessage').style.display = "block";
-    document.getElementById('bookingContainer').style.display = "block"
 
     reloadResults();
   }
 });
 
 async function reloadResults(){
-  let userDoc = await getDoc(doc(firestore, "users", auth.currentUser.uid))
+
+  //document.getElementById('bookingContainer').innerHTML = "";
+
+  let phone = "";
+  
+  
+  
+  if(!auth.currentUser) {
+    phone = document.getElementById('txtPhone').value;
+  }else{
+    let userDoc = await getDoc(doc(firestore, "users", auth.currentUser.uid))
+    phone = userDoc.data().phone;
+  }
   
   const bookingsRef = collection(firestore, "bookings");
-
+  
   // Create a query against the collection.
-  const bookingsByUser = query(bookingsRef, where("phone", "==", userDoc.data().phone), orderBy("week"), orderBy("sort"));
+  const bookingsByUser = query(bookingsRef, where("phone", "==", phone), orderBy("week"), orderBy("sort"));
   const querySnapshot = await getDocs(bookingsByUser);
 
   querySnapshot.forEach((doc) => {
@@ -86,7 +95,7 @@ async function reloadResults(){
 
 }
 
-export async function remove_booking(id){
+export async function remove_booking(id) {
 
   const phone_in = document.getElementById('txtPhone').value;
   const date_in = document.getElementById('txtDay').value;
@@ -101,17 +110,12 @@ export async function remove_booking(id){
   });
 
   if(auth.currentUser){
-    console.log("DELITING BOOKING!", id)
-    await deleteDoc(doc(firestore, "bookings", id))
-    reloadResults()
-  }else{
-    
+    console.log("DELITING BOOKING!", id);
+    await deleteDoc(doc(firestore, "bookings", id));
+    reloadResults();
   }
-  
 
-  
-
-
+}
 
 
 //Admin
@@ -207,7 +211,6 @@ onValue(dbref_admin, (snapshot) => {
     }
   });*/
 
-  window.location.pathname == "";
-}
 
-document.getElementById('unbook-btn').addEventListener("click", remove_booking);
+
+document.getElementById('unbook-btn').addEventListener("click", reloadResults);

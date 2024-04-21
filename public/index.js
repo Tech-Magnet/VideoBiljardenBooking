@@ -1,12 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+//import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 import { getFirestore, addDoc, collection, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
-
-//test
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
@@ -31,7 +29,7 @@ const appCheck = initializeAppCheck(app, {
 });
 
 onAuthStateChanged(auth, (user) => {
-  if(user){
+  if(user) {
     document.getElementById('loggedInMessage').style.display = "block";
     document.getElementById('spanUserLoggedIn').innerText = user.email;
     document.getElementById('form-name').style.display = "none";
@@ -44,13 +42,12 @@ const TimeArr =  [];
 const DayArr = [];
 const TableArr = [];
 
-function checkIfExixt(day, time, table){
+function checkIfExixt(day, time, table) {
 
   let found = false;
   let CheckTime = time;
 
-  for(let i = 0; i < DayArr.length; i++){
-
+  for(let i = 0; i < DayArr.length; i++) {
     if (DayArr[i] == day && TimeArr[i] == CheckTime && TableArr[i] == table){
       console.log("SAME DATA AS ON FILE");
       found = true;
@@ -58,7 +55,7 @@ function checkIfExixt(day, time, table){
     }
   }
 
-  if (!found){//If not find matching data in the database return false to symbolice that this time is avalibe
+  if(!found) {//If not find matching data in the database return false to symbolice that this time is avalibe
     return false;
   }
 }
@@ -87,7 +84,7 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   let sort = day_raw.split(" ")[1]
 
   let extraTime;
-  if (day == "Måndag" || day == "Tisdag" || day == "Onsdag" || day == "Torsdag" || day == "Söndag"){
+  if (day == "Måndag" || day == "Tisdag" || day == "Onsdag" || day == "Torsdag" || day == "Söndag") {
     extraTime = false;
   }else if(day == "Fredag" || day == "Lördag"){
     extraTime = true;
@@ -108,12 +105,12 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   }
 
   if (extraTime == false){
-    if (time == "13.0" || time == "13.5" || time == "14.0" || time == "14.5" || endtime >= 25){
+    if (time == "13.0" || time == "13.5" || time == "14.0" || time == "14.5" || endtime >= 25) {
       alert("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig");
       console.log("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
       return;
     }
-  }else if (extraTime == true){
+  }else if (extraTime == true) {
     if(endtime >= 26){
       alert("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig");
       console.log("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x02");
@@ -199,8 +196,6 @@ document.getElementById("bookingForm").addEventListener("submit", async function
     const newPostKey_booking = push(child(ref(database), "/booking")).key;
 
       set(ref(database, "/booking/" + newPostKey_booking), {
-        name: name,
-        phone: phone,
         day: day,
         time: time,
         table: table
