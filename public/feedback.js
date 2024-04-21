@@ -1,5 +1,9 @@
 function sendFeedback(){
 
+  if (document.getElementById('feedback-fld').value == ""){
+    return;
+  }
+
   var feedback_data = "@everyone " + document.getElementById('feedback-fld').value;
 
   const request = new XMLHttpRequest();
