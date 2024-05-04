@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-//import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 import { getFirestore, addDoc, collection, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
@@ -19,7 +19,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-//const database = getDatabase(app);
+const database = getDatabase(app);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 const Performance = getPerformance(app);
@@ -49,7 +49,6 @@ function checkIfExixt(day, time, table) {
 
   for(let i = 0; i < DayArr.length; i++) {
     if (DayArr[i] == day && TimeArr[i] == CheckTime && TableArr[i] == table){
-      console.log("SAME DATA AS ON FILE");
       found = true;
       return true;
     }
@@ -139,18 +138,6 @@ document.getElementById("bookingForm").addEventListener("submit", async function
     logged_in: auth.currentUser != null
   });
 
-  //const newPostKey_admin = push(child(ref(database), "/admin")).key;
-
-  /*set(ref(database, "/admin/" + newPostKey_admin), {
-    name: name,
-    phone: phone,
-    day: day,
-    time: time,
-    table: table,
-    length: length2,
-    endtime: endtime
-  });*/
-
   if(auth.currentUser){
     console.log(auth.currentUser)
 
@@ -167,7 +154,12 @@ document.getElementById("bookingForm").addEventListener("submit", async function
       table: parseInt(table),
       time: parseFloat(time),
       week: week
-    })
+    }).then(() => {
+      console.log("Documant Successfully Added");
+    }).catch((error) => {
+      console.error("An error occured ", error);
+      alert(error);
+    });
   }else{
     await addDoc(collection(firestore, "bookings"), {
       day: day,
@@ -178,31 +170,42 @@ document.getElementById("bookingForm").addEventListener("submit", async function
       phone: phone,
       sort: parseInt(sort),
       table: parseInt(table),
-      time: parseFloat(time) ,
+      time: parseFloat(time),
       week: week
     }).then(() => {
       console.log("Documant Successfully Added");
     }).catch((error) => {
       console.error("An error occured ", error);
       alert(error);
-    })
+    });
   }
 
+  //Write time data to RTDB
 
+  const newNodeKey = push(child(ref(database), "/schedule")).key;
+  
+  set(ref(database, "/schedule/" + newNodeKey), {
+    time: parseFloat(time),
+    endTime: parseFloat(endtime),
+    day: day,
+    week: week,
+    table: parseInt(table)
+  });
 
-  /*for(var i = 0; i < length; i++){
+  for(let i = 0; i < length; i++){
 
-    // Write the data to the database
-    const newPostKey_booking = push(child(ref(database), "/booking")).key;
+    const newNodeKeyTime = push(child(ref(database), "/schedule/time")).key;
 
-      set(ref(database, "/booking/" + newPostKey_booking), {
+      set(ref(database, "/schedule/time/" + newNodeKeyTime), {
+        id: newNodeKey,
         day: day,
-        time: time,
-        table: table
+        time: parseFloat(time),
+        week: week,
+        table: parseInt(table)
       });
 
     time = time + 0.5;
-  }*/
+  }
 
   console.log("DATA INSERTED");
   document.getElementById('Status_p').innerText = 'Bokning tillagd';
@@ -213,44 +216,43 @@ document.getElementById("bookingForm").addEventListener("submit", async function
 });
 
 
-
-
 //READ FROM DATABASE
-
-/*const dbref = ref(database, "booking");
-
-onValue(dbref, (snapshot) => {
-
+const rtdb_ref = ref(database, "schedule/time");
+onValue(rtdb_ref, (snapshot) => {
   const data = snapshot.val();
   const entries = [];
 
-  for (const key in data) {
+  for (const key in data){
     const entry = {
       namef: key,
       dataf: data[key]
     };
-    entries.push(entry); 
+    entries.push(entry);
   }
 
-
-  for (var i = 0; i < entries.length; i++ ){
-
-    if(entries[i].dataf.table == 'Bord_1'){
+  for(let i = 0; i < entries.length; i++){
+    //Week 1
+    if(entries[i].dataf.table == 1 && entries[i].dataf.week == "Denna Vecka"){
       var ID_BUILD = "TT_1_" + entries[i].dataf.time + "_" + entries[i].dataf.day;
       document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-    }else if(entries[i].dataf.table == 'Bord_2'){
+    }
+    else if(entries[i].dataf.table == 2 && entries[i].dataf.week == "Denna Vecka"){
       var ID_BUILD = "TT_2_" + entries[i].dataf.time + "_" + entries[i].dataf.day;
       document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-    }else if(entries[i].dataf.table == 'Bord_3'){
+    }
+    else if(entries[i].dataf.table == 3 && entries[i].dataf.week == "Denna Vecka"){
       var ID_BUILD = "TT_3_" + entries[i].dataf.time + "_" + entries[i].dataf.day;
       document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
-    }else if(entries[i].dataf.table == 'Bord_1_c'){
+    }//Week 2
+    else if(entries[i].dataf.table == 1 && entries[i].dataf.week == "Nästa Vecka"){
       var ID_BUILD = "TT_1_" + entries[i].dataf.time + "_" + entries[i].dataf.day + "_c";
       document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-    }else if(entries[i].dataf.table == 'Bord_2_c'){
+    }
+    else if(entries[i].dataf.table == 2 && entries[i].dataf.week == "Nästa Vecka"){
       var ID_BUILD = "TT_2_" + entries[i].dataf.time + "_" + entries[i].dataf.day + "_c";
       document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
-    }else if(entries[i].dataf.table == 'Bord_3_c'){
+    }
+    else if(entries[i].dataf.table == 3 && entries[i].dataf.week == "Nästa Vecka"){
       var ID_BUILD = "TT_3_" + entries[i].dataf.time + "_" + entries[i].dataf.day + "_c";
       document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
     }
@@ -259,4 +261,4 @@ onValue(dbref, (snapshot) => {
     DayArr.push(entries[i].dataf.day);
     TableArr.push(entries[i].dataf.table);
   }
-});*/
+});

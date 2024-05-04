@@ -43,11 +43,9 @@ onAuthStateChanged(auth, async (user) => {
 
 async function reloadResults(){
 
-  //document.getElementById('bookingContainer').innerHTML = "";
+  document.getElementById('bookingContainer').innerHTML = "";
 
   let phone = "";
-  
-  
   
   if(!auth.currentUser) {
     phone = document.getElementById('txtPhone').value;
@@ -70,7 +68,7 @@ async function reloadResults(){
     let cardBase = document.createElement("div");
     cardBase.classList.add("bookingCard");
     cardBase.id = doc.id;
-    cardBase.setAttribute("onClick", "window.removeBooking('" + doc.id + "')")
+    cardBase.setAttribute("onClick", "window.removeBooking('" + doc.id + "', " + doc.data().time + ", " + doc.data().endtime + ", '" + doc.data().day + "', '" + doc.data().week + "', " + doc.data().table + ")");
 
     let dayDisplay = document.createElement("h3");
     dayDisplay.innerHTML = "Dag: <span>" + doc.data().day + "</span>";
@@ -95,122 +93,94 @@ async function reloadResults(){
 
 }
 
-export async function remove_booking(id) {
-
-  const phone_in = document.getElementById('txtPhone').value;
-  const date_in = document.getElementById('txtDay').value;
-  const week_in = document.getElementById('txtWeek').value;
-  const table_in = document.getElementById('txtTable').value;
+export async function remove_booking(id, time, end_time, day, week, table) {
 
   logEvent(analytics, 'booking_removed', {
-    booking_made: 'false',
-    day: date_in,
-    week: week_in,
-    table: table_in
+    booking_made: 'false'
   });
 
-  if(auth.currentUser){
-    console.log("DELITING BOOKING!", id);
-    await deleteDoc(doc(firestore, "bookings", id));
-    reloadResults();
-  }
+  await deleteDoc(doc(firestore, "bookings", id));
+  reloadResults();
 
-}
+  //Remove From Schedule Board (RTDB)
 
-
-//Admin
-//console.log("Deleting Admin Entry");
-
-/*const dbref_admin = ref(database, "admin");
-
-onValue(dbref_admin, (snapshot) => {
-
-  const data = snapshot.val();
-  const entries = [];
-
-  for (const key in data) {
-    const entry = {
-        namef: key,
-        dataf: data[key]
-      };
-    entries.push(entry); 
-  }
-
-  for (var i = 0; i < entries.length; i++ ){
-
-    let key = entries[i].namef;
-    let phone_db = entries[i].dataf.phone;
-    let date_db = entries[i].dataf.day;
-    let table_db = entries[i].dataf.table;
-
-    let tmp_table_in = table_in;
-
-    if(week_in == "n"){
-      tmp_table_in = tmp_table_in + "_c";
-    }
-
-    if(phone_db == phone_in && date_db == date_in && table_db == tmp_table_in){
-
-      set(ref(database, "/admin/" + key), {
-        day: null,
-        endtime: null,
-        length: null,
-        name: null,
-        phone: null,
-        table: null,
-        time: null
-      });
-      console.log("TIME UNBOOKED FROM ADMIN", phone_in, date_in, table_in, week_in);
-    }else{
-      console.error("En error occured or no admin entry found")
-    }
-  }
-});*/
+  let timeID; // <-- Parent ID
 
 
-  //Booking
-  /*const dbref_booking = ref(database, "booking");
-
-  onValue(dbref_booking, (snapshot) => {
+  //Find and Clear Parent
+  onValue(ref(database, "schedule"), (snapshot) => {
 
     const data = snapshot.val();
     const entries = [];
 
     for (const key in data) {
       const entry = {
-          namef: key,
-          dataf: data[key]
-        };
+        namef: key,
+        dataf: data[key]
+      };
       entries.push(entry); 
     }
 
-    for (var i = 0; i < entries.length; i++ ){
+    for (let i = 0; i < entries.length; i++ ){
 
       let key = entries[i].namef;
-      let phone_db = entries[i].dataf.phone;
-      let date_db = entries[i].dataf.day;
+
+      let time_db = entries[i].dataf.time;
+      let end_time_db = entries[i].dataf.endTime;
+      let day_db = entries[i].dataf.day;
+      let week_db = entries[i].dataf.week;
       let table_db = entries[i].dataf.table;
 
-      let tmp_table_in = table_in;
+      
 
-      if(week_in == "n"){
-        tmp_table_in = tmp_table_in + "_c";      
-      }
+      if(time_db == time && end_time_db == end_time && day_db == day && week_db == week && table_db == table){
 
-      if(phone_db == phone_in && date_db == date_in && table_db == tmp_table_in){
+        timeID = key;
 
-        set(ref(database, "/booking/" + key), {
+        set(ref(database, "/schedule/" + key), {
+          time: null,
+          endTime: null,
           day: null,
-          name: null,
-          phone: null,
-          table: null,
-          time: null
+          week: null,
+          table: null
         });
-        console.log("TIME UNBOOKED FROM BOOKING", phone_in, date_in, table_in, week_in);
       }
     }
-  });*/
+  
+
+    //Find and clear all time cards based on Parent ID
+    onValue(ref(database, "schedule/time"), (snapshot) => {
+
+      const data = snapshot.val();
+      const entries = [];
+
+      for (const key in data) {
+        const entry = {
+          namef: key,
+          dataf: data[key]
+        };
+        entries.push(entry); 
+      }
+
+      for (let i = 0; i < entries.length; i++ ){
+      
+        let key = entries[i].namef;
+        let id_db = entries[i].dataf.id;
 
 
+        if(id_db == timeID){
+        
+          set(ref(database, "/schedule/time/" + key), {
+            id: null,
+            day: null,
+            time: null,
+            week: null,
+            table: null
+          });
+        }
+      }
+    });
+  });
+}
 
 document.getElementById('unbook-btn').addEventListener("click", reloadResults);

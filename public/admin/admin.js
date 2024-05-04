@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-import { getFirebase, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+import { getFirestore, getDoc, doc, collection, query, where, orderBy, getDocs} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
 
@@ -21,7 +21,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const database = getDatabase(app);
-const firebase = getFirebase(app);
+const firestore = getFirestore(app);
 const Performance = getPerformance(app);
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider('6LcgzkcpAAAAAGBLYci24KiGkfRRYmUbAW58_84W'),
@@ -29,9 +29,9 @@ const appCheck = initializeAppCheck(app, {
 });
 
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if(user){//Logged in
-    const userDoc = getDoc(doc(firestore, "users", user.uid));
+    const userDoc = await getDoc(doc(firestore, "users", user.uid));
     if(userDoc.data().isAdmin == true){
       document.getElementById('Admin-Div').style.display = "block";
     }
@@ -52,7 +52,6 @@ const logout = async () => {
 }
 
 function remove_member(phoneToDelete){
-  console.log("Deleting Member", phoneToDelete);
 
     const dbref = ref(database, "members");
 
@@ -68,10 +67,6 @@ function remove_member(phoneToDelete){
         };
         entries.push(entry); 
       }
-
-      console.log(entries);
-
-
 
       for (var i = 0; i < entries.length; i++ ){
 
@@ -154,150 +149,132 @@ const AddMember = async () => {
 document.getElementById('btnCreate_member').addEventListener("click", AddMember);
 
 
-window.onload = () => {
+window.onload = async () => {
 
   //Week 1
-  var tableBody1 = document.querySelector(".tb_1");//MONDAY
-  var tableBody2 = document.querySelector(".tb_2");//TUESDAY
-  var tableBody3 = document.querySelector(".tb_3");//WEDNESDAY
-  var tableBody4 = document.querySelector(".tb_4");//THURSDAY
-  var tableBody5 = document.querySelector(".tb_5");//FRIDAY
-  var tableBody6 = document.querySelector(".tb_6");//SATURDAY
-  var tableBody7 = document.querySelector(".tb_7");//SUNDAY
+  let tableBody1 = document.querySelector(".tb_1");//MONDAY
+  let tableBody2 = document.querySelector(".tb_2");//TUESDAY
+  let tableBody3 = document.querySelector(".tb_3");//WEDNESDAY
+  let tableBody4 = document.querySelector(".tb_4");//THURSDAY
+  let tableBody5 = document.querySelector(".tb_5");//FRIDAY
+  let tableBody6 = document.querySelector(".tb_6");//SATURDAY
+  let tableBody7 = document.querySelector(".tb_7");//SUNDAY
   
   /*
   //Week 2
-  var tableBody1_2 = document.querySelector(".tb_1_2");//MONDAY
-  var tableBody2_2 = document.querySelector(".tb_2_2");//TUESDAY
-  var tableBody3_2 = document.querySelector(".tb_3_2");//WEDNESDAY
-  var tableBody4_2 = document.querySelector(".tb_4_2");//THURSDAY
-  var tableBody5_2 = document.querySelector(".tb_5_2");//FRIDAY
-  var tableBody6_2 = document.querySelector(".tb_6_2");//SATURDAY
-  var tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY
+  let tableBody1_2 = document.querySelector(".tb_1_2");//MONDAY
+  let tableBody2_2 = document.querySelector(".tb_2_2");//TUESDAY
+  let tableBody3_2 = document.querySelector(".tb_3_2");//WEDNESDAY
+  let tableBody4_2 = document.querySelector(".tb_4_2");//THURSDAY
+  let tableBody5_2 = document.querySelector(".tb_5_2");//FRIDAY
+  let tableBody6_2 = document.querySelector(".tb_6_2");//SATURDAY
+  let tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY
   */
 
-  const dbref = ref(database, "admin");
+  // Create a query against the collection.
+  const bookingsByUser = query(collection(firestore, "bookings"), where("week", "==", "Denna Vecka"), orderBy("sort"));
+  const querySnapshot = await getDocs(bookingsByUser);
 
-  onValue(dbref, (snapshot) => {
+  console.log(querySnapshot);
 
-    const data = snapshot.val();
-    const entries = [];
+  querySnapshot.forEach((doc) => {
 
-    for (const key in data) {
-      const entry = {
-          namef: key,
-          dataf: data[key]
-        };
-      entries.push(entry); 
-    }
+    console.log(doc.data());
 
-    for (var i = 0; i < entries.length; i++ ){
-
-      let key = entries[i].namef;
-      //Data
-      let day = entries[i].dataf.day;
-      let endtime = entries[i].dataf.endtime;
-      let length = entries[i].dataf.length;
-      let name = entries[i].dataf.name;
-      let phone = entries[i].dataf.phone;
-      let table = entries[i].dataf.table;
-      let time = entries[i].dataf.time;
-
-      const dbref = ref(database, "members");
+    let day = doc.data().day;
+    let endtime = doc.data().endtime;
+    let length = doc.data().length;
+    let name = doc.data().name;
+    let phone = doc.data().phone;
+    let table = doc.data().table;
+    let time = doc.data().time;
+    //Checks if booking is made by member
+    const dbref = ref(database, "members");
+    let isMember = "NEJ";
 
       onValue(dbref, (snapshot) => {
-
+        
+        let isMember = "NEJ";
+        
         const data = snapshot.val();
-        const entries2 = [];
+        const entries = [];
 
         for (const key in data) {
           const entry = {
             namef: key,
             dataf: data[key]
           };
-          entries2.push(entry); 
+          entries.push(entry); 
         }
 
+        isMember = "NEJ";
 
-        let isMember = "NEJ";
+        for (var i = 0; i < entries.length; i++ ){
 
-        for (var i = 0; i < entries2.length; i++ ){
+          let member_phone = entries[i].dataf.phone;
 
-          let key = entries2[i].namef;
-          let data = entries2[i].dataf.phone;
-
-      
-
-          if(data == phone){
+          if(member_phone == phone){
             isMember = "JA";
           }
-
-      
         }
-
-        var newLine = document.createElement("tr");
-
-        var nameLine = document.createElement("td");
-        nameLine.innerText = name;
-        
-        var phoneLine = document.createElement("td");
-        phoneLine.innerText = phone;
-
-        var dayLine = document.createElement("td");
-        dayLine.innerText = day;
-
-        var timeLine = document.createElement("td");
-        timeLine.innerText = time;
-
-        var endLine = document.createElement("td");
-        endLine.innerText = endtime;
-
-        var lengthLine = document.createElement("td");
-        lengthLine.innerText = length;
-
-        var tableLine = document.createElement("td");
-        tableLine.innerText = table;
-
-        var weekLine = document.createElement("td");
-        weekLine.innerText = "none";
-
-        var memberLine = document.createElement("td");
-        memberLine.innerText = isMember;
-
-        newLine.appendChild(nameLine);
-        newLine.appendChild(phoneLine);
-        newLine.appendChild(dayLine);
-        newLine.appendChild(timeLine);
-        newLine.appendChild(endLine);
-        newLine.appendChild(lengthLine);
-        newLine.appendChild(tableLine);
-        //newLine.appendChild(weekLine);
-        newLine.appendChild(memberLine);
-
-        if(!table.includes("_c")){
-          if(day == "mon"){
-            tableBody1.appendChild(newLine);
-          }else if(day == "tis"){
-            tableBody2.appendChild(newLine);
-          }else if (day == "ons"){
-            tableBody3.appendChild(newLine);
-          }else if(day == "tor"){
-            tableBody4.appendChild(newLine);
-          }else if(day == "fre"){
-            tableBody5.appendChild(newLine);
-          }else if(day == "lor"){
-            tableBody6.appendChild(newLine);
-          }else if(day == "son"){
-            tableBody7.appendChild(newLine);
-          }
-        }
-
       });
-    }
+
+
+      var newLine = document.createElement("tr");
+
+      var nameLine = document.createElement("td");
+      nameLine.innerText = name;
+      
+      var phoneLine = document.createElement("td");
+      phoneLine.innerText = phone;
+
+      var dayLine = document.createElement("td");
+      dayLine.innerText = day;
+
+      var timeLine = document.createElement("td");
+      timeLine.innerText = time;
+
+      var endLine = document.createElement("td");
+      endLine.innerText = endtime;
+
+      var lengthLine = document.createElement("td");
+      lengthLine.innerText = length;
+
+      var tableLine = document.createElement("td");
+      tableLine.innerText = table;
+
+      var memberLine = document.createElement("td");
+      memberLine.innerText = isMember;
+
+      newLine.appendChild(nameLine);
+      newLine.appendChild(phoneLine);
+      newLine.appendChild(dayLine);
+      newLine.appendChild(timeLine);
+      newLine.appendChild(endLine);
+      newLine.appendChild(lengthLine);
+      newLine.appendChild(tableLine);
+      newLine.appendChild(memberLine);
+      
+      if(day == "Måndag"){
+        tableBody1.appendChild(newLine);
+      }else if(day == "Tisdag"){
+        tableBody2.appendChild(newLine);
+      }else if (day == "Onsdag"){
+        tableBody3.appendChild(newLine);
+      }else if(day == "Torsdag"){
+        tableBody4.appendChild(newLine);
+      }else if(day == "Fredag"){
+        tableBody5.appendChild(newLine);
+      }else if(day == "Lördag"){
+        tableBody6.appendChild(newLine);
+      }else if(day == "Söndag"){
+        tableBody7.appendChild(newLine);
+      }
+
+
   });
 
   //Display Members
-
   const dbref2 = ref(database, "members");
 
   onValue(dbref2, (snapshot) => {
@@ -346,10 +323,7 @@ window.onload = () => {
       newLine.appendChild(nextLine);
       newLine.appendChild(deleteLine);
 
-
       document.getElementById("pay_tb_1").appendChild(newLine);
-
-      
     }
   });
 
