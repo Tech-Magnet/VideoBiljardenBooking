@@ -150,7 +150,7 @@ document.getElementById("bookingForm").addEventListener("submit", async function
       length: parseFloat(length2),
       name: userDoc.data().name,
       phone: userDoc.data().phone,
-      sort:  sort,
+      sort:  parseInt(sort),
       table: parseInt(table),
       time: parseFloat(time),
       week: week

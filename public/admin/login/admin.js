@@ -24,9 +24,9 @@ const appCheck = initializeAppCheck(app, {
   isTokenAutoRefreshEnabled: true
 });
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if(user){ //Logged In
-    const userDoc = getDoc(doc(firestore, "users", user.uid));
+    const userDoc = await getDoc(doc(firestore, "users", user.uid));
     if(userDoc.data().isAdmin == true){
       window.location.pathname = "admin/";
     }
@@ -47,8 +47,7 @@ const loginEmailPassword = async () => {
   }
 
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-    console.log(userCredential.user);
+    await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
   }catch (error){
     console.error("An Error Occured", error);
     document.getElementById('login-email').style.borderColor = "#ff0000";
@@ -60,5 +59,3 @@ const loginEmailPassword = async () => {
 }
 
 document.getElementById('btnLogin').addEventListener("click", loginEmailPassword);
-
-

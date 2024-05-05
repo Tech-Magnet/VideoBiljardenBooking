@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-import { getFirestore, getDoc, doc, collection, query, where, orderBy, getDocs} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+import { getFirestore, getDoc, updateDoc, doc, collection, query, where, orderBy, getDocs, onSnapshot, FieldValue} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
 
@@ -51,7 +51,7 @@ const logout = async () => {
   }
 }
 
-function remove_member(phoneToDelete){
+/*function remove_member(phoneToDelete){
 
     const dbref = ref(database, "members");
 
@@ -86,64 +86,60 @@ function remove_member(phoneToDelete){
         }
       }
     });
-}
+}*/
 
 const AddMember = async () => {
   console.log("Adding New Member...");
-  var name_m = document.getElementById('member_name').value;
-  var phone_m = document.getElementById('member_phone').value;
-  var last = document.getElementById('member_last_payment').value;
-  var next = document.getElementById('member_next_payment').value;
 
-  next = parseInt(next);
+  const name = document.getElementById("memberName").value;
+  const phone = document.getElementById("memberPhone").value;
+  let last = document.getElementById("memberLast").value;
+  const length = parseInt(document.getElementById("member_length").value);
 
-  if (name_m == "" || phone_m == ""){
-    alert("Namn och Tel nr måste vara ifyllda");
+  if(phone.length != 10 || name < 2){
+    alert("Ogilight Telefon Nummer eller Namn");
     console.log("Data Transaction Cancelled");
     return;
   }
-
-  if(phone_m.length != 10 || name_m < 2){
-    alert("Ogilight Telefon Nummer eller Namn");
-    console.log("Data Transaction Cancelled");
-  }
-
-  // Get the current date
-  var currentDate;
-
+  
   if(last == ""){
-    currentDate = new Date();
+    last = new Date();
   }else{
-    currentDate = new Date(last);
+    last = new Date(last);
   }
 
-  // Calculate the next month's date
-  const nextMonth = new Date(currentDate);
-  nextMonth.setMonth(currentDate.getMonth() + next);
+  const expiryDate = new Date(last.getFullYear(), last.getMonth() + length, last.getDate());
 
-  // Handle cases where the day of the next month might not exist (e.g., Jan 31st to Feb 28th/29th)
-  if (currentDate.getDate() > nextMonth.getDate()) {
-      nextMonth.setDate(0); // This will set the date to the last day of the previous month
+  const membersDoc  = await getDoc(doc(firestore, "users", "members"))
+
+  let membersArray = [];
+
+  for (let i = 0; i < membersDoc.data().members.length; i++){
+    membersArray.push(membersDoc.data().members[i])
   }
 
-  var next_m = nextMonth.toISOString().split('T')[0];
-  var last_m = currentDate.toISOString().split('T')[0];
-
-  //var next = current_date;
-  console.log(name_m);
-  console.log(phone_m);
-
-  const newPostKey = push(child(ref(database), "/members")).key;
-
-  set(ref(database, "/members" + '/' + newPostKey), {
-    name: name_m,
-    phone: phone_m,
-    next: last_m,
-    last: next_m
+  membersArray.push({
+    name: name,
+    phone: phone,
+    lastDate: last,
+    expiryDate: expiryDate
   });
 
+  await updateDoc(doc(firestore, "users", "members"), {
+    "members": membersArray
+  });
+
+  const membersUserDocs = query(collection(firestore, "users"), where("phone", "==", phone));
+  const querySnapshot = await getDocs(membersUserDocs);
+
+  querySnapshot.forEach( async (document) => {
+    updateDoc(doc(firestore, "users", document.id), {
+      "isMember": true,
+      "memberExpiryDate": expiryDate
+    });
+  });
+  
   console.log("Member Added");
-  window.reload();
 }
 
 document.getElementById('btnCreate_member').addEventListener("click", AddMember);
@@ -171,15 +167,22 @@ window.onload = async () => {
   let tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY
   */
 
-  // Create a query against the collection.
-  const bookingsByUser = query(collection(firestore, "bookings"), where("week", "==", "Denna Vecka"), orderBy("sort"));
-  const querySnapshot = await getDocs(bookingsByUser);
+  //Display Bookings
+  const bookingsByUser = query(collection(firestore, "bookings"), where("week", "==", "Denna Vecka"), orderBy("sort"), orderBy("time"));
+  const unsubscribe = onSnapshot(bookingsByUser, (querySnapshot) => {
 
-  console.log(querySnapshot);
+    //Clears Current Table
+    tableBody1.innerHTML = "";
+    tableBody2.innerHTML = "";
+    tableBody3.innerHTML = "";
+    tableBody4.innerHTML = "";
+    tableBody5.innerHTML = "";
+    tableBody6.innerHTML = "";
+    tableBody7.innerHTML = "";
 
-  querySnapshot.forEach((doc) => {
+    querySnapshot.forEach( async (doc) => {
 
-    console.log(doc.data());
+    let isMember = "ERRoR Could Not Read :(";
 
     let day = doc.data().day;
     let endtime = doc.data().endtime;
@@ -188,36 +191,16 @@ window.onload = async () => {
     let phone = doc.data().phone;
     let table = doc.data().table;
     let time = doc.data().time;
+
     //Checks if booking is made by member
-    const dbref = ref(database, "members");
-    let isMember = "NEJ";
+    const memberQuery = query(collection(firestore, "users"), where("phone", "==", phone), where("isMember", "==", true))
+    const querySnapshot = await getDocs(memberQuery);
 
-      onValue(dbref, (snapshot) => {
-        
-        let isMember = "NEJ";
-        
-        const data = snapshot.val();
-        const entries = [];
-
-        for (const key in data) {
-          const entry = {
-            namef: key,
-            dataf: data[key]
-          };
-          entries.push(entry); 
-        }
-
-        isMember = "NEJ";
-
-        for (var i = 0; i < entries.length; i++ ){
-
-          let member_phone = entries[i].dataf.phone;
-
-          if(member_phone == phone){
-            isMember = "JA";
-          }
-        }
-      });
+    if(!querySnapshot.empty){
+      isMember = "JA";
+    }else{
+      isMember = "NEJ"
+    }
 
 
       var newLine = document.createElement("tr");
@@ -254,6 +237,8 @@ window.onload = async () => {
       newLine.appendChild(lengthLine);
       newLine.appendChild(tableLine);
       newLine.appendChild(memberLine);
+
+      
       
       if(day == "Måndag"){
         tableBody1.appendChild(newLine);
@@ -270,65 +255,46 @@ window.onload = async () => {
       }else if(day == "Söndag"){
         tableBody7.appendChild(newLine);
       }
-
-
+    });
   });
 
   //Display Members
-  const dbref2 = ref(database, "members");
+  const membersDoc = await getDoc(doc(firestore, "users", "members"));
+  membersDoc.data().members.forEach((member) => {
 
-  onValue(dbref2, (snapshot) => {
+    const name = member.name;
+    const phone = member.phone;
+    const lastDate = member.lastDate.toDate().toISOString().split('T')[0];
+    const expiryDate = member.expiryDate.toDate().toISOString().split('T')[0];;
 
-    const data = snapshot.val();
-    const entries = [];
+    let newLine = document.createElement("tr");
 
-    for (const key in data) {
-      const entry = {
-        namef: key,
-        dataf: data[key]
-      };
-      entries.push(entry); 
-    }
+    let nameLine = document.createElement("td");
+    nameLine.innerText = name;
 
+    let phoneLine = document.createElement("td");
+    phoneLine.innerText = phone;
 
-    for (var i = 0; i < entries.length; i++ ){
+    let lastLine = document.createElement("td");
+    lastLine.innerText = lastDate;
 
-      let key = entries[i].namef;
+    let expiryLine = document.createElement("td");
+    expiryLine.innerText = expiryDate;
 
-      let name = entries[i].dataf.name;
-      let phone = entries[i].dataf.phone;
-      let last = entries[i].dataf.next;
-      let next = entries[i].dataf.last;
+    let deleteLine = document.createElement("td");
+    deleteLine.innerHTML = "<button id='delete-member' class='delete_member_btn' member_phone_number=" + phone + ">Radera</button>";
 
-      var newLine = document.createElement("tr");
+    newLine.appendChild(nameLine);
+    newLine.appendChild(phoneLine);
+    newLine.appendChild(lastLine);
+    newLine.appendChild(expiryLine);
+    newLine.appendChild(deleteLine);
 
-      var nameLine = document.createElement("td");
-      nameLine.innerText = name;
+    document.getElementById("membersList").appendChild(newLine);
 
-      var phoneLine = document.createElement("td");
-      phoneLine.innerText = phone;
-
-      var lastLine = document.createElement("td");
-      lastLine.innerText = last;
-
-      var nextLine = document.createElement("td");
-      nextLine.innerText = next;
-
-      var deleteLine = document.createElement("td");
-      deleteLine.innerHTML = "<button id='delete-member' class='delete_member_btn' member_phone_number=" + phone + ">Radera</button>";
-
-      newLine.appendChild(nameLine);
-      newLine.appendChild(phoneLine);
-      newLine.appendChild(lastLine);
-      newLine.appendChild(nextLine);
-      newLine.appendChild(deleteLine);
-
-      document.getElementById("pay_tb_1").appendChild(newLine);
-    }
   });
 
   document.getElementById('btnLogOut').addEventListener("click", logout);
-
 
   //Adds a delay for the delete buttons to be correctly added
   setTimeout(function() {
@@ -340,9 +306,7 @@ window.onload = async () => {
       elements[i].addEventListener('click', function () {
       remove_member(elements[i].getAttribute('member_phone_number'));
       });
-      
     }
-    console.log("Elements Loaded");
   }, 1000);
 
 }
