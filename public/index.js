@@ -90,15 +90,10 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   }
 
   if(!auth.currentUser){
-    if(name.length < 2){
+    if(name.length < 2 || phone.length != 10){
       document.getElementById('txtName').style.borderColor = '#ff0000';
-      alert("Ogiltigt Namn");
-      return;
-    }
-
-    if(phone.length != 10){
       document.getElementById('txtPhone').style.borderColor = '#ff0000';
-      alert("Ogiltight Telefon Nummer");
+      alert("Ogiltigt Namn Eller Telefon Nummer");
       return;
     }
   }

@@ -7,6 +7,10 @@
     <link rel="icon" href="/img/icon.png">
     <link rel="stylesheet" href="style.css">
     <script defer type="module" src="admin.js"></script>
+    <script type="module">
+      import { removeMember } from "./admin.js";
+      window.removeMember = removeMember;
+    </script>
 </head>
 <body>
   <div id="Admin-Div" style="display: block;">

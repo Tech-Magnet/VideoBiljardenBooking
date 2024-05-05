@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-import { getFirestore, getDoc, updateDoc, doc, collection, query, where, orderBy, getDocs, onSnapshot, FieldValue} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, collection, query, where, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
 
@@ -51,44 +51,32 @@ const logout = async () => {
   }
 }
 
-/*function remove_member(phoneToDelete){
+export async function removeMember(uid){
 
-    const dbref = ref(database, "members");
+  const currentDate = new Date();
+  //remove isMember tag from userDoc
+  await updateDoc(doc(firestore, "users", uid), {
+    "isMember": false,
+    "memberExpiryDate": currentDate
+  });
 
-    onValue(dbref, (snapshot) => {
+  let memberArray = [];
 
-      const data = snapshot.val();
-      const entries = [];
-
-      for (const key in data) {
-        const entry = {
-          namef: key,
-          dataf: data[key]
-        };
-        entries.push(entry); 
+  const memberDoc = await getDoc(doc(firestore, "users", "members"));
+  if(!memberDoc.data().members == null){
+    for(let i = 0; i < memberDoc.data().members.length; i++){
+      if(memberDoc.data().members[i].uid != uid){
+        memberArray.push(memberDoc.data().members[i])
       }
+    }
+  }
 
-      for (var i = 0; i < entries.length; i++ ){
+  await updateDoc(doc(firestore, "users", "members"), {
+    "members": memberArray
+  });
+}
 
-        let key = entries[i].namef;
-        let data = entries[i].dataf.phone;
-
-        if(data == phoneToDelete){
-
-          set(ref(database, "/members" + '/' + key), {
-            name: null,
-            phone: null,
-            next: null,
-            last: null
-          });
-          console.log("MEMBER DELETED");
-          window.reload();
-        }
-      }
-    });
-}*/
-
-const AddMember = async () => {
+const addMember = async () => {
   console.log("Adding New Member...");
 
   const name = document.getElementById("memberName").value;
@@ -114,37 +102,56 @@ const AddMember = async () => {
 
   let membersArray = [];
 
+  //checks if member list is empty
   for (let i = 0; i < membersDoc.data().members.length; i++){
-    membersArray.push(membersDoc.data().members[i])
+    membersArray.push(membersDoc.data().members[i]);
+  }
+
+  const membersUserDocs = query(collection(firestore, "users"), where("phone", "==", phone));
+  const querySnapshot = await getDocs(membersUserDocs);
+  let memberId;
+
+  if(querySnapshot.empty){
+
+    const generatedDocId =  await generateUniqeDocId();
+    memberId = generatedDocId;
+
+    await setDoc(doc(firestore, "users", generatedDocId),{
+      "name": name,
+      "phone": phone,
+      "isMember": true,
+      "memberExpiryDate": expiryDate
+    });
+  }else{
+    //adds isMember tag to user Docs
+    querySnapshot.forEach( async (document) => {
+      memberId = document.id;
+      updateDoc(doc(firestore, "users", document.id), {
+        "isMember": true,
+        "memberExpiryDate": expiryDate
+      });
+    });
   }
 
   membersArray.push({
     name: name,
     phone: phone,
     lastDate: last,
-    expiryDate: expiryDate
+    expiryDate: expiryDate,
+    uid: memberId
   });
 
   await updateDoc(doc(firestore, "users", "members"), {
     "members": membersArray
   });
 
-  const membersUserDocs = query(collection(firestore, "users"), where("phone", "==", phone));
-  const querySnapshot = await getDocs(membersUserDocs);
-
-  querySnapshot.forEach( async (document) => {
-    updateDoc(doc(firestore, "users", document.id), {
-      "isMember": true,
-      "memberExpiryDate": expiryDate
-    });
-  });
+  
   
   console.log("Member Added");
 }
 
-document.getElementById('btnCreate_member').addEventListener("click", AddMember);
-
-
+document.getElementById('btnCreate_member').addEventListener("click", addMember);
+  
 window.onload = async () => {
 
   //Week 1
@@ -155,7 +162,7 @@ window.onload = async () => {
   let tableBody5 = document.querySelector(".tb_5");//FRIDAY
   let tableBody6 = document.querySelector(".tb_6");//SATURDAY
   let tableBody7 = document.querySelector(".tb_7");//SUNDAY
-  
+
   /*
   //Week 2
   let tableBody1_2 = document.querySelector(".tb_1_2");//MONDAY
@@ -182,26 +189,25 @@ window.onload = async () => {
 
     querySnapshot.forEach( async (doc) => {
 
-    let isMember = "ERRoR Could Not Read :(";
+      let isMember = "ERRoR Could Not Read :(";
 
-    let day = doc.data().day;
-    let endtime = doc.data().endtime;
-    let length = doc.data().length;
-    let name = doc.data().name;
-    let phone = doc.data().phone;
-    let table = doc.data().table;
-    let time = doc.data().time;
+      let day = doc.data().day;
+      let endtime = doc.data().endtime;
+      let length = doc.data().length;
+      let name = doc.data().name;
+      let phone = doc.data().phone;
+      let table = doc.data().table;
+      let time = doc.data().time;
 
-    //Checks if booking is made by member
-    const memberQuery = query(collection(firestore, "users"), where("phone", "==", phone), where("isMember", "==", true))
-    const querySnapshot = await getDocs(memberQuery);
+      //Checks if booking is made by member
+      const memberQuery = query(collection(firestore, "users"), where("phone", "==", phone), where("isMember", "==", true))
+      const querySnapshot = await getDocs(memberQuery);
 
-    if(!querySnapshot.empty){
-      isMember = "JA";
-    }else{
-      isMember = "NEJ"
-    }
-
+      if(!querySnapshot.empty){
+        isMember = "JA";
+      }else{
+        isMember = "NEJ"
+      }
 
       var newLine = document.createElement("tr");
 
@@ -238,8 +244,6 @@ window.onload = async () => {
       newLine.appendChild(tableLine);
       newLine.appendChild(memberLine);
 
-      
-      
       if(day == "Måndag"){
         tableBody1.appendChild(newLine);
       }else if(day == "Tisdag"){
@@ -264,6 +268,7 @@ window.onload = async () => {
 
     const name = member.name;
     const phone = member.phone;
+    const uid = member.uid;
     const lastDate = member.lastDate.toDate().toISOString().split('T')[0];
     const expiryDate = member.expiryDate.toDate().toISOString().split('T')[0];;
 
@@ -282,7 +287,7 @@ window.onload = async () => {
     expiryLine.innerText = expiryDate;
 
     let deleteLine = document.createElement("td");
-    deleteLine.innerHTML = "<button id='delete-member' class='delete_member_btn' member_phone_number=" + phone + ">Radera</button>";
+    deleteLine.innerHTML = "<button id='delete-member' class='delete_member_btn' onclick='window.removeMember(" + '"' +  uid + '"' + ")'>Radera</button>";
 
     newLine.appendChild(nameLine);
     newLine.appendChild(phoneLine);
@@ -297,7 +302,7 @@ window.onload = async () => {
   document.getElementById('btnLogOut').addEventListener("click", logout);
 
   //Adds a delay for the delete buttons to be correctly added
-  setTimeout(function() {
+  /*setTimeout(function() {
 
     const elements = document.getElementsByClassName('delete_member_btn');
     
@@ -307,6 +312,19 @@ window.onload = async () => {
       remove_member(elements[i].getAttribute('member_phone_number'));
       });
     }
-  }, 1000);
+  }, 1000);*/
 
+}
+
+async function generateUniqeDocId (){
+  let generatedID = Math.random().toString(36).slice(2, 15);
+  generatedID = "temp_" + generatedID;
+
+  const docSnap = await getDoc(doc(firestore, "users", generatedID));
+
+  if (docSnap.exists()) {
+    return generateUniqeDocId();
+  }else{
+    return(generatedID);
+  }
 }
