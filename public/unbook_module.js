@@ -96,7 +96,7 @@ async function reloadResults(){
 export async function remove_booking(id, time, end_time, day, week, table) {
 
   logEvent(analytics, 'booking_removed', {
-    booking_made: 'false'
+    booking_removed: 'true'
   });
 
   await deleteDoc(doc(firestore, "bookings", id));
