@@ -172,7 +172,7 @@ window.onload = async () => {
   */
 
   //Display Bookings
-  /*const bookingsByUser = query(collection(firestore, "bookings"), where("week", "==", "Denna Vecka"), orderBy("sort"), orderBy("time"));
+  const bookingsByUser = query(collection(firestore, "bookings"), where("week", "==", "Denna Vecka"), orderBy("sort"), orderBy("time"));
   const unsubscribe = onSnapshot(bookingsByUser, (querySnapshot) => {
 
     //Clears Current Table
@@ -257,7 +257,7 @@ window.onload = async () => {
         tableBody7.appendChild(newLine);
       }
     });
-  });*/
+  });
 
   //Display Members
 
@@ -303,19 +303,6 @@ window.onload = async () => {
   
 
   document.getElementById('btnLogOut').addEventListener("click", logout);
-
-  //Adds a delay for the delete buttons to be correctly added
-  /*setTimeout(function() {
-
-    const elements = document.getElementsByClassName('delete_member_btn');
-    
-    for (let i = 0; i < elements.length; i++){
-
-      elements[i].addEventListener('click', function () {
-      remove_member(elements[i].getAttribute('member_phone_number'));
-      });
-    }
-  }, 1000);*/
 
 }
 
