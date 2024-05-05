@@ -52,7 +52,6 @@ const logout = async () => {
 }
 
 export async function removeMember(uid){
-
   const currentDate = new Date();
   //remove isMember tag from userDoc
   await updateDoc(doc(firestore, "users", uid), {
@@ -63,11 +62,9 @@ export async function removeMember(uid){
   let memberArray = [];
 
   const memberDoc = await getDoc(doc(firestore, "users", "members"));
-  if(!memberDoc.data().members == null){
-    for(let i = 0; i < memberDoc.data().members.length; i++){
-      if(memberDoc.data().members[i].uid != uid){
-        memberArray.push(memberDoc.data().members[i])
-      }
+  for(let i = 0; i < memberDoc.data().members.length; i++){
+    if(memberDoc.data().members[i].uid != uid){
+      memberArray.push(memberDoc.data().members[i]);
     }
   }
 
@@ -175,7 +172,7 @@ window.onload = async () => {
   */
 
   //Display Bookings
-  const bookingsByUser = query(collection(firestore, "bookings"), where("week", "==", "Denna Vecka"), orderBy("sort"), orderBy("time"));
+  /*const bookingsByUser = query(collection(firestore, "bookings"), where("week", "==", "Denna Vecka"), orderBy("sort"), orderBy("time"));
   const unsubscribe = onSnapshot(bookingsByUser, (querySnapshot) => {
 
     //Clears Current Table
@@ -260,44 +257,50 @@ window.onload = async () => {
         tableBody7.appendChild(newLine);
       }
     });
-  });
+  });*/
 
   //Display Members
-  const membersDoc = await getDoc(doc(firestore, "users", "members"));
-  membersDoc.data().members.forEach((member) => {
 
-    const name = member.name;
-    const phone = member.phone;
-    const uid = member.uid;
-    const lastDate = member.lastDate.toDate().toISOString().split('T')[0];
-    const expiryDate = member.expiryDate.toDate().toISOString().split('T')[0];;
+  const unsub = onSnapshot(doc(firestore, "users", "members"), (doc) => {
+    document.getElementById("membersList").innerHTML = "";
+    doc.data().members.forEach((member) => {
 
-    let newLine = document.createElement("tr");
-
-    let nameLine = document.createElement("td");
-    nameLine.innerText = name;
-
-    let phoneLine = document.createElement("td");
-    phoneLine.innerText = phone;
-
-    let lastLine = document.createElement("td");
-    lastLine.innerText = lastDate;
-
-    let expiryLine = document.createElement("td");
-    expiryLine.innerText = expiryDate;
-
-    let deleteLine = document.createElement("td");
-    deleteLine.innerHTML = "<button id='delete-member' class='delete_member_btn' onclick='window.removeMember(" + '"' +  uid + '"' + ")'>Radera</button>";
-
-    newLine.appendChild(nameLine);
-    newLine.appendChild(phoneLine);
-    newLine.appendChild(lastLine);
-    newLine.appendChild(expiryLine);
-    newLine.appendChild(deleteLine);
-
-    document.getElementById("membersList").appendChild(newLine);
-
+      const name = member.name;
+      const phone = member.phone;
+      const uid = member.uid;
+      const lastDate = member.lastDate.toDate().toISOString().split('T')[0];
+      const expiryDate = member.expiryDate.toDate().toISOString().split('T')[0];;
+  
+      let newLine = document.createElement("tr");
+  
+      let nameLine = document.createElement("td");
+      nameLine.innerText = name;
+  
+      let phoneLine = document.createElement("td");
+      phoneLine.innerText = phone;
+  
+      let lastLine = document.createElement("td");
+      lastLine.innerText = lastDate;
+  
+      let expiryLine = document.createElement("td");
+      expiryLine.innerText = expiryDate;
+  
+      let deleteLine = document.createElement("td");
+      deleteLine.innerHTML = "<button id='delete-member' class='delete_member_btn' onclick='window.removeMember(" + '"' +  uid + '"' + ")'>Radera</button>";
+  
+      newLine.appendChild(nameLine);
+      newLine.appendChild(phoneLine);
+      newLine.appendChild(lastLine);
+      newLine.appendChild(expiryLine);
+      newLine.appendChild(deleteLine);
+  
+      document.getElementById("membersList").appendChild(newLine);
+  
+    });
+    
   });
+  const membersDoc = await getDoc(doc(firestore, "users", "members"));
+  
 
   document.getElementById('btnLogOut').addEventListener("click", logout);
 
