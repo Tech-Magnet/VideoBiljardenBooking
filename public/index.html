@@ -11,7 +11,9 @@
   <script defer type="module" src="index.js"></script>
 </head>
 <body>
-
+<!--<div id="accountDropMenu" class="accountDropMenu">
+  <span id="login-symbol-btn" onclick="window.location.pathname = 'userPortal/';" style="padding-top: 5px;" class="material-symbols-outlined">login</span>
+</div>-->
 <div id="fb_panel" class="feedback-panel">
   <center>
     <h1>Skicka Feedback</h1>
@@ -32,7 +34,7 @@
     <button class="feedback-btn" onclick="feedback_panel_tgl('on')"><span style="padding-top: 5px;" class="material-symbols-outlined">feedback</span></button>
   <div class="container">
     <div class="py-5 text-center">
-      <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
+      <img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px">
       <h2>Boka Bord - Snooker</h2>
     </div>
   <fieldset>
@@ -134,8 +136,9 @@
     </form>
   </fieldset>
   <input type="button" name="button" id="smt-button" value="Avboka Bord"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='unbook.html'">
-<br>
-<br>
+  <br>
+  <input type="button" name="button" id="login-symbol-btn" value="Logga In" style="margin-top: 15px;" class="btn btn-primary btn-lg btn-block" onclick="window.location.pathname='userPortal/'">
+  <br>
 </div>
 <h2>&Oumlppettider</h2>
 <h4>M&aringn - Torsdags: 15 - 24</h4>

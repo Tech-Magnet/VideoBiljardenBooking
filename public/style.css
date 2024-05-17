@@ -8691,6 +8691,13 @@ textarea.form-control-lg{
     border-color: #0d6efd;
     border-width: 3px;
     margin-top: 10px;
-    /*margin-bottom: 10px;*/
     cursor: pointer;
-  }
+}
+.accountDropMenu{
+    
+}
+.accountDropMenu > span{
+    cursor: pointer;
+    position: fixed;
+    left: 5px;
+}

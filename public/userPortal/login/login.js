@@ -26,7 +26,7 @@ const appCheck = initializeAppCheck(app, {
 
 onAuthStateChanged(auth, (user) => {
   if(user){ //Logged In
-    window.location.pathname = "userPortal/";
+    window.location.pathname = "";
   }
 });
 

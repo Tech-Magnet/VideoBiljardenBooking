@@ -11,3 +11,9 @@ body{
   border-width: 3px;
   margin-bottom: 10px;
 }
+
+.back-btn > span {
+  cursor: pointer;
+  position: fixed;
+  left: 5px;
+}

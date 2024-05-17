@@ -35,6 +35,9 @@ onAuthStateChanged(auth, (user) => {
     document.getElementById('form-name').style.display = "none";
     document.getElementById('form-phone').style.display = "none";
     document.getElementById('form-email').style.display = "none";
+    document.getElementById('login-symbol-btn').value = "Mina Bokningar";
+  }else{
+    document.getElementById('login-symbol-btn').value = "Logga In";
   }
 });
 
