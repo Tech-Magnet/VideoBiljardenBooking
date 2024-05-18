@@ -95,9 +95,24 @@ async function reloadResults(){
 
 export async function remove_booking(id, time, end_time, day, week, table) {
 
-  logEvent(analytics, 'booking_removed', {
-    booking_removed: 'true'
-  });
+  //Analytics
+  if(auth.currentUser != null) { //logged in
+    logEvent(analytics, 'booking_removed_with_account', {
+      booking_removed: true,
+      day: day,
+      time: time,
+      week: week,
+      table: table
+    });
+  }else{ // Not Logged in
+    logEvent(analytics, 'booking_removed_without_account', {
+      booking_removed: true,
+      day: day,
+      time: time,
+      week: week,
+      table: table
+    });
+  }
 
   await deleteDoc(doc(firestore, "bookings", id));
   reloadResults();

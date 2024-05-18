@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 import { getFirestore, collection, getDocs, doc, query, where } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"
@@ -50,7 +50,11 @@ const loginEmailPassword = async () => {
 
   try {
     const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-    console.log(userCredential.user);
+    
+    logEvent(analytics, 'user_logged_in', { 
+      user_logged_in: true
+    });
+
   }catch (error){
     document.getElementById('login-email').style.borderColor = "#ff0000";
     document.getElementById('login-password').style.borderColor = "#ff0000";

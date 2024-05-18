@@ -102,13 +102,13 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   }
 
   if (extraTime == false){
-    if (time == "13.0" || time == "13.5" || time == "14.0" || time == "14.5" || endtime >= 25) {
+    if (time == "13.0" || time == "13.5" || time == "14.0" || time == "14.5" || endtime >= 24.5) {
       alert("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig");
       console.log("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
       return;
     }
   }else if (extraTime == true) {
-    if(endtime >= 26){
+    if(endtime >= 25.5){
       alert("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig");
       console.log("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x02");
       return;
@@ -127,29 +127,37 @@ document.getElementById("bookingForm").addEventListener("submit", async function
     }
   }
 
-  logEvent(analytics, 'booking_made', {
-    booking_made: 'true',
-    name: name,
+  //Analytics
+  if(auth.currentUser != null) { // Logged In
+    logEvent(analytics, 'booking_made_with_account', {
+      booking_added: true,
+      day: day,
+      table: table,
+      length: length
+    });
+  }else{ // Not Logged In
+    logEvent(analytics, 'booking_made_without_account', {
+      booking_added: true,
+      day: day,
+      table: table,
+      length: length
+    });
+  }
+
+  //Write time data to RTDB controller
+
+  const newNodeKey = push(child(ref(database), "/schedule")).key;
+  
+  set(ref(database, "/schedule/" + newNodeKey), {
+    time: parseFloat(time),
+    endTime: parseFloat(endtime),
     day: day,
-    table: table,
-    length: length,
-    logged_in: auth.currentUser != null
+    week: week,
+    table: parseInt(table)
   });
 
   if(auth.currentUser){
     console.log(auth.currentUser)
-
-    //Write time data to RTDB controller
-
-    const newNodeKey = push(child(ref(database), "/schedule")).key;
-    
-    set(ref(database, "/schedule/" + newNodeKey), {
-      time: parseFloat(time),
-      endTime: parseFloat(endtime),
-      day: day,
-      week: week,
-      table: parseInt(table)
-    });
 
     let userDoc = await getDoc(doc(firestore, "users", auth.currentUser.uid))
 
@@ -174,7 +182,6 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   }else{
     await addDoc(collection(firestore, "bookings"), {
       day: day,
-      email: document.getElementById('txtEmail').value,
       endtime: parseFloat(endtime),
       length: parseFloat(length2),
       name: name,
