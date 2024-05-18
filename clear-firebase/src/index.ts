@@ -11,7 +11,7 @@ initializeApp();
 const firestore = getFirestore();
 const database = getDatabase();
 
-exports.clear_firebase = onSchedule("0 0 * * 0", async () => {
+exports.clear_firebase = onSchedule("0 2 * * 0", async () => {
   // Save id to Delete in RTDB
   const sceduleNodesToDelete: string[] = [];
 
