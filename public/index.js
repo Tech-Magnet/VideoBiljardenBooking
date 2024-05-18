@@ -139,6 +139,18 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   if(auth.currentUser){
     console.log(auth.currentUser)
 
+    //Write time data to RTDB controller
+
+    const newNodeKey = push(child(ref(database), "/schedule")).key;
+    
+    set(ref(database, "/schedule/" + newNodeKey), {
+      time: parseFloat(time),
+      endTime: parseFloat(endtime),
+      day: day,
+      week: week,
+      table: parseInt(table)
+    });
+
     let userDoc = await getDoc(doc(firestore, "users", auth.currentUser.uid))
 
     await addDoc(collection(firestore, "bookings"), {
@@ -151,7 +163,8 @@ document.getElementById("bookingForm").addEventListener("submit", async function
       sort:  parseInt(sort),
       table: parseInt(table),
       time: parseFloat(time),
-      week: week
+      week: week,
+      nodeRef: newNodeKey
     }).then(() => {
       console.log("Documant Successfully Added");
     }).catch((error) => {
@@ -178,17 +191,9 @@ document.getElementById("bookingForm").addEventListener("submit", async function
     });
   }
 
-  //Write time data to RTDB
-
-  const newNodeKey = push(child(ref(database), "/schedule")).key;
   
-  set(ref(database, "/schedule/" + newNodeKey), {
-    time: parseFloat(time),
-    endTime: parseFloat(endtime),
-    day: day,
-    week: week,
-    table: parseInt(table)
-  });
+
+  //Add time blocks to the scedule board
 
   for(let i = 0; i < length; i++){
 
