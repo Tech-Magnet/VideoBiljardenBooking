@@ -24,15 +24,16 @@ const appCheck = initializeAppCheck(app, {
   isTokenAutoRefreshEnabled: true
 });
 
-window.onload = () => {
-  if(auth.currentUser != null){ //Logged Not In
+let signingOut = false;
+  
+onAuthStateChanged(auth, async (user) => {
+
+
+  if(!user && signingOut == false ){ //Logged Not In
     window.location.pathname = "userPortal/login";
     return;
   }
-}
-  
-onAuthStateChanged(auth, async (user) => {
-  
+
   const userDoc = await getDoc(doc(firestore, "users", user.uid));
   document.getElementById('spanUserWelcome').innerText = userDoc.data().name.split(" ")[0];
 
@@ -74,6 +75,7 @@ onAuthStateChanged(auth, async (user) => {
 const logout = async () => {
 
   try {
+    signingOut = true;
     const userCredential = await signOut(auth);
     console.log("SUCCESSFULLY LOGGED OUT");
     window.location.pathname = "";
