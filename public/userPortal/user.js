@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getFirestore, getDoc, doc, getDocs, collection, where, orderBy, query } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 
@@ -23,12 +23,17 @@ const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider('6LcgzkcpAAAAAGBLYci24KiGkfRRYmUbAW58_84W'),
   isTokenAutoRefreshEnabled: true
 });
+
+let signingOut = false;
   
 onAuthStateChanged(auth, async (user) => {
-  if(!user){ //Logged Not In
+
+
+  if(!user && signingOut == false ){ //Logged Not In
     window.location.pathname = "userPortal/login";
     return;
   }
+
   const userDoc = await getDoc(doc(firestore, "users", user.uid));
   document.getElementById('spanUserWelcome').innerText = userDoc.data().name.split(" ")[0];
 
@@ -66,6 +71,20 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById('bookingContainer').appendChild(cardBase);
   });
 });
+
+const logout = async () => {
+
+  try {
+    signingOut = true;
+    const userCredential = await signOut(auth);
+    console.log("SUCCESSFULLY LOGGED OUT");
+    window.location.pathname = "";
+  }catch (error){
+    console.error("An Error Occured", error);
+  }
+}
+
+document.getElementById('btnLogOut').addEventListener("click", logout);
 
 /*
 <div class="bookingCard">

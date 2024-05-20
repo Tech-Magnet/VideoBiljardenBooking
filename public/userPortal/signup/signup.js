@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"
@@ -62,14 +62,20 @@ const signUpEmailPassword = async () => {
       isAdmin: false,
       name: loginName,
       phone: loginPhone
-    })
+    });
+
+    logEvent(analytics, 'user_sign_up', { 
+      user_sign_up: true
+    });
+    
   }).catch((error) => {
     document.getElementById('login-email').style.borderColor = "#ff0000";
     document.getElementById('login-phone').style.borderColor = "#ff0000";
     document.getElementById('login-password').style.borderColor = "#ff0000";
-    document.getElementById('status-text').innerText = "Ogiltig Email/Telefonnummer eller L&oumlsenord";
+    document.getElementById('status-text').innerText = "Kunnde inte ska konto, var god att testa igen senare :(";
     document.getElementById('status-text').style.color = "#ff0000";
     document.getElementById('status-text').style.display = "block";
+    console.error("Could not create account!")
   });
 }
 

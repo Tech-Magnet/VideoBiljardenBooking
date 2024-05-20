@@ -34,7 +34,7 @@ onAuthStateChanged(auth, (user) => {
     document.getElementById('spanUserLoggedIn').innerText = user.email;
     document.getElementById('form-name').style.display = "none";
     document.getElementById('form-phone').style.display = "none";
-    document.getElementById('form-email').style.display = "none";
+    //document.getElementById('form-email').style.display = "none";
     document.getElementById('login-symbol-btn').value = "Mina Bokningar";
   }else{
     document.getElementById('login-symbol-btn').value = "Logga In";
@@ -99,16 +99,19 @@ document.getElementById("bookingForm").addEventListener("submit", async function
       alert("Ogiltigt Namn Eller Telefon Nummer");
       return;
     }
+  }else if(auth.currentUser.uid == "byVnqNBkOEhgovIghT2KWja6xOf1"){
+    alert("You cannot book with that account (admin@orebrobiljarden.se), please logout or login in/ctrate another account");
+    return;
   }
 
   if (extraTime == false){
-    if (time == "13.0" || time == "13.5" || time == "14.0" || time == "14.5" || endtime >= 25) {
+    if (time == "13.0" || time == "13.5" || time == "14.0" || time == "14.5" || endtime >= 24.5) {
       alert("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig");
       console.log("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x01");
       return;
     }
   }else if (extraTime == true) {
-    if(endtime >= 26){
+    if(endtime >= 25.5){
       alert("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig");
       console.log("Tyv&aumlrr men tiden du har valt &aumlr inte tillg&aumlnglig Error:0x02");
       return;
@@ -127,13 +130,33 @@ document.getElementById("bookingForm").addEventListener("submit", async function
     }
   }
 
-  logEvent(analytics, 'booking_made', {
-    booking_made: 'true',
-    name: name,
+  //Analytics
+  if(auth.currentUser != null) { // Logged In
+    logEvent(analytics, 'booking_made_with_account', {
+      booking_added: true,
+      day: day,
+      table: table,
+      length: length
+    });
+  }else{ // Not Logged In
+    logEvent(analytics, 'booking_made_without_account', {
+      booking_added: true,
+      day: day,
+      table: table,
+      length: length
+    });
+  }
+
+  //Write time data to RTDB controller
+
+  const newNodeKey = push(child(ref(database), "/schedule")).key;
+  
+  set(ref(database, "/schedule/" + newNodeKey), {
+    time: parseFloat(time),
+    endTime: parseFloat(endtime),
     day: day,
-    table: table,
-    length: length,
-    logged_in: auth.currentUser != null
+    week: week,
+    table: parseInt(table)
   });
 
   if(auth.currentUser){
@@ -151,7 +174,8 @@ document.getElementById("bookingForm").addEventListener("submit", async function
       sort:  parseInt(sort),
       table: parseInt(table),
       time: parseFloat(time),
-      week: week
+      week: week,
+      nodeRef: newNodeKey
     }).then(() => {
       console.log("Documant Successfully Added");
     }).catch((error) => {
@@ -161,7 +185,6 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   }else{
     await addDoc(collection(firestore, "bookings"), {
       day: day,
-      email: document.getElementById('txtEmail').value,
       endtime: parseFloat(endtime),
       length: parseFloat(length2),
       name: name,
@@ -178,17 +201,9 @@ document.getElementById("bookingForm").addEventListener("submit", async function
     });
   }
 
-  //Write time data to RTDB
-
-  const newNodeKey = push(child(ref(database), "/schedule")).key;
   
-  set(ref(database, "/schedule/" + newNodeKey), {
-    time: parseFloat(time),
-    endTime: parseFloat(endtime),
-    day: day,
-    week: week,
-    table: parseInt(table)
-  });
+
+  //Add time blocks to the scedule board
 
   for(let i = 0; i < length; i++){
 

@@ -50,10 +50,10 @@
         <label for="phone">Telnr</label>
         <input type="number"  class="form-control" name="txtPhone" id="txtPhone" value="">
       </p>
-      <p id="form-email">
+      <!--<p id="form-email">
         <label for="email">Epost (Valfritt)</label>
         <input type="email"  class="form-control" name="txtEmail" id="txtEmail" value="">
-      </p>
+      </p>-->
       <p>
         <label for="Day">Datum</label>
         <select id="txtDay" name="txtDay" style="padding: 10px;">
@@ -97,7 +97,7 @@
           <option value="22">22.00</option>
           <option value="22.5">22.30</option>
           <option value="23">23.00</option>
-          <option value="23.5">13.00</option>
+          <option value="23.5">23.30</option>
           <option value="24">24.00</option>
         </select>
       </p>
@@ -138,16 +138,15 @@
   <input type="button" name="button" id="smt-button" value="Avboka Bord"  class="btn btn-primary btn-lg btn-block" onclick="window.location.href='unbook.html'">
   <br>
   <input type="button" name="button" id="login-symbol-btn" value="Logga In" style="margin-top: 15px;" class="btn btn-primary btn-lg btn-block" onclick="window.location.pathname='userPortal/'">
-  <br>
 </div>
-<h2>&Oumlppettider</h2>
-<h4>M&aringn - Torsdags: 15 - 24</h4>
-<h4>Fredag - L&oumlr: 13 - 01</h4>
-<h4>S&oumln: 15 - 24</h4>
 <br>
 <br>
-<br>
-<br>
+<div style="margin-left: 15px;">
+  <h2>&Oumlppettider</h2>
+  <h4>M&aringn - Torsdags: 15 - 24</h4>
+  <h4>Fredag - L&oumlr: 13 - 01</h4>
+  <h4>S&oumln: 15 - 24</h4>
+</div>
 <br>
 <br>
 <div>
@@ -161,13 +160,13 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
 
-  <div class="grid-item" id="TT_1_13_Måndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_1_13_Måndag" style="background-color: #000; color: #000; border-top-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_1_13_Tisdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_13_Onsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_13_Torsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_13_Fredag">13.00</div>
   <div class="grid-item" id="TT_1_13_Lördag">13.00</div>
-  <div class="grid-item" id="TT_1_13_Söndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_1_13_Söndag" style="background-color: #000; color: #000; border-top-right-radius: 10px;"></div>
 
   <div class="grid-item" id="TT_1_13.5_Måndag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_13.5_Tisdag" style="background-color: #000; color: #000;"></div>
@@ -337,13 +336,13 @@
   <div class="grid-item" id="TT_1_23.5_Lördag">23.30</div>
   <div class="grid-item" id="TT_1_23.5_Söndag">23.30</div>
 
-  <div class="grid-item" id="TT_1_24_Måndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_1_24_Måndag" style="background-color: #000; color: #000; border-bottom-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_1_24_Tisdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_24_Onsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_24_Torsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_24_Fredag">24.00</div>
   <div class="grid-item" id="TT_1_24_Lördag">24.00</div>
-  <div class="grid-item" id="TT_1_24_Söndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_1_24_Söndag" style="background-color: #000; color: #000; border-bottom-right-radius: 10px;"></div>
   </div>
   <p style="padding-left: 20px;">Tider &aumlr fr&aringn p&aringb&oumlrjad halvtimme</p>
 </div>
@@ -361,13 +360,13 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
 
-  <div class="grid-item" id="TT_2_13_Måndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_2_13_Måndag" style="background-color: #000; color: #000; border-top-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_2_13_Tisdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_13_Onsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_13_Torsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_13_Fredag">13.00</div>
   <div class="grid-item" id="TT_2_13_Lördag">13.00</div>
-  <div class="grid-item" id="TT_2_13_Söndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_2_13_Söndag" style="background-color: #000; color: #000; border-top-right-radius: 10px;"></div>
 
   <div class="grid-item" id="TT_2_13.5_Måndag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_13.5_Tisdag" style="background-color: #000; color: #000;"></div>
@@ -537,13 +536,13 @@
   <div class="grid-item" id="TT_2_23.5_Lördag">23.30</div>
   <div class="grid-item" id="TT_2_23.5_Söndag">23.30</div>
 
-  <div class="grid-item" id="TT_2_24_Måndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_2_24_Måndag" style="background-color: #000; color: #000; border-bottom-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_2_24_Tisdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_24_Onsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_24_Torsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_24_Fredag">24.00</div>
   <div class="grid-item" id="TT_2_24_Lördag">24.00</div>
-  <div class="grid-item" id="TT_2_24_Söndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_2_24_Söndag" style="background-color: #000; color: #000; border-bottom-right-radius: 10px;"></div>
   </div>
   <p style="padding-left: 20px;">Tider &aumlr fr&aringn p&aringb&oumlrjad halvtimme</p>
 </div>
@@ -561,13 +560,13 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
 
-  <div class="grid-item" id="TT_3_13_Måndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_3_13_Måndag" style="background-color: #000; color: #000; border-top-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_3_13_Tisdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_13_Onsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_13_Torsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_13_Fredag">13.00</div>
   <div class="grid-item" id="TT_3_13_Lördag">13.00</div>
-  <div class="grid-item" id="TT_3_13_Söndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_3_13_Söndag" style="background-color: #000; color: #000; border-top-right-radius: 10px;"></div>
 
   <div class="grid-item" id="TT_3_13.5_Måndag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_13.5_Tisdag" style="background-color: #000; color: #000;"></div>
@@ -737,13 +736,13 @@
   <div class="grid-item" id="TT_3_23.5_Lördag">23.30</div>
   <div class="grid-item" id="TT_3_23.5_Söndag">23.30</div>
 
-  <div class="grid-item" id="TT_3_24_Måndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_3_24_Måndag" style="background-color: #000; color: #000; border-bottom-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_3_24_Tisdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_24_Onsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_24_Torsdag" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_24_Fredag">24.00</div>
   <div class="grid-item" id="TT_3_24_Lördag">24.00</div>
-  <div class="grid-item" id="TT_3_24_Söndag" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_3_24_Söndag" style="background-color: #000; color: #000; border-bottom-right-radius: 10px;"></div>
 </div>
 <p style="padding-left: 20px;">Tider &aumlr fr&aringn p&aringb&oumlrjad halvtimme</p>
 <br>
@@ -760,13 +759,13 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
 
-  <div class="grid-item" id="TT_1_13_Måndag_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_1_13_Måndag_c" style="background-color: #000; color: #000; border-top-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_1_13_Tisdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_13_Onsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_13_Torsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_13_Fredag_c">13.00</div>
   <div class="grid-item" id="TT_1_13_lor_c">13.00</div>
-  <div class="grid-item" id="TT_1_13_son_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_1_13_son_c" style="background-color: #000; color: #000; border-top-right-radius: 10px;"></div>
 
   <div class="grid-item" id="TT_1_13.5_Måndag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_13.5_Tisdag_c" style="background-color: #000; color: #000;"></div>
@@ -936,13 +935,13 @@
   <div class="grid-item" id="TT_1_23.5_lor_c">23.30</div>
   <div class="grid-item" id="TT_1_23.5_son_c">23.30</div>
 
-  <div class="grid-item" id="TT_1_24_Måndag_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_1_24_Måndag_c" style="background-color: #000; color: #000; border-bottom-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_1_24_Tisdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_24_Onsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_24_Torsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_1_24_Fredag_c">24.00</div>
   <div class="grid-item" id="TT_1_24_lor_c">24.00</div>
-  <div class="grid-item" id="TT_1_24_son_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_1_24_son_c" style="background-color: #000; color: #000; border-bottom-right-radius: 10px;"></div>
   </div>
   <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad halvtimme</p>
 </div>
@@ -960,13 +959,13 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
 
-  <div class="grid-item" id="TT_2_13_Måndag_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_2_13_Måndag_c" style="background-color: #000; color: #000; border-top-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_2_13_Tisdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_13_Onsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_13_Torsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_13_Fredag_c">13.00</div>
   <div class="grid-item" id="TT_2_13_lor_c">13.00</div>
-  <div class="grid-item" id="TT_2_13_son_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_2_13_son_c" style="background-color: #000; color: #000; border-top-right-radius: 10px;"></div>
 
   <div class="grid-item" id="TT_2_13.5_Måndag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_13.5_Tisdag_c" style="background-color: #000; color: #000;"></div>
@@ -1136,13 +1135,13 @@
   <div class="grid-item" id="TT_2_23.5_lor_c">23.30</div>
   <div class="grid-item" id="TT_2_23.5_son_c">23.30</div>
 
-  <div class="grid-item" id="TT_2_24_Måndag_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_2_24_Måndag_c" style="background-color: #000; color: #000; border-bottom-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_2_24_Tisdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_24_Onsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_24_Torsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_2_24_Fredag_c">24.00</div>
   <div class="grid-item" id="TT_2_24_lor_c">24.00</div>
-  <div class="grid-item" id="TT_2_24_son_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_2_24_son_c" style="background-color: #000; color: #000; border-bottom-right-radius: 10px;"></div>
   </div>
   <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad halvtimme</p>
 </div>
@@ -1160,13 +1159,13 @@
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">L&oumlrdag</div>
   <div class="grid-item" style="border-style: none; padding-bottom: 25px;">S&oumlndag</div>
 
-  <div class="grid-item" id="TT_3_13_Måndag_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_3_13_Måndag_c" style="background-color: #000; color: #000; border-top-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_3_13_Tisdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_13_Onsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_13_Torsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_13_Fredag_c">13.00</div>
   <div class="grid-item" id="TT_3_13_lor_c">13.00</div>
-  <div class="grid-item" id="TT_3_13_son_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_3_13_son_c" style="background-color: #000; color: #000; border-top-right-radius: 10px;"></div>
 
   <div class="grid-item" id="TT_3_13.5_Måndag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_13.5_Tisdag_c" style="background-color: #000; color: #000;"></div>
@@ -1336,13 +1335,13 @@
   <div class="grid-item" id="TT_3_23.5_lor_c">23.30</div>
   <div class="grid-item" id="TT_3_23.5_son_c">23.30</div>
 
-  <div class="grid-item" id="TT_3_24_Måndag_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_3_24_Måndag_c" style="background-color: #000; color: #000; border-bottom-left-radius: 10px;"></div>
   <div class="grid-item" id="TT_3_24_Tisdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_24_Onsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_24_Torsdag_c" style="background-color: #000; color: #000;"></div>
   <div class="grid-item" id="TT_3_24_Fredag_c">24.00</div>
   <div class="grid-item" id="TT_3_24_lor_c">24.00</div>
-  <div class="grid-item" id="TT_3_24_son_c" style="background-color: #000; color: #000;"></div>
+  <div class="grid-item" id="TT_3_24_son_c" style="background-color: #000; color: #000; border-bottom-right-radius: 10px;"></div>
   </div>
   <p style="padding-left: 10px;">Tider &aumlr fr&aringn p&aringb&oumlrjad halvtimme</p>
 </div>

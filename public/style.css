@@ -8622,7 +8622,9 @@ textarea.form-control-lg{
 }
 .grid-item {
     background-color: #ffffff;
-    border: 1px solid #000000;
+    border-width: 1px;
+    border-color: #000;
+    border-style: solid;
     margin: 0px;
     padding: 20px;
     font-size: 30px;
@@ -8692,12 +8694,4 @@ textarea.form-control-lg{
     border-width: 3px;
     margin-top: 10px;
     cursor: pointer;
-}
-.accountDropMenu{
-    
-}
-.accountDropMenu > span{
-    cursor: pointer;
-    position: fixed;
-    left: 5px;
 }

@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 import { getAuth, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
 import { getFirestore, collection, getDocs, doc, query, where } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"
@@ -47,6 +47,10 @@ const loginEmailPassword = async () => {
       document.getElementById('status-text').innerText = "Ett Lösenords återställing melj har skickets till din e-post";
       document.getElementById('status-text').style.color = "#ff0000";
       document.getElementById('status-text').style.display = "block";
+    });
+
+    logEvent(analytics, 'user_reset_password', { 
+      user_reset_password: true
     });
     
   }catch (error){
