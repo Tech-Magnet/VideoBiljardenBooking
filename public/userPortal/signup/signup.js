@@ -72,9 +72,10 @@ const signUpEmailPassword = async () => {
     document.getElementById('login-email').style.borderColor = "#ff0000";
     document.getElementById('login-phone').style.borderColor = "#ff0000";
     document.getElementById('login-password').style.borderColor = "#ff0000";
-    document.getElementById('status-text').innerText = "Ogiltig Email/Telefonnummer eller L&oumlsenord";
+    document.getElementById('status-text').innerText = "Kunnde inte ska konto, var god att testa igen senare :(";
     document.getElementById('status-text').style.color = "#ff0000";
     document.getElementById('status-text').style.display = "block";
+    console.error("Could not create account!")
   });
 }
 
