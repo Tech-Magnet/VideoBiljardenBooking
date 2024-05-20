@@ -99,6 +99,9 @@ document.getElementById("bookingForm").addEventListener("submit", async function
       alert("Ogiltigt Namn Eller Telefon Nummer");
       return;
     }
+  }else if(auth.currentUser.uid == "byVnqNBkOEhgovIghT2KWja6xOf1"){
+    alert("You cannot book with that account (admin@orebrobiljarden.se), please logout or login in/ctrate another account");
+    return;
   }
 
   if (extraTime == false){
