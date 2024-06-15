@@ -195,6 +195,9 @@ onValue(dbref, (snapshot) => {
       }else if(entries[i].dataf.table == 'Bord_3'){
           var ID_BUILD = "TT_3_" + entries[i].dataf.time + "_" + entries[i].dataf.day;
           document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
+      }else if(entries[i].dataf.table == 'Bord_4'){
+        var ID_BUILD = "TT_4_" + entries[i].dataf.time + "_" + entries[i].dataf.day;
+        document.getElementById(ID_BUILD).style.backgroundColor = "#a1181f";
       }else if(entries[i].dataf.table == 'Bord_1_c'){
           var ID_BUILD = "TT_1_" + entries[i].dataf.time + "_" + entries[i].dataf.day + "_c";
           document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
@@ -204,6 +207,9 @@ onValue(dbref, (snapshot) => {
       }else if(entries[i].dataf.table == 'Bord_3_c'){
           var ID_BUILD = "TT_3_" + entries[i].dataf.time + "_" + entries[i].dataf.day + "_c";
           document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
+      }else if(entries[i].dataf.table == 'Bord_4_c'){
+        var ID_BUILD = "TT_4_" + entries[i].dataf.time + "_" + entries[i].dataf.day + "_c";
+        document.getElementById(ID_BUILD).style.backgroundColor = "#3268a8";
       }
 
       TimeArr.push(entries[i].dataf.time);
