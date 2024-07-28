@@ -8622,9 +8622,7 @@ textarea.form-control-lg{
 }
 .grid-item {
     background-color: #ffffff;
-    border-width: 1px;
-    border-color: #000;
-    border-style: solid;
+    border: 1px solid #000000;
     margin: 0px;
     padding: 20px;
     font-size: 30px;
@@ -8685,13 +8683,4 @@ textarea.form-control-lg{
 }
 #feedback-fld{
     width: 80vw;
-}
-.bookingCard{
-    padding-left: 10px;
-    border-radius: 10px;
-    border-style: solid;
-    border-color: #0d6efd;
-    border-width: 3px;
-    margin-top: 10px;
-    cursor: pointer;
 }

@@ -6,39 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/icon.png">
     <link rel="stylesheet" href="style.css">
-    <script type="module" src="unbook_module.js"></script>
-    <!--IMPORTS FUNCTIONS TO GLOBAL SCOPE-->
-    <script type="module">
-      import { remove_booking } from "/unbook_module.js";
-      window.removeBooking = remove_booking;
-    </script>
+    <script type="module" src="unbook.js"></script>
 </head>
 <body>
-  <div class="container">
-      <div class="py-5 text-center">
-        <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
-        <h2>Avboka Bord - Snooker</h2>
-      </div>
-    <fieldset>
-      <form id="bookingForm" name="frmBook" class="needs-validation">
-        <p id="loggedInMessage" style="display: none;">
-          <label>Logged in as <span id="spanUserLoggedIn"></span></label>
-        </p>
-        <p id="form-phone">
-          <label for="phone">Telnr</label>
-          <input type="text" class="form-control" name="txtPhone" id="txtPhone" value="">
-        </p>
-        <p>&nbsp;</p>
-        <p id="status_p" style="color: #00ff00;"></p>
-        <p id="form-unbook-btn">
-          <input type="button" name="button" id="unbook-btn" value="Sök" class="btn btn-primary btn-lg btn-block">
-        </p>
-      </form>
-    </fieldset>
-    <input type="button" value="Tillbaka" class="btn btn-primary btn-lg btn-block" onclick="window.location.pathname = ''">
-    <br>
-    <h3 style="margin-top: 10px;">Vilken Tid vill du Avboka?</h3>
-    <div id=bookingContainer class="bookingContainer">
-    </div>
+    <div class="container">
+        <div class="py-5 text-center">
+          <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
+          <h2>Avboka Bord - Snooker</h2>
+        </div>
+      <fieldset>
+        <form id="bookingForm" name="frmBook" class="needs-validation">
+          <p>
+            <label for="phone">Telnr</label>
+            <input type="text" class="form-control" name="txtPhone" id="txtPhone" value="" required>
+          </p>
+          <p>
+            <label for="Day">Datum</label>
+            <select id="txtDay" name="txtDay" style="padding: 10px;">
+              <!--Week One (Current)-->
+              <option value="mon">M&aringndag</option>
+              <option value="tis">Tisdag</option>
+              <option value="ons">Onsdag</option>
+              <option value="tor">Torsdag</option>
+              <option value="fre">Fredag</option>
+              <option value="lor">L&oumlrdag</option>
+              <option value="son">S&oumlndag</option>
+            </select>
+          </p>
+          <p>
+            <label for="Week">Vecka</label>
+            <select id="txtWeek" name="txtWeek" style="padding: 10px;">
+              <!--Week One (Current)-->
+              <option value="t">Denna Vecka</option>
+              <option value="n">N&aumlsta Vecka</option>
+            </select>
+          </p>
+          <p>
+            <label for="txtTable">Bord</label>
+            <select id="txtTable" name="txtTable" style="padding: 10px;">
+              <option value="Bord_1">Bord 1</option>
+              <option value="Bord_2">Bord 2</option>
+              <option value="Bord_3">Bord 3</option>
+            </select>
+          </p>
+          <p>&nbsp;</p>
+          <p id="status_p" style="color: #00ff00;"></p>
+          <p>
+            <input type="button" name="button" id="unbook-btn" value="Avboka Bord" class="btn btn-primary btn-lg btn-block">
+          </p>
+        </form>
+      </fieldset>
+      <input type="button" value="Tillbaka" class="btn btn-primary btn-lg btn-block" onclick="window.location.pathname = ''">
 </body>
 </html>

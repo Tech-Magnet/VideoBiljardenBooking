@@ -1,320 +1,369 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-import { getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, collection, query, where, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app-check.js";
-import { getPerformance } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-performance.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
+import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
-  authDomain: "videobiljardenorebrosite.firebaseapp.com",
-  databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "videobiljardenorebrosite",
-  storageBucket: "videobiljardenorebrosite.appspot.com",
-  messagingSenderId: "1042889427467",
-  appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
-  measurementId: "G-FPJBGKX7R0"
+    apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
+    authDomain: "videobiljardenorebrosite.firebaseapp.com",
+    databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "videobiljardenorebrosite",
+    storageBucket: "videobiljardenorebrosite.appspot.com",
+    messagingSenderId: "1042889427467",
+    appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
+    measurementId: "G-FPJBGKX7R0"
 };
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const database = getDatabase(app);
-const firestore = getFirestore(app);
 const Performance = getPerformance(app);
 const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6LcgzkcpAAAAAGBLYci24KiGkfRRYmUbAW58_84W'),
-  isTokenAutoRefreshEnabled: true
+    provider: new ReCaptchaV3Provider('6LcgzkcpAAAAAGBLYci24KiGkfRRYmUbAW58_84W'),
+    isTokenAutoRefreshEnabled: true
 });
 
 
-onAuthStateChanged(auth, async (user) => {
-  if(user){//Logged in
-    const userDoc = await getDoc(doc(firestore, "users", user.uid));
-    if(userDoc.data().isAdmin == true){
+onAuthStateChanged(auth, (user) => {
+    if(user){//Logged in
       document.getElementById('Admin-Div').style.display = "block";
+    }else{ //Not Logged In
+      window.location.pathname = "admin/login/";
     }
-  }else{ //Not Logged In
-    window.location.pathname = "admin/login/";
-  }
 });
 
 const logout = async () => {
 
   try {
-    const userCredential = await signOut(auth);
-    console.log("SUCCESSFULLY LOGGED OUT");
-    window.location.reload();
+      const userCredential = await signOut(auth);
+      console.log("SUCCESSFULLY LOGGED OUT");
+      window.location.reload();
   }catch (error){
-    console.error("An Error Occured", error);
+      console.error("An Error Occured", error);
   }
 }
 
-export async function removeMember(uid){
-  const currentDate = new Date();
-  //remove isMember tag from userDoc
-  await updateDoc(doc(firestore, "users", uid), {
-    "isMember": false,
-    "memberExpiryDate": currentDate
-  });
+function remove_member(phoneToDelete){
+  console.log("Deleting Member", phoneToDelete);
 
-  let memberArray = [];
+    const dbref = ref(database, "members");
 
-  const memberDoc = await getDoc(doc(firestore, "users", "members"));
-  for(let i = 0; i < memberDoc.data().members.length; i++){
-    if(memberDoc.data().members[i].uid != uid){
-      memberArray.push(memberDoc.data().members[i]);
-    }
-  }
+    onValue(dbref, (snapshot) => {
 
-  await updateDoc(doc(firestore, "users", "members"), {
-    "members": memberArray
-  });
+      const data = snapshot.val();
+      const entries = [];
+
+      for (const key in data) {
+        const entry = {
+            namef: key,
+            dataf: data[key]
+          };
+        entries.push(entry); 
+      }
+
+      console.log(entries);
+
+
+
+      for (var i = 0; i < entries.length; i++ ){
+
+        let key = entries[i].namef;
+        let data = entries[i].dataf.phone;
+
+        if(data == phoneToDelete){
+
+          set(ref(database, "/members" + '/' + key), {
+            name: null,
+            phone: null,
+            next: null,
+            last: null
+          });
+          console.log("MEMBER DELETED");
+          window.reload();
+        }
+      }
+    });
 }
 
-const addMember = async () => {
+const AddMember = async () => {
   console.log("Adding New Member...");
+  var name_m = document.getElementById('member_name').value;
+  var phone_m = document.getElementById('member_phone').value;
+  var last = document.getElementById('member_last_payment').value;
+  var next = document.getElementById('member_next_payment').value;
 
-  const name = document.getElementById("memberName").value;
-  const phone = document.getElementById("memberPhone").value;
-  let last = document.getElementById("memberLast").value;
-  const length = parseInt(document.getElementById("member_length").value);
+  next = parseInt(next);
 
-  if(phone.length != 10 || name < 2){
-    alert("Ogilight Telefon Nummer eller Namn");
+  if (name_m == "" || phone_m == ""){
+    alert("Namn och Tel nr måste vara ifyllda");
     console.log("Data Transaction Cancelled");
     return;
   }
-  
+
+  if(phone_m.length != 10 || name_m < 2){
+    alert("Ogilight Telefon Nummer eller Namn");
+    console.log("Data Transaction Cancelled");
+  }
+
+  // Get the current date
+  var currentDate;
+
   if(last == ""){
-    last = new Date();
+    currentDate = new Date();
   }else{
-    last = new Date(last);
+    currentDate = new Date(last);
   }
 
-  const expiryDate = new Date(last.getFullYear(), last.getMonth() + length, last.getDate());
+  // Calculate the next month's date
+  const nextMonth = new Date(currentDate);
+  nextMonth.setMonth(currentDate.getMonth() + next);
 
-  const membersDoc  = await getDoc(doc(firestore, "users", "members"))
-
-  let membersArray = [];
-
-  //checks if member list is empty
-  for (let i = 0; i < membersDoc.data().members.length; i++){
-    membersArray.push(membersDoc.data().members[i]);
+  // Handle cases where the day of the next month might not exist (e.g., Jan 31st to Feb 28th/29th)
+  if (currentDate.getDate() > nextMonth.getDate()) {
+      nextMonth.setDate(0); // This will set the date to the last day of the previous month
   }
 
-  const membersUserDocs = query(collection(firestore, "users"), where("phone", "==", phone));
-  const querySnapshot = await getDocs(membersUserDocs);
-  let memberId;
+  var next_m = nextMonth.toISOString().split('T')[0];
+  var last_m = currentDate.toISOString().split('T')[0];
 
-  if(querySnapshot.empty){
+  //var next = current_date;
+  console.log(name_m);
+  console.log(phone_m);
 
-    const generatedDocId =  await generateUniqeDocId();
-    memberId = generatedDocId;
+  const newPostKey = push(child(ref(database), "/members")).key;
 
-    await setDoc(doc(firestore, "users", generatedDocId),{
-      "name": name,
-      "phone": phone,
-      "isMember": true,
-      "memberExpiryDate": expiryDate
-    });
-  }else{
-    //adds isMember tag to user Docs
-    querySnapshot.forEach( async (document) => {
-      memberId = document.id;
-      updateDoc(doc(firestore, "users", document.id), {
-        "isMember": true,
-        "memberExpiryDate": expiryDate
-      });
-    });
-  }
-
-  membersArray.push({
-    name: name,
-    phone: phone,
-    lastDate: last,
-    expiryDate: expiryDate,
-    uid: memberId
+  set(ref(database, "/members" + '/' + newPostKey), {
+    name: name_m,
+    phone: phone_m,
+    next: last_m,
+    last: next_m
   });
 
-  await updateDoc(doc(firestore, "users", "members"), {
-    "members": membersArray
-  });
-
-  
-  
   console.log("Member Added");
+  window.reload();
 }
 
-document.getElementById('btnCreate_member').addEventListener("click", addMember);
-  
-window.onload = async () => {
+document.getElementById('btnCreate_member').addEventListener("click", AddMember);
+
+
+window.onload = () => {
 
   //Week 1
-  let tableBody1 = document.querySelector(".tb_1");//MONDAY
-  let tableBody2 = document.querySelector(".tb_2");//TUESDAY
-  let tableBody3 = document.querySelector(".tb_3");//WEDNESDAY
-  let tableBody4 = document.querySelector(".tb_4");//THURSDAY
-  let tableBody5 = document.querySelector(".tb_5");//FRIDAY
-  let tableBody6 = document.querySelector(".tb_6");//SATURDAY
-  let tableBody7 = document.querySelector(".tb_7");//SUNDAY
-
+  var tableBody1 = document.querySelector(".tb_1");//MONDAY
+  var tableBody2 = document.querySelector(".tb_2");//TUESDAY
+  var tableBody3 = document.querySelector(".tb_3");//WEDNESDAY
+  var tableBody4 = document.querySelector(".tb_4");//THURSDAY
+  var tableBody5 = document.querySelector(".tb_5");//FRIDAY
+  var tableBody6 = document.querySelector(".tb_6");//SATURDAY
+  var tableBody7 = document.querySelector(".tb_7");//SUNDAY
+  
   /*
   //Week 2
-  let tableBody1_2 = document.querySelector(".tb_1_2");//MONDAY
-  let tableBody2_2 = document.querySelector(".tb_2_2");//TUESDAY
-  let tableBody3_2 = document.querySelector(".tb_3_2");//WEDNESDAY
-  let tableBody4_2 = document.querySelector(".tb_4_2");//THURSDAY
-  let tableBody5_2 = document.querySelector(".tb_5_2");//FRIDAY
-  let tableBody6_2 = document.querySelector(".tb_6_2");//SATURDAY
-  let tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY
+  var tableBody1_2 = document.querySelector(".tb_1_2");//MONDAY
+  var tableBody2_2 = document.querySelector(".tb_2_2");//TUESDAY
+  var tableBody3_2 = document.querySelector(".tb_3_2");//WEDNESDAY
+  var tableBody4_2 = document.querySelector(".tb_4_2");//THURSDAY
+  var tableBody5_2 = document.querySelector(".tb_5_2");//FRIDAY
+  var tableBody6_2 = document.querySelector(".tb_6_2");//SATURDAY
+  var tableBody7_2 = document.querySelector(".tb_7_2");//SUNDAY
   */
 
-  //Display Bookings
-  const bookingsByUser = query(collection(firestore, "bookings"), where("week", "==", "Denna Vecka"), orderBy("sort"), orderBy("time"));
-  const unsubscribe = onSnapshot(bookingsByUser, (querySnapshot) => {
+  const dbref = ref(database, "admin");
 
-    //Clears Current Table
-    tableBody1.innerHTML = "";
-    tableBody2.innerHTML = "";
-    tableBody3.innerHTML = "";
-    tableBody4.innerHTML = "";
-    tableBody5.innerHTML = "";
-    tableBody6.innerHTML = "";
-    tableBody7.innerHTML = "";
+  onValue(dbref, (snapshot) => {
 
-    querySnapshot.forEach( async (doc) => {
+    const data = snapshot.val();
+    const entries = [];
 
-      let isMember = "ERRoR Could Not Read :(";
+    for (const key in data) {
+      const entry = {
+          namef: key,
+          dataf: data[key]
+        };
+      entries.push(entry); 
+    }
 
-      let day = doc.data().day;
-      let endtime = doc.data().endtime;
-      let length = doc.data().length;
-      let name = doc.data().name;
-      let phone = doc.data().phone;
-      let table = doc.data().table;
-      let time = doc.data().time;
+    for (var i = 0; i < entries.length; i++ ){
 
-      //Checks if booking is made by member
-      const memberQuery = query(collection(firestore, "users"), where("phone", "==", phone), where("isMember", "==", true))
-      const querySnapshot = await getDocs(memberQuery);
+      let key = entries[i].namef;
+      //Data
+      let day = entries[i].dataf.day;
+      let endtime = entries[i].dataf.endtime;
+      let length = entries[i].dataf.length;
+      let name = entries[i].dataf.name;
+      let phone = entries[i].dataf.phone;
+      let table = entries[i].dataf.table;
+      let time = entries[i].dataf.time;
 
-      if(!querySnapshot.empty){
-        isMember = "JA";
-      }else{
-        isMember = "NEJ"
-      }
+      const dbref = ref(database, "members");
+
+      onValue(dbref, (snapshot) => {
+
+        const data = snapshot.val();
+        const entries2 = [];
+
+        for (const key in data) {
+          const entry = {
+              namef: key,
+              dataf: data[key]
+            };
+          entries2.push(entry); 
+        }
+
+
+        let isMember = "NEJ";
+
+        for (var i = 0; i < entries2.length; i++ ){
+
+          let key = entries2[i].namef;
+          let data = entries2[i].dataf.phone;
+
+      
+
+          if(data == phone){
+            isMember = "JA";
+          }
+
+      
+        }
+
+        var newLine = document.createElement("tr");
+
+        var nameLine = document.createElement("td");
+        nameLine.innerText = name;
+        
+        var phoneLine = document.createElement("td");
+        phoneLine.innerText = phone;
+
+        var dayLine = document.createElement("td");
+        dayLine.innerText = day;
+
+        var timeLine = document.createElement("td");
+        timeLine.innerText = time;
+
+        var endLine = document.createElement("td");
+        endLine.innerText = endtime;
+
+        var lengthLine = document.createElement("td");
+        lengthLine.innerText = length;
+
+        var tableLine = document.createElement("td");
+        tableLine.innerText = table;
+
+        var weekLine = document.createElement("td");
+        weekLine.innerText = "none";
+
+        var memberLine = document.createElement("td");
+        memberLine.innerText = isMember;
+
+        newLine.appendChild(nameLine);
+        newLine.appendChild(phoneLine);
+        newLine.appendChild(dayLine);
+        newLine.appendChild(timeLine);
+        newLine.appendChild(endLine);
+        newLine.appendChild(lengthLine);
+        newLine.appendChild(tableLine);
+        //newLine.appendChild(weekLine);
+        newLine.appendChild(memberLine);
+
+        if(!table.includes("_c")){
+          if(day == "mon"){
+            tableBody1.appendChild(newLine);
+          }else if(day == "tis"){
+            tableBody2.appendChild(newLine);
+          }else if (day == "ons"){
+            tableBody3.appendChild(newLine);
+          }else if(day == "tor"){
+            tableBody4.appendChild(newLine);
+          }else if(day == "fre"){
+            tableBody5.appendChild(newLine);
+          }else if(day == "lor"){
+            tableBody6.appendChild(newLine);
+          }else if(day == "son"){
+            tableBody7.appendChild(newLine);
+          }
+        }
+
+      });
+    }
+  });
+
+  //Display Members
+
+  const dbref2 = ref(database, "members");
+
+  onValue(dbref2, (snapshot) => {
+
+    const data = snapshot.val();
+    const entries = [];
+
+    for (const key in data) {
+      const entry = {
+          namef: key,
+          dataf: data[key]
+        };
+      entries.push(entry); 
+    }
+
+
+    for (var i = 0; i < entries.length; i++ ){
+
+      let key = entries[i].namef;
+
+      let name = entries[i].dataf.name;
+      let phone = entries[i].dataf.phone;
+      let last = entries[i].dataf.next;
+      let next = entries[i].dataf.last;
 
       var newLine = document.createElement("tr");
 
       var nameLine = document.createElement("td");
       nameLine.innerText = name;
-      
+
       var phoneLine = document.createElement("td");
       phoneLine.innerText = phone;
 
-      var dayLine = document.createElement("td");
-      dayLine.innerText = day;
+      var lastLine = document.createElement("td");
+      lastLine.innerText = last;
 
-      var timeLine = document.createElement("td");
-      timeLine.innerText = time;
+      var nextLine = document.createElement("td");
+      nextLine.innerText = next;
 
-      var endLine = document.createElement("td");
-      endLine.innerText = endtime;
+      var deleteLine = document.createElement("td");
+      deleteLine.innerHTML = "<button id='delete-member' class='delete_member_btn' member_phone_number=" + phone + ">Radera</button>";
 
-      var lengthLine = document.createElement("td");
-      lengthLine.innerText = length;
-
-      var tableLine = document.createElement("td");
-      tableLine.innerText = table;
-
-      var memberLine = document.createElement("td");
-      memberLine.innerText = isMember;
-
-      newLine.appendChild(nameLine);
-      newLine.appendChild(phoneLine);
-      newLine.appendChild(dayLine);
-      newLine.appendChild(timeLine);
-      newLine.appendChild(endLine);
-      newLine.appendChild(lengthLine);
-      newLine.appendChild(tableLine);
-      newLine.appendChild(memberLine);
-
-      if(day == "Måndag"){
-        tableBody1.appendChild(newLine);
-      }else if(day == "Tisdag"){
-        tableBody2.appendChild(newLine);
-      }else if (day == "Onsdag"){
-        tableBody3.appendChild(newLine);
-      }else if(day == "Torsdag"){
-        tableBody4.appendChild(newLine);
-      }else if(day == "Fredag"){
-        tableBody5.appendChild(newLine);
-      }else if(day == "Lördag"){
-        tableBody6.appendChild(newLine);
-      }else if(day == "Söndag"){
-        tableBody7.appendChild(newLine);
-      }
-    });
-  });
-
-  //Display Members
-
-  const unsub = onSnapshot(doc(firestore, "users", "members"), (doc) => {
-    document.getElementById("membersList").innerHTML = "";
-    doc.data().members.forEach((member) => {
-
-      const name = member.name;
-      const phone = member.phone;
-      const uid = member.uid;
-      const lastDate = member.lastDate.toDate().toISOString().split('T')[0];
-      const expiryDate = member.expiryDate.toDate().toISOString().split('T')[0];;
-  
-      let newLine = document.createElement("tr");
-  
-      let nameLine = document.createElement("td");
-      nameLine.innerText = name;
-  
-      let phoneLine = document.createElement("td");
-      phoneLine.innerText = phone;
-  
-      let lastLine = document.createElement("td");
-      lastLine.innerText = lastDate;
-  
-      let expiryLine = document.createElement("td");
-      expiryLine.innerText = expiryDate;
-  
-      let deleteLine = document.createElement("td");
-      deleteLine.innerHTML = "<button id='delete-member' class='delete_member_btn' onclick='window.removeMember(" + '"' +  uid + '"' + ")'>Radera</button>";
-  
       newLine.appendChild(nameLine);
       newLine.appendChild(phoneLine);
       newLine.appendChild(lastLine);
-      newLine.appendChild(expiryLine);
+      newLine.appendChild(nextLine);
       newLine.appendChild(deleteLine);
-  
-      document.getElementById("membersList").appendChild(newLine);
-  
-    });
-    
+
+
+      document.getElementById("pay_tb_1").appendChild(newLine);
+
+      
+    }
   });
-  const membersDoc = await getDoc(doc(firestore, "users", "members"));
-  
 
   document.getElementById('btnLogOut').addEventListener("click", logout);
 
-}
 
-async function generateUniqeDocId (){
-  let generatedID = Math.random().toString(36).slice(2, 15);
-  generatedID = "temp_" + generatedID;
+  //Adds a delay for the delete buttons to be correctly added
+  setTimeout(function() {
 
-  const docSnap = await getDoc(doc(firestore, "users", generatedID));
+    const elements = document.getElementsByClassName('delete_member_btn');
+    
+    for (let i = 0; i < elements.length; i++){
 
-  if (docSnap.exists()) {
-    return generateUniqeDocId();
-  }else{
-    return(generatedID);
-  }
+      elements[i].addEventListener('click', function () {
+      remove_member(elements[i].getAttribute('member_phone_number'));
+      });
+      
+    }
+    console.log("Elements Loaded");
+  }, 1000);
+
 }

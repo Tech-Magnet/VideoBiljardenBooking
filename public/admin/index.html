@@ -7,10 +7,6 @@
     <link rel="icon" href="/img/icon.png">
     <link rel="stylesheet" href="style.css">
     <script defer type="module" src="admin.js"></script>
-    <script type="module">
-      import { removeMember } from "./admin.js";
-      window.removeMember = removeMember;
-    </script>
 </head>
 <body>
   <div id="Admin-Div" style="display: block;">
@@ -104,29 +100,29 @@
           <th>N&aumlsta Betalning</th>
           <th>Ta Bort</th>
         </thead>
-        <tbody class="pay_tb_1" id="membersList">
+        <tbody class="pay_tb_1" id="pay_tb_1">
         </tbody>
       </table>
 
       <div style="display: flex;">
         <label for="name" class="login-label">Namn</label>
-        <input type="text" class="login-fields" id="memberName" style="margin-top: 10px;">
+        <input type="text" class="login-fields" id="member_name" style="margin-top: 10px;">
         </div>
 
         <div style="display: flex;">
         <label for="phone" class="login-label">Tel.Nr</label>
-        <input type="text" class="login-fields" id="memberPhone">
+        <input type="text" class="login-fields" id="member_phone">
         </div>
 
         <div style="display: flex;">
         <label for="last" class="login-label" id="lastLabel">Betald</label>
-        <input type="date" class="login-fields" id="memberLast">
+        <input type="date" class="login-fields" id="member_last_payment">
         </div>
         
 
         <div style="display: flex;">
           <label for="next" class="login-label" id="nextLabel">L&aumlngd</label>
-          <select class="login-fields" id="member_length">
+          <select class="login-fields" id="member_next_payment">
             <!--Week One (Current)-->
             <option value="1">1 M&aringnad</option>
             <option value="2">2 M&aringnader</option>

@@ -1,6 +1,6 @@
 function sendFeedback(){
 
-  if (document.getElementById('feedback-fld').value == ""){
+  if(document.getElementById('feedback-fld').value == ""){
     return;
   }
 
