@@ -1,7 +1,7 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getAnalytics, logEvent} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 import { child, getDatabase, onValue, push, ref, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import {getPerformance} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
+import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
 import {initializeAppCheck, ReCaptchaV3Provider} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
 
 const firebaseConfig = {
@@ -45,7 +45,6 @@ function checkIfExist(day, time, table) {
     }
 }
 
-
 //WRITE TO DB
 
 // Add an event listener to the form submit
@@ -53,16 +52,16 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     event.preventDefault();
 
     // Get the data from the input field
-    var name = document.getElementById("txtName").value;
-    var phone = document.getElementById("txtPhone").value;
-    var day = document.getElementById("txtDay").value;
-    var time = parseFloat(document.getElementById("txtTime").value);
-    var length = parseFloat(document.getElementById("txtLength").value);
-    var table = document.getElementById("txtTable").value;
-    var week = document.getElementById('txtWeek').value;
-    var end_c = length / 2
-    var endtime = time + end_c;
-    var length2 = length / 2;
+    let name = document.getElementById("txtName").value;
+    let phone = document.getElementById("txtPhone").value;
+    let day = document.getElementById("txtDay").value;
+    let time = parseFloat(document.getElementById("txtTime").value);
+    let length = parseFloat(document.getElementById("txtLength").value);
+    let table = document.getElementById("txtTable").value;
+    let week = document.getElementById('txtWeek').value;
+    let end_c = length / 2
+    let endtime = time + end_c;
+    let length2 = length / 2;
 
 
     let extraTime;
@@ -136,7 +135,7 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
 
     console.log("Booking Added to admin table");
 
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
 
         // Write the data to the database
         const newPostKey_booking = push(child(ref(database), "/booking")).key;
@@ -178,7 +177,7 @@ onValue(dbref, (snapshot) => {
     }
 
 
-    for (var i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length; i++) {
 
         if (entries[i].dataf.table === 'Bord_1') {
             let ID_BUILD = "TT_1_" + entries[i].dataf.time + "_" + entries[i].dataf.day;

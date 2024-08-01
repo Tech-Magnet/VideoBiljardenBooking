@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="SE-sv">
 <head>
     <title>Avboka Bord</title>
     <meta charset="UTF-8">
@@ -11,17 +11,17 @@
 <body>
     <div class="container">
         <div class="py-5 text-center">
-          <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
+          <a href="https://www.orebrobiljarden.se/"><img alt="VideoBiljarden" class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
           <h2>Avboka Bord - Snooker</h2>
         </div>
       <fieldset>
         <form id="bookingForm" name="frmBook" class="needs-validation">
           <p>
-            <label for="phone">Telnr</label>
+            <label for="txtPhone">Telnr</label>
             <input type="text" class="form-control" name="txtPhone" id="txtPhone" value="" required>
           </p>
           <p>
-            <label for="Day">Datum</label>
+            <label for="txtDay">Datum</label>
             <select id="txtDay" name="txtDay" style="padding: 10px;">
               <!--Week One (Current)-->
               <option value="mon">M&aringndag</option>
@@ -34,7 +34,7 @@
             </select>
           </p>
           <p>
-            <label for="Week">Vecka</label>
+            <label for="txtWeek">Vecka</label>
             <select id="txtWeek" name="txtWeek" style="padding: 10px;">
               <!--Week One (Current)-->
               <option value="t">Denna Vecka</option>
@@ -58,5 +58,6 @@
         </form>
       </fieldset>
       <input type="button" value="Tillbaka" class="btn btn-primary btn-lg btn-block" onclick="window.location.pathname = ''">
+    </div>
 </body>
 </html>

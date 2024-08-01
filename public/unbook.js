@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-import { getDatabase, ref, push, set, onValue, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-performance.js";
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
 
@@ -38,8 +38,7 @@ function remove_booking(){
     day: date_in,
     table: table_in
   });
-
-
+  
   //Admin
   console.log("Deleting Admin Entry");
   
@@ -58,7 +57,7 @@ onValue(dbref_admin, (snapshot) => {
     entries.push(entry); 
   }
 
-  for (var i = 0; i < entries.length; i++ ){
+  for (let i = 0; i < entries.length; i++ ){
 
     let key = entries[i].namef;
     let phone_db = entries[i].dataf.phone;
@@ -67,11 +66,11 @@ onValue(dbref_admin, (snapshot) => {
 
     let tmp_table_in = table_in;
 
-    if(week_in == "n"){
+    if(week_in === "n"){
       tmp_table_in = tmp_table_in + "_c";
     }
 
-    if(phone_db == phone_in && date_db == date_in && table_db == tmp_table_in){
+    if(phone_db === phone_in && date_db === date_in && table_db === tmp_table_in){
 
       set(ref(database, "/admin/" + key), {
         day: null,
@@ -106,7 +105,7 @@ onValue(dbref_admin, (snapshot) => {
       entries.push(entry); 
     }
 
-    for (var i = 0; i < entries.length; i++ ){
+    for (let i = 0; i < entries.length; i++ ){
 
       let key = entries[i].namef;
       let phone_db = entries[i].dataf.phone;
@@ -115,11 +114,11 @@ onValue(dbref_admin, (snapshot) => {
 
       let tmp_table_in = table_in;
 
-      if(week_in == "n"){
+      if(week_in === "n"){
         tmp_table_in = tmp_table_in + "_c";      
       }
 
-      if(phone_db == phone_in && date_db == date_in && table_db == tmp_table_in){
+      if(phone_db === phone_in && date_db === date_in && table_db === tmp_table_in){
 
         set(ref(database, "/booking/" + key), {
           day: null,

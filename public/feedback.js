@@ -1,10 +1,10 @@
 function sendFeedback(){
 
-  if(document.getElementById('feedback-fld').value == ""){
+  if(document.getElementById('feedback-fld').value === ""){
     return;
   }
 
-  var feedback_data = "@everyone " + document.getElementById('feedback-fld').value;
+  let feedback_data = "@everyone " + document.getElementById('feedback-fld').value;
 
   const request = new XMLHttpRequest();
   request.open("POST", "https://discord.com/api/webhooks/1153849127441018900/TvS-1R0ZaZ6BIvFpnrnBRsI_vabCBjBJBU3aVnkJcQI59PH7icNB6qpDGXVShXa1CTgR");
@@ -23,10 +23,10 @@ function sendFeedback(){
 }
 
 function feedback_panel_tgl(type){
-  if(type == "on"){
+  if(type === "on"){
     document.getElementById('fb_panel').style.display = "block";
     document.getElementById('booking_page').style.display = "none";
-  }else if(type == "off"){
+  }else if(type === "off"){
     document.getElementById('fb_panel').style.display = "none";
     document.getElementById('booking_page').style.display = "block";
   }
