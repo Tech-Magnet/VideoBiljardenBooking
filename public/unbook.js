@@ -40,10 +40,10 @@ function remove_booking(){
   });
 
 
-//Admin
-console.log("Deleting Admin Entry");
-
-const dbref_admin = ref(database, "admin");
+  //Admin
+  console.log("Deleting Admin Entry");
+  
+  const dbref_admin = ref(database, "admin");
 
 onValue(dbref_admin, (snapshot) => {
 
