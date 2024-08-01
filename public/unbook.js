@@ -132,7 +132,7 @@ onValue(dbref_admin, (snapshot) => {
     }
   });
 
-  window.location.pathname == "";
+  window.location.pathname = "";
 }
 
 document.getElementById('unbook-btn').addEventListener("click", remove_booking);

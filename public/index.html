@@ -19,11 +19,11 @@
         <span onclick="feedback_panel_tgl('off')" id="fb_close" class="material-symbols-outlined">close</span>
     </center>
     <div style="padding-left: 20px;">
-        <label>Medelande</label>
+        <label for="feedback-fld">Medelande</label>
         <div style="display: flex;">
             <textarea id="feedback-fld" placeholder="Feedback"></textarea>
             <button class="feedback-send" onclick="sendFeedback();">
-                <span><img src="/img/icons/send_white_24dp.svg"></span>
+                <span><img alt="send" src="/img/icons/send_white_24dp.svg"></span>
             </button>
         </div>
         <br>
@@ -35,8 +35,7 @@
     </button>
     <div class="container">
         <div class="py-5 text-center">
-            <a href="https://www.orebrobiljarden.se/"><img class="d-block mx-auto mb-4" src="img/biljard.jpg"
-                                                           height="140px"></a>
+            <a href="https://www.orebrobiljarden.se/"><img alt="VideoBiljarden" class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
             <h2>Boka Bord - Snooker</h2>
         </div>
         <fieldset>
@@ -46,7 +45,7 @@
                     <input type="text" class="form-control" name="txtName" id="txtName" value="" required>
                 </p>
                 <p>
-                    <label for="txtphone">Telnr</label>
+                    <label for="txtPhone">Telnr</label>
                     <input type="number" class="form-control" name="txtPhone" id="txtPhone" value="" required>
                 </p>
                 <p>
