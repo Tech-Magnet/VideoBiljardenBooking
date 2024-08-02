@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="SE-sv">
+<head>
+    <title>Avboka Bord</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="cancel.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="py-5 text-center">
+          <a href="https://www.orebrobiljarden.se/"><img alt="VideoBiljarden" class="d-block mx-auto mb-4" src="img/biljard.jpg" height="140px"></a>
+          <h2>Avboka Bord - Snooker</h2>
+        </div>
+      <fieldset>
+        <form id="bookingForm" name="frmBook" class="needs-validation">
+          <p>
+            <label for="txtPhone">Telnr</label>
+            <input type="text" class="form-control" name="txtPhone" id="txtPhone" value="" required>
+          </p>
+          <p>
+            <label for="txtDay">Datum</label>
+            <select id="txtDay" name="txtDay" style="padding: 10px;">
+              <!--Week One (Current)-->
+              <option value="mon">M&aringndag</option>
+              <option value="tis">Tisdag</option>
+              <option value="ons">Onsdag</option>
+              <option value="tor">Torsdag</option>
+              <option value="fre">Fredag</option>
+              <option value="lor">L&oumlrdag</option>
+              <option value="son">S&oumlndag</option>
+            </select>
+          </p>
+          <p>
+            <label for="txtWeek">Vecka</label>
+            <select id="txtWeek" name="txtWeek" style="padding: 10px;">
+              <option value="t">Denna Vecka</option>
+              <option value="n">N&aumlsta Vecka</option>
+            </select>
+          </p>
+          <p>
+            <label for="txtTable">Bord</label>
+            <select id="txtTable" name="txtTable" style="padding: 10px;">
+              <option value="Bord_1">Bord 1</option>
+              <option value="Bord_2">Bord 2</option>
+              <option value="Bord_3">Bord 3</option>
+              <option value="Bord_4">Bord 4</option>
+            </select>
+          </p>
+          <p>&nbsp;</p>
+          <p id="status_p" style="color: #00ff00;"></p>
+          <p>
+            <input type="button" name="button" id="cancel-btn" value="Avboka Bord" class="btn btn-primary btn-lg btn-block" onclick="sessionStorage.setItem('lock', '1')">
+          </p>
+        </form>
+      </fieldset>
+      <input type="button" value="Tillbaka" id="back-btn" class="btn btn-primary btn-lg btn-block">
+    </div>
+</body>
+</html>
