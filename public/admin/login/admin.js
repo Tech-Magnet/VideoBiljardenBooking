@@ -3,14 +3,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
-    authDomain: "videobiljardenorebrosite.firebaseapp.com",
-    databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "videobiljardenorebrosite",
-    storageBucket: "videobiljardenorebrosite.appspot.com",
-    messagingSenderId: "1042889427467",
-    appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
-    measurementId: "G-FPJBGKX7R0"
+    /*API KEYS*/
 };
 
 const app = initializeApp(firebaseConfig);
