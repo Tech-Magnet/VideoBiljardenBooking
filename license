@@ -1,6 +1,6 @@
 LICENSE AGREEMENT
 
-This License Agreement ("Agreement") is entered into by and between [Your Name/Your Company Name] ("Licensor") and the individual or entity using the website ("Licensee"). By accessing and using the website, Licensee agrees to the terms and conditions of this Agreement.
+This License Agreement ("Agreement") is entered into by and between Luna Nordbergh and the individual or entity using the website ("Licensee"). By accessing and using the website, Licensee agrees to the terms and conditions of this Agreement.
 
 1. GRANT OF LICENSE
 1.1. Subject to the terms and conditions of this Agreement, Licensor hereby grants to Licensee a non-exclusive, non-transferable, and limited license to use the website (the "Website") solely for its intended purpose, provided that Licensee has purchased a valid license key from the Licensor.
@@ -10,7 +10,7 @@ This License Agreement ("Agreement") is entered into by and between [Your Name/Y
 2. LICENSE KEY PURCHASE
 2.1. Licensee must purchase a license key from Licensor to activate and use the Website.
 
-2.2. The License Key must be stored on the Licensee's server at the following path: [specify path, e.g., /path/to/license.key]. The Website will periodically check this path to ensure the presence of a valid license key.
+2.2. The License Key must be stored on the Licensee's server at the following path: /license.key. The Website will periodically check this path to ensure the presence of a valid license key.
 
 2.3. Failure to store the license key at the specified path or tampering with the key will result in the deactivation of the Website.
 
@@ -43,3 +43,5 @@ a) Sublicense, sell, rent, lease, distribute, or otherwise transfer the Website 
 
 10. SEVERABILITY
 10.1. If any provision of this Agreement is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.
+
+A license key can be acquired by emailing me at dev@lunalu.org
