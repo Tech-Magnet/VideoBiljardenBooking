@@ -7,14 +7,7 @@ import { getPerformance } from "https://www.gstatic.com/firebasejs/10.12.5/fireb
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app-check.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAxv9AQ5b9Ig9HnCAzxfLcHfdojZiGMyNQ",
-  authDomain: "videobiljardenorebrosite.firebaseapp.com",
-  databaseURL: "https://videobiljardenorebrosite-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "videobiljardenorebrosite",
-  storageBucket: "videobiljardenorebrosite.appspot.com",
-  messagingSenderId: "1042889427467",
-  appId: "1:1042889427467:web:bbbedfe2ce5eea96d8d50e",
-  measurementId: "G-FPJBGKX7R0"
+  /*API KEYS*/
 };
 
 const app = initializeApp(firebaseConfig);
